@@ -1,0 +1,199 @@
+		<!-- Sidebar -->
+		<div class="sidebar sidebar-style-2 bg-info">	
+			<div class="sidebar-wrapper scrollbar scrollbar-inner">
+				<div class="sidebar-content">
+
+				{% if request.user.is_authenticated %}	
+					<div class="user">
+						<div class="avatar-sm float-left mr-2">
+							<img src="/static/assets/img/puntadelicia.png" alt="..." class="avatar-img rounded-circle">
+						</div>
+						<div class="info">
+							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+								<span style="color:black;">
+									{{ request.user.username }}
+									<span class="user-level" style="color:black;">
+										{{ request.user.email }}
+									</span style="color:black;">
+									<span class="caret"></span>
+								</span>
+							</a>
+							<div class="clearfix"></div>
+
+							<div class="collapse in" id="collapseExample">
+								<ul class="nav">
+									<li>
+										<a href="#profile">
+											<span class="link-collapse text-dark">My Profile</span>
+										</a>
+									</li>
+									<li>
+										<a href="/logout/">
+											<span class="link-collapse text-dark">Logout</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<ul class="nav nav-primary">
+						
+						<li class="nav-section">
+							<span class="sidebar-mini-icon">
+								<i class="fa fa-ellipsis-h"></i>
+							</span>
+							<h4 class="text-section text-dark">Componentes</h4>
+						</li>
+						<li class="nav-item {% if 'tareas' in segment %} active {% endif %} ">
+							<a data-toggle="collapse" href="#base">
+								<i class="fas fa-layer-group" style="color:black;"></i>
+								<p style="color:black;">Tareas</p>
+								<span class="caret" style="color:black;"></span>
+							</a>
+							<div class="collapse" id="base">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="/forma-tareas.html">
+											<span class="sub-item" style="color:black;">Modo Manual</span>
+										</a>
+									</li>
+									<li>
+										<a href="/tareas-aleatorio.html">
+											<span class="sub-item" style="color:black;">Modo Aleatorio</span>
+										</a>
+									</li>
+									
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item {% if 'mantenimiento' in segment %} active {% endif %}" >
+							<a data-toggle="collapse" href="#sidebarLayouts">
+								<i class="fas fa-th-list" style="color:black;"></i>
+								<p style="color:black;">Mantenimiento</p>
+								<span class="caret" style="color:black;"></span>
+							</a>
+							<div class="collapse" id="sidebarLayouts">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="/forma-mantenimiento.html">
+											<span class="sub-item" style="color:black;">Modo Manual</span>
+										</a>
+									</li>
+									<li>
+										<a href="/mantenimiento-aleatorio.html">
+											<span class="sub-item" style="color:black;">Modo Aleatorio</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item {% if 'Personal' in segment %} active {% endif %}">
+							<a data-toggle="collapse" href="#forms">
+								<i class="fas fa-pen-square" style="color:black;"></i>
+								<p style="color:black;">Recursos Humanos</p>
+								<span class="caret" style="color:black;"></span>
+							</a>
+							<div class="collapse" id="forms">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="/Personal.html">
+											<span class="sub-item" style="color:black;">Personal</span>
+										</a>
+									</li>
+									<li>
+										<a href="/Horarios-Personal.html">
+											<span class="sub-item" style="color:black;">Horarios</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item {% if 'almacen' in segment %} active {% endif %}">
+							<a data-toggle="collapse" href="#tables">
+								<i class="fas fa-table" style="color:black;"></i>
+								<p style="color:black;">Almacén</p>
+								<span class="caret" style="color:black;"></span>
+							</a>
+							<div class="collapse" id="tables">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="/Insumos-almacen.html">
+											<span class="sub-item" style="color:black;">Insumos</span>
+										</a>
+									</li>
+									<li>
+										<a href="/Producto-almacenado.html">
+											<span class="sub-item" style="color:black;">Producto final almacenado</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item {% if 'transporte' in segment %} active {% endif %}">
+							<a data-toggle="collapse" href="#maps">
+								<i class="fas fa-map-marker-alt" style="color:black;"></i>
+								<p style="color:black;">Transporte</p>
+								<span class="caret" style="color:black;"></span>
+							</a>
+							<div class="collapse" id="maps">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="/Ingreso-insumos-transporte.html">
+											<span class="sub-item" style="color:black;">Ingreso de insumos</span>
+										</a>
+									</li>
+									<li>
+										<a href="/Registro-salida-transporte.html">
+											<span class="sub-item" style="color:black;">Registro de salidas</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item {% if 'opt' in segment %} active {% endif %}">
+							<a data-toggle="collapse" href="#charts">
+								<i class="far fa-chart-bar" style="color:black;"></i>
+								<p style="color:black;">Optimizadores</p>
+								<span class="caret" style="color:black;"></span>
+							</a>
+							<div class="collapse" id="charts">
+								<ul class="nav nav-collapse">
+									<li style="color:black;">
+										<a href="/opt-ga.html">
+											<span class="sub-item" style="color:black;">Algoritmos genéticos</span>
+										</a>
+									</li>
+									<li>
+										<a href="/opt-SA.html">
+											<span class="sub-item" style="color:black;">Simulado recocído</span>
+										</a>
+									</li>
+									<li>
+										<a href="/opt-PSO.html">
+											<span class="sub-item" style="color:black;">Enjambre de partículas</span>
+										</a>
+									</li>
+									<li>
+										<a href="/opt-ACO.html">
+											<span class="sub-item" style="color:black;">Colonía de hormigas</span>
+										</a>
+									</li>
+									<li>
+										<a href="/opt-NSGA.html">
+											<span class="sub-item" style="color:black;">NSGA</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				{% else %}
+					<ul class="nav nav-primary">
+
+					</ul>
+				{% endif %}	
+				</div>
+			</div>
+		</div>
+        <!-- End Sidebar -->
+        

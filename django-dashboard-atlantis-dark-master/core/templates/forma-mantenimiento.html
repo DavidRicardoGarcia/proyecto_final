@@ -1,0 +1,130 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Mantenimiento Manual {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<h4 class="page-title">Punta Delicia</h4>
+				<ul class="breadcrumbs">
+					<li class="nav-home">
+						<a href="#">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Mantenimiento Planificado</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Modo Manual</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">Agregar Orden de Mantenimiento</div>
+						</div>
+						<form method="post" action="">
+						{% csrf_token %}
+							<div class="card-body">
+								<div class="row">
+									<div class="col-md-6 col-lg-4">
+										<div class="form-group">
+											<label for="nombre">Encargado</label>
+											<input type="text" class="form-control" id="encargado" name="encargado" placeholder="Ingrese Nombre">
+											
+										</div>
+
+										<div class="form-group">
+											<label for="fecha">Fecha planificada :</label>
+											<input id="fecha" type="date" name="fechaplan">
+										</div>
+
+										<div class="form-group">
+											<label for="eresp">Empresa Responsable</label>
+											<input type="text" class="form-control" id="eresp" name="eresp" placeholder="Ingrese la empresa responsable">
+											
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-4">
+										<div class="form-group">
+											<label for="estacion">Estación de trabajo</label>
+											<select class="form-control" id="estacion" name="estacion">
+												<option>Desembarque</option>
+												<option>Pesado</option>
+												<option>Lavado</option>
+												<option>Pelado</option>
+												<option>Molienda</option>
+												<option>Centrífuga</option>
+												<option>UHT</option>
+												<option>Tanque 1</option>
+												<option>Tanque 2</option>
+												<option>Tanque 3</option>
+												<option>Tanque 4</option>
+												<option>Tanque mezclado</option>
+												<option>Tanque carbonatado</option>
+												<option>Enlatadora</option>
+												<option>Embarque</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="actividades">Actividades</label>
+											<textarea class="form-control" id="actividades" name="actividades" rows="5">
+											</textarea>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-4">
+
+
+										<div class="form-group">
+											<label for="tipo">Tipo</label>
+											<select class="form-control" id="tipo" name="tipo">
+												<option>inspeccion</option>
+												<option>renovacion</option>
+												<option>servicio externo</option>
+												<option>inspeccion UDT</option>
+												<option>anotacion del mostrador</option>
+												<option>manual</option>
+												<option>trabajos adicionales</option>
+
+											</select>
+										</div>
+
+										<div class="form-group">
+											<label for="fuentecost">Fuente de costos</label>
+											<textarea class="form-control" id="fuentecost" name="fuentecost" rows="5">
+											</textarea>
+										</div>
+									</div>
+								</div>
+							</div> 
+							<div class="card-action">
+								<button type="submit" class="btn btn-success">Agregar</button>
+								<button class="btn btn-danger">Cancel</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		
+		</div>
+	</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

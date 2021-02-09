@@ -1,0 +1,96 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Tables {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<h4 class="page-title">Recursos Humanos</h4>
+				<ul class="breadcrumbs">
+					<li class="nav-home">
+						<a href="#">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Horarios</a>
+					</li>
+				</ul>
+			</div>
+				<div class="card">
+						<div class="card-header">
+							<div class="card-title">Horario del dia</div>
+						</div>
+						<form method="post" action="">
+						{% csrf_token %}
+						<div class="form-group">
+							<label for="recepcion">Fecha consulta :</label>
+							<input id="recepcion" type="date" name="consulta" data-date="" data-date-format="DD MMMM YYYY">
+						</div>
+						</form>	
+						<div class="card-body">
+							<table class="table table-bordered table-head-bg-default table-bordered-bd-default mt-4" width="978px"	height= "100px">
+								<thead>
+									<tr>
+										<th scope="col">ID</th>
+										<th scope="col">Hora inicio</th>
+										<th scope="col">Hora salida</th>
+										<th scope="col">fecha</th>
+
+									</tr>
+								</thead>
+								<tbody>
+
+								</tbody>
+							</table>
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}
+
+{% comment %} <!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="/static/assets/js/setting-demo2.js"></script>
+	<script>
+		$('#displayNotif').on('click', function(){
+			var placementFrom = $('#notify_placement_from option:selected').val();
+			var placementAlign = $('#notify_placement_align option:selected').val();
+			var state = $('#notify_state option:selected').val();
+			var style = $('#notify_style option:selected').val();
+			var content = {};
+
+			content.message = 'Turning standard Bootstrap alerts into "notify" like notifications';
+			content.title = 'Bootstrap notify';
+			if (style == "withicon") {
+				content.icon = 'fa fa-bell';
+			} else {
+				content.icon = 'none';
+			}
+			content.url = 'index.html';
+			content.target = '_blank';
+
+			$.notify(content,{
+				type: state,
+				placement: {
+					from: placementFrom,
+					align: placementAlign
+				},
+				time: 1000,
+			});
+		});
+	</script>
+	
+{% endblock javascripts %} {% endcomment %}
