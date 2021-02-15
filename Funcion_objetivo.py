@@ -49,6 +49,8 @@ def Calcular_Costo(tareas):
     for j in x:
         #penalizacion por almacenar productos
         costo_almacenaje+= j['cantidad']*50
+
+    del funcion
     
     return costo_maquinas+costo_trabajadores+costo_Transporte+costo_almacenaje+costo_insumos+costo_penalizacion
 
@@ -60,5 +62,5 @@ def cargar_tareas():
             clientes = json.load(json_file)
         return clientes
 
-x=cargar_tareas()
-print(Calcular_Costo(x))
+#x=cargar_tareas()
+#print(Calcular_Costo(x))

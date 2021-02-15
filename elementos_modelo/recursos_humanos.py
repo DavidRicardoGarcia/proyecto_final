@@ -28,6 +28,17 @@ class horarios():
 
     def __init__(self):
         super().__init__()
+        save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+
+        name_of_file = 'datae'
+
+        completeName = os.path.join(save_path, name_of_file+".txt") 
+
+        with open(completeName) as json_file:
+            data = json.load(json_file)
+        
+        self.data=data
+        
 
     def crear_lista_De_Empleados(self):
 
@@ -85,7 +96,27 @@ class horarios():
         
         with open(completeName_1,'w') as outfile:
             json.dump(hlist,outfile)
+            
+    def asignar_horario_ng(self):
+ 
+        hlist={}
+        hlist['horario empleados']=[]
 
-x=horarios()
-x.crear_lista_De_Empleados()
+        for i in self.data['empleados']:
+            r=random.uniform(0,1)
+            if (r>1):
+                i['hinicio']=0
+                i['hsalida']=0
+                i['estado']='incapacidad'
+                #en el caso de incapacidad suponer que la maquina no se opera ese dia o que alguien hace relevo y toca pagarle un extra?
+            else:
+                i['hinicio']=8
+                i['hsalida']=18
+                i['estado']='disponible'
+            hlist['horario empleados'].append(i)
+        return hlist
+
+
+#x=horarios()
+#x.crear_lista_De_Empleados()
 #x.asignar_horario('prueba1')

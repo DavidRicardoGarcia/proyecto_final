@@ -51,8 +51,7 @@ class proceso:
             self.vino.pop(0)
         if(a =='a'):
             self.agua.pop(0)
-        if(a=='d'):
-            print('no hubo orden')
+
 
     def verificar_si_almacenar(self,a):
         
@@ -109,7 +108,7 @@ class proceso:
             self.tanques[3]['TAREA']=a.copy()
             B=self.tanques[3]['TIPO']
         else: 
-          print('todos los tanques estan llenos')
+          #print('todos los tanques estan llenos')
           self.estadot='no disponible'
           B='0'
         return B
@@ -133,7 +132,7 @@ class proceso:
         for x in lista:
             lista[cont]['TAREA']['fecha_finalizacion']=(self.fecha_Referencia+timedelta(days=(d-1))).strftime("%m %d %Y")
             cont+=1
-        print('.')
+        #print('.')
         return lista
 
     def calcular_procesos_jugo(self,t,d,cond1,cond2,a,trabajadores,insumos1,insumos2,insumos3):
@@ -224,7 +223,7 @@ class proceso:
                 
                 #como ya pase una tarea lista para enlatar al proceso de enlatar,lo guardo en el registro y libero el recurso
                 if(a['TIPO']=='tanque0'):
-                    print('.')
+                    1
                 else:
                     var=a.copy()
                     var['TAREA']['fecha_finalizacion']=(self.fecha_Referencia+timedelta(days=(d-1))).strftime("%m %d %Y")
@@ -262,13 +261,7 @@ class proceso:
 
 
 #calcula el costo de produccion del sector operaciones
-class funcion_De_costo:
-    def __init__(self):
-        self.funcion={}
-    def actualizar_Datos(self):
-        print(1)
-    def calcular_Funcion(self):
-        print(1)
+
 #actualiza el tiempo de la simulacion en horas
 class update:
     def __init__(self):
@@ -456,24 +449,14 @@ class Planificador():
 
     def pedir_horario_a_RH(self,d):
 
-        nombre='horario' + str(d)
-        #self.RH.asignar_horario(nombre)
-
-        save_path = '/home/david/Desktop/optimizacion_final/datos_json'
-
-        name_of_file = nombre
-
-        completeName = os.path.join(save_path, name_of_file+".txt") 
-
-        with open(completeName) as json_file:
-            data = json.load(json_file)
+        data=self.RH.asignar_horario_ng()
 
         cont=0
         for x in data['horario empleados']:
             if(x['estado']=='incapacidad'):
                 data[cont]={"id": -1, "nombre y apellido": "sustituto" + str(cont), "email": "------@gmail.com", 
                 "telefono": 000000000, "empresa": "Punta Delicia", "cargo": "operario", "departamento": x['departamento'],
-                 "estacion de trabajo": x['estacion de trabajo'], "salario": x['salario']*1.1, "horas_extra": 25, 
+                 "estacion de trabajo": x['estacion'], "salario": x['salario']*1.1, "horas_extra": 25, 
                  "hinicio": 8, "hsalida": 18, "estado": "sustituyendo"}
             cont+=1
         self.trabajadores=data
@@ -641,7 +624,7 @@ class Planificador():
             tiempo.calcular_dias()
             tiempo.incrementar()
             
-        print('hola')
+        #print('hola')
 
 '''
 if __name__ == '__main__':
