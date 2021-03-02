@@ -598,7 +598,26 @@ class Planificador():
                 self.almacen.ingreso_De_insumos(self.tipos_insumos[cont],cantidad,fecha.strftime("%m %d %Y"))
             cont+=1
 
-    def ejecutar_proceso(self):
+    def guardar_registros(self,save):
+
+        if(save):
+            data={'tareas':self.lista_de_tareas,'fecha_inicio':self.dayzero.strftime("%m %d %Y"),
+            'fecha_final':self.transformacion.listatotal[-1]['TAREA']['fecha_finalizacion'],'lista_total':self.transformacion.listatotal}
+
+            save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+
+            name_of_file = 'registro'
+
+            completeName = os.path.join(save_path, name_of_file+".txt") 
+
+            registro={}
+            registro['registro']=data
+            
+            with open(completeName,'w') as outfile:
+                json.dump(data,outfile)
+
+
+    def ejecutar_proceso(self,save=False):
             
          
         tiempo=update()   
@@ -623,7 +642,8 @@ class Planificador():
             #si el tiempo igual a 18 revisar el stock
             tiempo.calcular_dias()
             tiempo.incrementar()
-            
+        
+        self.guardar_registros(save)
         #print('hola')
 
 '''

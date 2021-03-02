@@ -1,0 +1,82 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Page Blank {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<h4 class="page-title">Optimizer solver</h4>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">Ejecutar los algoritmos de optimización</div>
+							<label for="cant">Actualizado a la fecha</label>
+						</div>
+						<form method="post" action="">
+						{% csrf_token %}
+							<div class="card-body">
+								<div class="row">
+										<div class="card-body">
+										<button type="submit" class="btn btn-primary btn-border btn-round">RUN</button>
+										
+											<table class="table table-bordered table-bordered-bd-default mt-4" >
+												<thead>
+													<tr>
+														<th scope="col">Algoritmo</th>
+														<th scope="col">Valor mínimo</th>
+														<th scope="col">Combinación</th>
+														<th scope="col">Tiempo</th>
+
+													</tr>
+												</thead>
+												<tbody>
+												<tr>
+												<td> Algoritmos genéticos </td>
+												<td></td>
+												<td></td>
+												<td></td>
+												</tr>
+												<tr>
+												<td> Simulado recocído </td>
+												<td></td>
+												<td></td>
+												<td></td>
+												</tr>
+												<tr>
+												<td> Enjambre de partículas </td>
+												<td></td>
+												<td></td>
+												<td></td>
+												</tr>
+												<tr>
+												<td> Colonia de hormigas </td>
+												<td></td>
+												<td></td>
+												<td></td>
+												</tr>
+					
+												</tbody>
+											</table>
+										</div>
+									
+								</div>
+							</div> 
+
+						</form>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

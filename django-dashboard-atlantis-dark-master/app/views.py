@@ -11,6 +11,7 @@ from django import template
 import json
 import os.path
 from datetime import timedelta, datetime
+import time
 # some_file.py
 import sys
 # insert at 1, 0 is the script path (or '' in REPL)
@@ -21,6 +22,8 @@ from elementos_modelo import clientes as clt
 
 mant=mto.generar_mantenimiento_planificado()
 tareas=clt.generar_tareas_aleatorias()
+consulta={}
+consulta['query']={'tipo':'','hinicio':'','duracion':'','nombre':'','empleado':'','insumos':''}
 
 @login_required(login_url="/login/")
 def index(request):
@@ -39,17 +42,26 @@ def pages(request):
     try:
         
         load_template      = request.path.split('/')[-1]
-        context['segment'] = load_template
-        context['tareas']=cargar_tareas()
-        context['mantenimiento']=cargar_mantenimiento()
-        context['empleados']=cargar_personal()
-        context['almacen']=cargar_almacen()
+
+       
+        #print(cargar_registros())
         if request.method == "POST":
             data=request.POST
+            #print(data)
         else:
             data=" "
-        #print(load_template)
+        
         ejecutar_form(load_template,data)
+        
+        context['segment'] = load_template
+        context['tareas']=ctareas
+        context['mantenimiento']=cmantenimiento
+        context['empleados']=cpersonal
+        context['almacen']=calmacen
+        lista=separar_por_tipos(ctareas)
+        context['listas']=lista
+        context['dias']=recursos_por_Fecha()
+        context['consultas']=consulta['query']
         
         html_template = loader.get_template( load_template )
         return HttpResponse(html_template.render(context, request))
@@ -133,6 +145,19 @@ def ejecutar_form(a,data):
                 datos={"tp":data['tp'],"tc":data['tc'],"tm":data['tm'],"ts":data['ts'],"maxk":data['maxk']}
                 actualizar_opt_Settings(datos,'nsga')
                 print('nsga')
+    if(a=='Registros-totales.html'):
+        if(data!= " "):
+            if(data['tipor']!= " " and data['tipof']!= " "):
+                consulta['query']={'tipo':'','hinicio':'','duracion':'','nombre':'','empleado':'','insumos':''}
+                for i in registros['lista_total']:
+                    if(i['TAREA']['fecha_inicio']== data['tipof'] and i['TIPO']==data['tipor']):
+                        consulta['query']={'tipo':i['TIPO'],'hinicio':i['HINICIO'],'duracion':i['HORAS'],'nombre':i['TAREA']['nombre'],
+                        'empleado':i['EMPLEADO']['nombre'],'insumos':i['INSUMOS']}
+            
+                print(consulta)
+            
+
+
 
 def cargar_tareas():
         
@@ -146,6 +171,79 @@ def cargar_tareas():
             data = json.load(json_file)
 
         return data['pedidos']
+
+def separar_por_tipos(tareas):
+
+    vino=[]
+    agua=[]
+    jugo=[]
+    #print(tareas)
+    for val in tareas:
+        tipo=val['tipo'].split()
+        if(tipo[0]=='vino'):
+            for x in range(val['cantidad']):
+                k=val.copy()
+                k['cantidad']=1
+                vino.append(k)
+            #print('v')
+        if(tipo[0]=='agua'):
+            for x in range(val['cantidad']):
+                k=val.copy()
+                k['cantidad']=1
+                agua.append(k)
+            #print('a')
+        if(tipo[0]=='banano' or tipo[0]=='guanabana'):
+            for x in range(val['cantidad']):
+                k=val.copy()
+                k['cantidad']=1
+                jugo.append(k)
+
+    nummax=len(vino)
+    if(nummax < len(jugo)):
+        nummax=len(jugo)
+    if(nummax < len(agua)):
+        nummax=len(agua)
+    
+
+    lista=[]
+    for i in range(nummax):
+        #print(i)
+
+        if(i>=(len(jugo)-1)):
+            jugov=""
+        else:
+            jugov=jugo[i]
+        
+        
+        if(i>=(len(vino)-1)):
+            vinov=""
+        else:
+            vinov=vino[i]
+        
+        
+        if(i>=(len(agua)-1)):
+            aguav=""
+        else:
+            aguav=agua[i]
+
+        lista.append([jugov,vinov,aguav])
+
+        
+    return lista
+
+def cargar_registros():
+        
+        save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+
+        name_of_file = 'registro'
+
+        completeName = os.path.join(save_path, name_of_file+".txt") 
+
+        with open(completeName) as json_file:
+            data = json.load(json_file)
+
+        
+        return data
 
 def actualizar_opt_Settings(datos,name):
 
@@ -241,3 +339,20 @@ def cargar_almacen():
             data = json.load(json_file)
 
         return data['racks']
+
+def recursos_por_Fecha():
+    inicio=datetime.strptime(registros['fecha_inicio'],'%m %d %Y')
+    final=datetime.strptime(registros['fecha_final'],'%m %d %Y')
+    valor=final-inicio
+    lista=[]
+    for i in range(valor.days):
+        dia=inicio + timedelta(days=(i+1))
+        lista.append(dia.strftime("%m %d %Y"))
+
+    return lista
+
+registros=cargar_registros()
+ctareas=cargar_tareas()
+cmantenimiento=cargar_mantenimiento()
+cpersonal=cargar_personal()
+calmacen=cargar_almacen()

@@ -1,0 +1,130 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Page Blank {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<h4 class="page-title">Registro</h4>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">Seleccionar fecha y recurso</div>
+						</div>
+						<form method="post" action="/Registros-totales.html">
+						{% csrf_token %}
+							<div class="card-body">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="nombre">Fecha a consultar :</label>
+											<select class="form-control" id="tipof" name="tipof">
+												{%for d in dias%}
+													
+													<option>{{d}}</option>
+
+												{% endfor %}
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="nombre">Recurso a consultar :</label>
+											<select class="form-control" id="tipor" name="tipor">
+												<option>desembarque</option>
+												<option>pesado</option>
+												<option>lavado</option>
+												<option>pelado</option>
+												<option>molienda</option>
+												<option>centrifuga</option>
+												<option>UHT</option>
+												<option>tanque1</option>
+												<option>tanque2</option>
+												<option>tanque3</option>
+												<option>tanque4</option>
+												<option>mezclado</option>
+												<option>carbonatado</option>
+												<option>enlatado</option>
+												<option>embarque</option>
+											</select>
+										</div>
+									
+									</div>
+									<div class="col-md-6">
+											<label for="cant">Orden</label>
+											<table class="table table-bordered " >
+												<thead>
+													<tr>
+														<th scope="col">A</th>
+														<th scope="col">B </th>
+														<th scope="col">C</th>
+													</tr>
+												</thead>
+												<tbody>
+												
+												{%for i in listas%}
+													<tr>
+													<td>{{i.0.nombre}}</td>
+													<td>{{i.1.nombre}}</td>
+													<td>{{i.2.nombre}}</td>													
+													</tr>
+												{% endfor %}
+																						
+												</tbody>
+											</table>
+									</div>
+								</div>
+							</div> 
+							<div class="card-action">
+								<button type="submit" class="btn btn-primary btn-border btn-round">Consultar</button>
+								
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+				<div class="card">
+						<div class="card-header">
+							<div class="card-title">Tabla de registros</div>
+							<label for="nombre">Hora y fecha de la revisión</label>
+						</div>
+						<div class="card-body">
+							<table class="table table-bordered table-head-bg-default table-bordered-bd-default mt-4" width="978px"	height= "100px">
+								<thead>
+									<tr>
+										<th scope="col">Tipo</th>
+										<th scope="col">Hora inicio </th>
+										<th scope="col">Duración</th>
+										<th scope="col">Tarea</th>
+										<th scope="col">Empleado</th>
+										<th scope="col">Insumos</th>
+									</tr>
+								</thead>
+								<tbody>
+
+								<tr>
+								<td>{{consultas.tipo}}</td>
+								<td>{{consultas.hinicio}}</td>
+								<td>{{consultas.duracion}}</td>
+								<td>{{consultas.nombre}}</td>
+								<td>{{consultas.empleado}}</td>
+								<td>{{consultas.insumos}}</td>
+												
+								</tr>
+	
+								</tbody>
+							</table>
+						</div>
+				</div> 
+		</div>
+	</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
