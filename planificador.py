@@ -135,7 +135,7 @@ class proceso:
         #print('.')
         return lista
 
-    def calcular_procesos_jugo(self,t,d,cond1,cond2,a,trabajadores,insumos1,insumos2,insumos3):
+    def calcular_procesos_jugo(self,t,d,cond1,cond2,a,trabajadores,insumos1,insumos2,insumos3,parametros):
 
         #si es la hora de inicio de la jornada laboral y hay tanques disponible se procesa una tarea
         if(cond1):
@@ -144,13 +144,13 @@ class proceso:
             self.b=self.asignar_tanque(a)
 
             self.listadedatos=[
-            {'TIPO':'desembarque','HINICIO':8,'HORAS':1,'COSTO':0.5,'EMPLEADO':trabajadores['horario empleados'][0],'TAREA':a,'DIA':d,'INSUMOS':0},
-            {'TIPO':'pesado','HINICIO':9,'HORAS':2,'COSTO':0.5,'EMPLEADO':trabajadores['horario empleados'][1],'TAREA':a,'DIA':d,'INSUMOS':0},
-            {'TIPO':'lavado','HINICIO':9,'HORAS':2,'COSTO':0.5,'EMPLEADO':trabajadores['horario empleados'][2],'TAREA':a,'DIA':d,'INSUMOS':insumos1},
-            {'TIPO':'pelado','HINICIO':9,'HORAS':2,'COSTO':0.5,'EMPLEADO':trabajadores['horario empleados'][3],'TAREA':a,'DIA':d,'INSUMOS':0},
-            {'TIPO':'molienda','HINICIO':9,'HORAS':2,'COSTO':0.5,'EMPLEADO':trabajadores['horario empleados'][4],'TAREA':a,'DIA':d,'INSUMOS':insumos2},
-            {'TIPO':'centrifuga','HINICIO':10,'HORAS':3,'COSTO':0.5,'EMPLEADO':trabajadores['horario empleados'][5],'TAREA':a,'DIA':d,'INSUMOS':0},
-            {'TIPO':'UHT','HINICIO':11,'HORAS':2,'COSTO':0.5,'EMPLEADO':trabajadores['horario empleados'][6],'TAREA':a,'DIA':d,'INSUMOS':0}]
+            {'TIPO':'desembarque','HINICIO':parametros['inicio']['desembarque'],'HORAS':parametros['duracion']['desembarque'],'COSTO':0.5,'EMPLEADO':trabajadores['horario empleados'][0],'TAREA':a,'DIA':d,'INSUMOS':0},
+            {'TIPO':'pesado','HINICIO':parametros['inicio']['pesado'],'HORAS':parametros['duracion']['pesado'],'COSTO':0.5,'EMPLEADO':trabajadores['horario empleados'][1],'TAREA':a,'DIA':d,'INSUMOS':0},
+            {'TIPO':'lavado','HINICIO':parametros['inicio']['lavado'],'HORAS':parametros['duracion']['lavado'],'COSTO':0.5,'EMPLEADO':trabajadores['horario empleados'][2],'TAREA':a,'DIA':d,'INSUMOS':insumos1},
+            {'TIPO':'pelado','HINICIO':parametros['inicio']['pelado'],'HORAS':parametros['duracion']['pelado'],'COSTO':0.5,'EMPLEADO':trabajadores['horario empleados'][3],'TAREA':a,'DIA':d,'INSUMOS':0},
+            {'TIPO':'molienda','HINICIO':parametros['inicio']['molienda'],'HORAS':parametros['duracion']['molienda'],'COSTO':0.5,'EMPLEADO':trabajadores['horario empleados'][4],'TAREA':a,'DIA':d,'INSUMOS':insumos2},
+            {'TIPO':'centrifuga','HINICIO':parametros['inicio']['centrifuga'],'HORAS':parametros['duracion']['centrifuga'],'COSTO':0.5,'EMPLEADO':trabajadores['horario empleados'][5],'TAREA':a,'DIA':d,'INSUMOS':0},
+            {'TIPO':'UHT','HINICIO':parametros['inicio']['UHT'],'HORAS':parametros['duracion']['UHT'],'COSTO':0.5,'EMPLEADO':trabajadores['horario empleados'][6],'TAREA':a,'DIA':d,'INSUMOS':0}]
         if(cond2) : #si es la hora de finalizar la tarea de procesamiento se guardan los datos y se limpian, ademas se pasa la tarea al tanque que se le haya asignado
             
             #self.listadedatos=self.poner_fecha_salida(self.listadedatos,d)
@@ -167,14 +167,14 @@ class proceso:
             cont=0
             for tank in self.tanques:
               if(tank['TIPO']==self.b): 
-                self.tanques[cont]['HINICIO']=13
-                self.tanques[cont]['HORAS']=67
+                self.tanques[cont]['HINICIO']=parametros['inicio']['tanque']
+                self.tanques[cont]['HORAS']=parametros['duracion']['tanque']
                 self.tanques[cont]['DIA']=d
                 self.tanques[cont]['INSUMOS']=insumos3
                 self.b=' '
               cont=cont+1
 
-    def calcular_procesos_tanques(self,t,d,cond1,a,insumos):
+    def calcular_procesos_tanques(self,t,d,cond1,a,insumos,parametros):
         #se le suma cada hora que pase un producto en un tanque cuando ya esta listo para ser enlatado y no se enlata
         cont=0
         for enlatar in self.listaenlatar:
@@ -186,8 +186,8 @@ class proceso:
 
             for tank in self.tanques:
                 if(tank['TIPO']==self.c): 
-                    self.tanques[cont]['HINICIO']=8
-                    self.tanques[cont]['HORAS']=24
+                    self.tanques[cont]['HINICIO']=parametros['inicio']['tanque']
+                    self.tanques[cont]['HORAS']=parametros['duracion']['tanque']
                     self.tanques[cont]['DIA']=d
                     self.tanques[cont]['INSUMOS']=insumos
                     self.c=' '
@@ -203,7 +203,7 @@ class proceso:
                   self.listaenlatar.append(self.tanques[cont].copy())
           cont=cont+1  
 
-    def proceso_enlatar(self,t,d,cond1,cond2,cond3,x,trabajadores,insumo1,insumo2,insumo3):
+    def proceso_enlatar(self,t,d,cond1,cond2,cond3,x,trabajadores,insumo1,insumo2,insumo3,parametros):
 
 
         if(cond2):#si es el inicio de la jornada laboral se comienza a enlatar
@@ -240,11 +240,13 @@ class proceso:
                         cont=cont+1
                 #se asignan los recursos par enlatar la tarea 
                 aux=aux['TAREA']
+                lata=aux['tipo'].split()
+                parametros=parametros[lata[1]]
                 self.listadedatos1=[
-                {'TIPO':'mezclado','HINICIO':8,'HORAS':6,'COSTO':0.5,'EMPLEADO':trabajadores['horario empleados'][7],'TAREA':aux,'DIA':d,'INSUMOS':insumo1},
-                {'TIPO':'carbonatado','HINICIO':10,'HORAS':6,'COSTO':0.5,'EMPLEADO':trabajadores['horario empleados'][8],'TAREA':aux,'DIA':d,'INSUMOS':insumo2},
-                {'TIPO':'enlatado','HINICIO':12,'HORAS':4,'COSTO':0.5,'EMPLEADO':trabajadores['horario empleados'][9],'TAREA':aux,'DIA':d,'INSUMOS':insumo3},
-                {'TIPO':'embarque','HINICIO':16,'HORAS':2,'COSTO':0.5,'EMPLEADO':trabajadores['horario empleados'][10],'TAREA':aux,'DIA':d,'INSUMOS':0}]
+                {'TIPO':'mezclado','HINICIO':parametros['inicio'],'HORAS':parametros['duracion'],'COSTO':0.5,'EMPLEADO':trabajadores['horario empleados'][7],'TAREA':aux,'DIA':d,'INSUMOS':insumo1},
+                {'TIPO':'carbonatado','HINICIO':parametros['inicio'],'HORAS':parametros['duracion'],'COSTO':0.5,'EMPLEADO':trabajadores['horario empleados'][8],'TAREA':aux,'DIA':d,'INSUMOS':insumo2},
+                {'TIPO':'enlatado','HINICIO':parametros['inicio'],'HORAS':parametros['duracion'],'COSTO':0.5,'EMPLEADO':trabajadores['horario empleados'][9],'TAREA':aux,'DIA':d,'INSUMOS':insumo3},
+                {'TIPO':'embarque','HINICIO':parametros['inicio'],'HORAS':parametros['duracion'],'COSTO':0.5,'EMPLEADO':trabajadores['horario empleados'][10],'TAREA':aux,'DIA':d,'INSUMOS':0}]
         if(cond3): # fin de la jornada laboral, se limpian los recursos
             self.listadedatos1=self.poner_fecha_salida(self.listadedatos1,d)
             #guardo el registro de uso de los recursos
@@ -350,13 +352,15 @@ class Planificador():
     def cargar_datos_iniciales(self):
         
         save_path = '/home/david/Desktop/optimizacion_final/datos_json'
-        '''
-        name_of_file = 'data'
+        
+        name_of_file = 'modelsettings'
         completeName = os.path.join(save_path, name_of_file+".txt") 
         with open(completeName) as json_file:
-            clientes = json.load(json_file)
-        self.lista_de_tareas=clientes
-        '''
+            settings = json.load(json_file)
+        self.settings=settings
+
+        #print(settings)
+        
         name_of_file = 'datam'
         completeName = os.path.join(save_path, name_of_file+".txt") 
         with open(completeName) as json_file:
@@ -409,7 +413,8 @@ class Planificador():
           a=False
         else:
           a=True
-        return (j,v,a)            
+        return (j,v,a)
+
 
     def separar_por_tipos(self):
 
@@ -480,18 +485,24 @@ class Planificador():
         insumo1=''
         insumo2=''
         insumo3=''
+        parametros=''
 
         if(condicion1):
             insumo1=self.almacen.asignar_recurso_quimico('quimico 0',1)
             insumo2=self.almacen.asignar_recurso_quimico('quimico 1',1)
             a=self.jugo[0]
+            name=a['tipo'].split()
+            parametros=self.settings['tareas'][name[0]]
             a['fecha_inicio']=(self.dayzero+timedelta(days=(d-1))).strftime("%m %d %Y")
 
         if(condicion2):
             insumo1=self.almacen.asignar_recurso_quimico('quimico 2',1)
+            a=self.jugo[0]
+            name=a['tipo'].split()
+            parametros=self.settings['tareas'][name[0]]
             self.jugo.pop(0)
 
-        self.transformacion.calcular_procesos_jugo(t,d,condicion1,condicion2,a,self.trabajadores,insumo1,insumo2,insumo3)
+        self.transformacion.calcular_procesos_jugo(t,d,condicion1,condicion2,a,self.trabajadores,insumo1,insumo2,insumo3,parametros)
 
     def asignar_proceso_almacenar(self,t,d):
 
@@ -506,14 +517,17 @@ class Planificador():
 
         a=''
         insumo=''
+        parametros=''
         condicion1=(t==8 and f[1] == False and c and w != 6 and y[1])
 
         if(condicion1):
             insumo=self.almacen.asignar_recurso_quimico('quimico 2',1)
-            a=self.vino[0] 
+            a=self.vino[0]
+            name=a['tipo'].split()
+            parametros=self.settings['tareas'][name[0]] 
             a['fecha_inicio']=(self.dayzero+timedelta(days=(d-1))).strftime("%m %d %Y")
             self.vino.pop(0)
-        self.transformacion.calcular_procesos_tanques(t,d,condicion1,a,insumo)
+        self.transformacion.calcular_procesos_tanques(t,d,condicion1,a,insumo,parametros)
  
     def asignar_proceso_enlatar(self,t,d):
 
@@ -534,6 +548,7 @@ class Planificador():
         insumo1=''
         insumo2=''
         lata=''
+        parametros=self.settings['latas']
 
         if(condicion1 and condicion2):
             #se saca la tarea de agua de la lista de tareas de agua
@@ -542,12 +557,13 @@ class Planificador():
             self.agua.pop(0)
             tipo=a['tipo'].split()
             tipo=tipo[1]
+            
             insumo1=self.almacen.asignar_recurso_quimico('quimico 3',1)
             insumo2=self.almacen.asignar_recurso_quimico('quimico 4',1)
             lata=self.almacen.asignar_recurso_lata(tipo,8)
             
 
-        self.transformacion.proceso_enlatar(t,d,condicion1,condicion2,condicion3,a,self.trabajadores,insumo1,insumo2,lata)
+        self.transformacion.proceso_enlatar(t,d,condicion1,condicion2,condicion3,a,self.trabajadores,insumo1,insumo2,lata,parametros)
 
     def entrega_producto_final(self,d):
 

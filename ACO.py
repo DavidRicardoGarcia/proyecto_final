@@ -3,14 +3,53 @@ import random
 import time as tm
 from tqdm import tqdm
 from matplotlib import pyplot as plt
-
+import json
+import os.path
 import pandas as pd
 import numpy as np
 import copy
 import Funcion_objetivo as fo
 
+
 funcion=fo
 
+def terminado_algoritmo(res):
+        
+    save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+
+    name_of_file = 'estado'
+
+    completeName = os.path.join(save_path, name_of_file+".txt") 
+
+    with open(completeName) as json_file:
+        data = json.load(json_file)
+
+    data['ACO']['estado']='terminado'
+    data['ACO']['resultado']=res
+
+    #se ejecuta el algoritmo en cuestion
+
+    with open(completeName,'w') as outfile:
+        json.dump(data,outfile)
+
+def charts(x,y):
+        
+    save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+
+    name_of_file = 'charts'
+
+    completeName = os.path.join(save_path, name_of_file+".txt") 
+
+    with open(completeName) as json_file:
+        data = json.load(json_file)
+
+    data['ACO']['y']=y
+    data['ACO']['x']=x
+
+    #se ejecuta el algoritmo en cuestion
+
+    with open(completeName,'w') as outfile:
+        json.dump(data,outfile)
 
 class ACO:
 
@@ -203,6 +242,8 @@ class ACO:
             self.pheromone = initial_pheromone
 
     def _acs(self):
+        self.makespan_record=[]
+        self.index_record=[]
         for step in range(self.steps):
             for ant in self.ants:
                 # calcula un tour para esa hormiga
@@ -216,6 +257,9 @@ class ACO:
             for i in range(self.num_nodes):
                 for j in range(i + 1, self.num_nodes):
                     self.edges[i][j].pheromone *= (1.0 - self.rho)
+            
+            self.makespan_record.append(self.global_best_distance)
+            self.index_record.append(step)
 
     def run(self):
         start = tm.time()
@@ -230,7 +274,7 @@ class ACO:
         # print('Sequence : <- {0} ->'.format(' - '.join(str(self.labels[i]) for i in self.global_best_tour)))
         # print('Total distance travelled to complete the tour : {0}\n'.format(round(self.global_best_distance, 2)))
         runtime = tm.time() - start
-        return runtime, self.global_best_distance
+        return runtime, self.global_best_distance , self.global_best_tour
 
 
 
@@ -245,17 +289,20 @@ def get_id_list(lista):
 
 if __name__ == '__main__':
 
+    #start_time = tm.time()
     _colony_size = 20
     _steps = 100
     x=funcion.cargar_tareas()
 
     lista_id=get_id_list(x['pedidos'])
 
-  
+
     acs=ACO(mode='ACS', colony_size=_colony_size, steps=_steps, nodes=lista_id, tareas=x['pedidos'])
-    time, dist =acs.run()
+    time, dist, tour =acs.run()
 
     s='el algoritmo ACS     :' + repr(dist) +" con tiempo de:" + repr(time)
     print(s)
-
+    #print('the elapsed time:%s'% (tm.time() - start_time))
+    terminado_algoritmo(tour)
+    charts(acs.index_record,acs.makespan_record)
     #print(_nodes)

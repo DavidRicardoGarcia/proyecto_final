@@ -12,7 +12,8 @@ import pandas as pd
 import numpy as np
 import time
 import copy
-
+import json
+import os.path
 import Funcion_objetivo as fo
 
 funcion=fo
@@ -42,6 +43,44 @@ def ordenar_Tareas(state,tareas):
     h['pedidos']=newtareas
     return h
 
+def terminado_algoritmo(res):
+        
+    save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+
+    name_of_file = 'estado'
+
+    completeName = os.path.join(save_path, name_of_file+".txt") 
+
+    with open(completeName) as json_file:
+        data = json.load(json_file)
+
+    data['GA']['estado']='terminado'
+    data['GA']['resultado']=res
+
+    #se ejecuta el algoritmo en cuestion
+
+    with open(completeName,'w') as outfile:
+        json.dump(data,outfile)
+
+def charts(x,y):
+        
+    save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+
+    name_of_file = 'charts'
+
+    completeName = os.path.join(save_path, name_of_file+".txt") 
+
+    with open(completeName) as json_file:
+        data = json.load(json_file)
+
+    data['GA']['y']=y
+    data['GA']['x']=x
+
+    #se ejecuta el algoritmo en cuestion
+
+    with open(completeName,'w') as outfile:
+        json.dump(data,outfile)
+
 x=funcion.cargar_tareas()
 
 lista_id=get_id_list(x['pedidos'])
@@ -64,6 +103,7 @@ Tbest=999999999999999
 best_list,best_obj=[],[]
 population_list=[]
 makespan_record=[]
+index_record=[]
 # it generates a random permutation array for each one in the population
 for i in range(population_size):
     nxm_random_num=list(np.random.permutation(num_gene)) # generate a random permutation of 0 to num_job*num_mc-1
@@ -179,11 +219,15 @@ for n in range(num_iteration):
         sequence_best=copy.deepcopy(sequence_now)
         
     makespan_record.append(Tbest)
+    index_record.append(n)
+
+
 '''----------result----------'''
 print("optimal sequence",sequence_best)
 print("optimal value:%f"%Tbest)
 print('the elapsed time:%s'% (time.time() - start_time))
-
+terminado_algoritmo(sequence_best)
+charts(index_record,makespan_record)
 # import matplotlib.pyplot as plt
 
 # plt.plot([i for i in range(len(makespan_record))],makespan_record,'b')

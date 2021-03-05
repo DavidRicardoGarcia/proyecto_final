@@ -52,6 +52,8 @@ def pages(request):
             data=" "
         
         ejecutar_form(load_template,data)
+
+        print(data)
         
         context['segment'] = load_template
         context['tareas']=ctareas
@@ -60,6 +62,8 @@ def pages(request):
         context['almacen']=calmacen
         lista=separar_por_tipos(ctareas)
         context['listas']=lista
+        context['estados']=cargar_estados()
+        #registros=cargar_registros()
         context['dias']=recursos_por_Fecha()
         context['consultas']=consulta['query']
         
@@ -155,7 +159,72 @@ def ejecutar_form(a,data):
                         'empleado':i['EMPLEADO']['nombre'],'insumos':i['INSUMOS']}
             
                 print(consulta)
+    if(a=='opt-solver.html'):
+        if(data!= " "):
+            botones=['btnGA','btnSA','btnPSO','btnACO']
+            sel=['selGA','selSA','selPSO','selACO']
+            labels=['GA','SA','PSO','ACO']
+            ind=0
+            for x in botones:
+                if x in data.keys():
+                    ejecutando_algoritmo(labels[ind])
+                ind+=1
             
+            ind=0
+            for x in sel:
+                if x in data.keys():
+                    selecionar_Resultado(labels[ind])
+                ind+=1
+
+
+def selecionar_Resultado(a):
+
+        save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+
+        name_of_file = 'estado'
+
+        completeName = os.path.join(save_path, name_of_file+".txt") 
+
+        with open(completeName) as json_file:
+            data = json.load(json_file)
+
+        #se le pasa el vector a la funcion planificador
+        
+        data[a]['resultado']
+
+            
+
+def ejecutando_algoritmo(a):
+        
+        save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+
+        name_of_file = 'estado'
+
+        completeName = os.path.join(save_path, name_of_file+".txt") 
+
+        with open(completeName) as json_file:
+            data = json.load(json_file)
+
+        data[a]['estado']='ejecutando'
+
+        #se ejecuta el algoritmo en cuestion
+
+        with open(completeName,'w') as outfile:
+            json.dump(data,outfile)
+
+
+def cargar_estados():
+        
+        save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+
+        name_of_file = 'estado'
+
+        completeName = os.path.join(save_path, name_of_file+".txt") 
+
+        with open(completeName) as json_file:
+            data = json.load(json_file)
+
+        return data
 
 
 

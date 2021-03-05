@@ -54,6 +54,23 @@ def Calcular_Costo(tareas):
     
     return costo_maquinas+costo_trabajadores+costo_Transporte+costo_almacenaje+costo_insumos+costo_penalizacion
 
+def Calcular_span(tareas):
+    funcion=sc.Planificador()
+    #a=random.sample(tareas['pedidos'],len(tareas['pedidos']))
+    #dic={'pedidos':a}
+    funcion.lista_de_tareas=tareas
+    funcion.separar_por_tipos()
+    funcion.ejecutar_proceso()
+    diazero=funcion.dayzero
+    x=funcion.registro_viajes
+    dias=0
+    for i in x:
+        
+        fecha=datetime.strptime(i.vencimiento,'%m %d %Y')
+        dias+=(fecha-diazero).days
+
+    return dias
+
 def cargar_tareas():
         save_path = '/home/david/Desktop/optimizacion_final/datos_json'
         name_of_file = 'data'

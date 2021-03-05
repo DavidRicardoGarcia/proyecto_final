@@ -4,6 +4,8 @@ import math
 import random
 import time
 import copy
+import json
+import os.path
 # some_file.py
 #import sys
 # insert at 1, 0 is the script path (or '' in REPL)
@@ -11,6 +13,45 @@ import copy
 import Funcion_objetivo as fo
 
 funcion=fo
+
+
+def terminado_algoritmo(res):
+        
+    save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+
+    name_of_file = 'estado'
+
+    completeName = os.path.join(save_path, name_of_file+".txt") 
+
+    with open(completeName) as json_file:
+        data = json.load(json_file)
+
+    data['SA']['estado']='terminado'
+    data['SA']['resultado']=res
+
+    #se ejecuta el algoritmo en cuestion
+
+    with open(completeName,'w') as outfile:
+        json.dump(data,outfile)
+
+def charts(x,y):
+        
+    save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+
+    name_of_file = 'charts'
+
+    completeName = os.path.join(save_path, name_of_file+".txt") 
+
+    with open(completeName) as json_file:
+        data = json.load(json_file)
+
+    data['SA']['y']=y
+    data['SA']['x']=x
+
+    #se ejecuta el algoritmo en cuestion
+
+    with open(completeName,'w') as outfile:
+        json.dump(data,outfile)
 
 class SA():
 
@@ -69,6 +110,8 @@ class SA():
 
         step = 0
         
+        self.makespan_record=[]
+        self.index_record=[]
 
         Tfactor = -math.log(self.Tmax / self.Tmin)
 
@@ -112,6 +155,8 @@ class SA():
             if self.updates > 1:
                 if (step // updateWavelength) > ((step - 1) // updateWavelength):
                     trials, accepts, improves = 0, 0, 0
+            self.makespan_record.append(self.best_energy)
+            self.index_record.append(step)
 
         self.state = self.copy_state(self.best_state)
 
@@ -149,6 +194,8 @@ def get_id_list(lista):
 
 if __name__ == '__main__':
 
+    start_time = time.time()
+
     x=funcion.cargar_tareas()
 
     lista_id=get_id_list(x['pedidos'])
@@ -163,6 +210,9 @@ if __name__ == '__main__':
     print("%i es el makespan total" % e)
     print("la mejor secuencia es")
     print(state)
+    print('the elapsed time:%s'% (time.time() - start_time))
+    terminado_algoritmo(state)
+    charts(tsp.index_record,tsp.makespan_record)
 
 # '''--------plot gantt chart-------'''
 # import pandas as pd

@@ -1,0 +1,1 @@
+{"GA": {"estado": "terminado", "resultado": 0}, "SA": {"estado": "terminado", "resultado": 0}, "PSO": {"estado": "terminado", "resultado": 0}, "ACO": {"estado": "terminado", "resultado": 0}}

@@ -5,8 +5,49 @@ import numpy as np
 import time
 import copy
 import Funcion_objetivo as fo
+import json
+import os.path
 
 funcion=fo
+
+def terminado_algoritmo(res):
+        
+	save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+
+	name_of_file = 'estado'
+
+	completeName = os.path.join(save_path, name_of_file+".txt") 
+
+	with open(completeName) as json_file:
+		data = json.load(json_file)
+
+	data['PSO']['estado']='terminado'
+	data['PSO']['resultado']=res
+
+	#se ejecuta el algoritmo en cuestion
+
+	with open(completeName,'w') as outfile:
+		json.dump(data,outfile)
+
+def charts(x,y):
+        
+    save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+
+    name_of_file = 'charts'
+
+    completeName = os.path.join(save_path, name_of_file+".txt") 
+
+    with open(completeName) as json_file:
+        data = json.load(json_file)
+
+    data['PSO']['y']=y
+    data['PSO']['x']=x
+
+    #se ejecuta el algoritmo en cuestion
+
+    with open(completeName,'w') as outfile:
+        json.dump(data,outfile)
+
 
 class Particle:
 
@@ -79,6 +120,8 @@ class PSO:
 		self.particles = [] # list of particles
 		self.beta = beta # the probability that all swap operators in swap sequence (gbest - x(t-1))
 		self.alfa = alfa # the probability that all swap operators in swap sequence (pbest - x(t-1))
+		self.makespan_record=[]
+		self.index_record=[]
 
 		solutions=[]
 		# initialized with a group of random particles (solutions)
@@ -125,6 +168,8 @@ class PSO:
 	def run(self):
 
 		# for each time step (iteration)
+
+
 		for t in range(self.iterations):
 
 			# updates gbest (best particle of the population)
@@ -190,7 +235,8 @@ class PSO:
 				if cost_current_solution < particle.getCostPBest():
 					particle.setPBest(solution_particle)
 					particle.setCostPBest(cost_current_solution)
-		
+			self.makespan_record.append(self.gbest.getCostPBest())
+			self.index_record.append(t)
 
 class modelo:
 
@@ -234,21 +280,26 @@ def get_id_list(lista):
     return newlist
 
 
+if __name__ == '__main__':
+	start_time = time.time()
+	x=funcion.cargar_tareas()
 
+	lista_id=get_id_list(x['pedidos'])
 
-x=funcion.cargar_tareas()
+	problem=modelo(x['pedidos'],lista_id)
 
-lista_id=get_id_list(x['pedidos'])
+	solver=PSO(problem,iterations=1000,size_population=10,beta=1,alfa=0.9)
 
-problem=modelo(x['pedidos'],lista_id)
+	solver.run()
 
-solver=PSO(problem,iterations=1000,size_population=10,beta=1,alfa=0.9)
+	solver.showsParticles()
 
-solver.run()
+	print('gbest: %s | cost: %d\n' % (solver.getGBest().getPBest(), solver.getGBest().getCostPBest()))
 
-solver.showsParticles()
+	print('the elapsed time:%s'% (time.time() - start_time))
 
-print('gbest: %s | cost: %d\n' % (solver.getGBest().getPBest(), solver.getGBest().getCostPBest()))
- 
-#print(min(solver.particles, key=attrgetter('cost_pbest_solution')).solution)
+	terminado_algoritmo(solver.getGBest().getPBest())
+	charts(solver.index_record,solver.makespan_record)
+	
+	#print(min(solver.particles, key=attrgetter('cost_pbest_solution')).solution)
 
