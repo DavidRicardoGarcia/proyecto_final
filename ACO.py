@@ -13,7 +13,7 @@ import Funcion_objetivo as fo
 
 funcion=fo
 
-def terminado_algoritmo(res):
+def terminado_algoritmo(res,tiempo,valor):
         
     save_path = '/home/david/Desktop/optimizacion_final/datos_json'
 
@@ -26,6 +26,8 @@ def terminado_algoritmo(res):
 
     data['ACO']['estado']='terminado'
     data['ACO']['resultado']=res
+    data['ACO']['tiempo']=tiempo
+    data['ACO']['valor']=valor
 
     #se ejecuta el algoritmo en cuestion
 
@@ -287,7 +289,7 @@ def get_id_list(lista):
 
 
 
-if __name__ == '__main__':
+def ejecutarACO():
 
     #start_time = tm.time()
     _colony_size = 20
@@ -303,6 +305,6 @@ if __name__ == '__main__':
     s='el algoritmo ACS     :' + repr(dist) +" con tiempo de:" + repr(time)
     print(s)
     #print('the elapsed time:%s'% (tm.time() - start_time))
-    terminado_algoritmo(tour)
+    terminado_algoritmo(tour,time,dist)
     charts(acs.index_record,acs.makespan_record)
     #print(_nodes)

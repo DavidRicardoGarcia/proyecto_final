@@ -33,51 +33,10 @@
 												{% endfor %}
 											</select>
 										</div>
-										<div class="form-group">
-											<label for="nombre">Recurso a consultar :</label>
-											<select class="form-control" id="tipor" name="tipor">
-												<option>desembarque</option>
-												<option>pesado</option>
-												<option>lavado</option>
-												<option>pelado</option>
-												<option>molienda</option>
-												<option>centrifuga</option>
-												<option>UHT</option>
-												<option>tanque1</option>
-												<option>tanque2</option>
-												<option>tanque3</option>
-												<option>tanque4</option>
-												<option>mezclado</option>
-												<option>carbonatado</option>
-												<option>enlatado</option>
-												<option>embarque</option>
-											</select>
-										</div>
+
 									
 									</div>
-									<div class="col-md-6">
-											<label for="cant">Orden</label>
-											<table class="table table-bordered " >
-												<thead>
-													<tr>
-														<th scope="col">A</th>
-														<th scope="col">B </th>
-														<th scope="col">C</th>
-													</tr>
-												</thead>
-												<tbody>
-												
-												{%for i in listas%}
-													<tr>
-													<td>{{i.0.nombre}}</td>
-													<td>{{i.1.nombre}}</td>
-													<td>{{i.2.nombre}}</td>													
-													</tr>
-												{% endfor %}
-																						
-												</tbody>
-											</table>
-									</div>
+
 								</div>
 							</div> 
 							<div class="card-action">
@@ -106,17 +65,17 @@
 									</tr>
 								</thead>
 								<tbody>
-
+								{%for i in consultas%}
 								<tr>
-								<td>{{consultas.tipo}}</td>
-								<td>{{consultas.hinicio}}</td>
-								<td>{{consultas.duracion}}</td>
-								<td>{{consultas.nombre}}</td>
-								<td>{{consultas.empleado}}</td>
-								<td>{{consultas.insumos}}</td>
+								<td>{{i.tipo}}</td>
+								<td>{{i.hinicio}}</td>
+								<td>{{i.duracion}}</td>
+								<td>{{i.nombre}}</td>
+								<td>{{i.empleado}}</td>
+								<td>{{i.insumos}}</td>
 												
 								</tr>
-	
+								{% endfor %}
 								</tbody>
 							</table>
 						</div>

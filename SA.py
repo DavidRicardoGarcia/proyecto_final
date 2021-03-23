@@ -15,7 +15,7 @@ import Funcion_objetivo as fo
 funcion=fo
 
 
-def terminado_algoritmo(res):
+def terminado_algoritmo(res,tiempo,valor):
         
     save_path = '/home/david/Desktop/optimizacion_final/datos_json'
 
@@ -28,9 +28,8 @@ def terminado_algoritmo(res):
 
     data['SA']['estado']='terminado'
     data['SA']['resultado']=res
-
-    #se ejecuta el algoritmo en cuestion
-
+    data['SA']['tiempo']=tiempo
+    data['SA']['valor']=valor
     with open(completeName,'w') as outfile:
         json.dump(data,outfile)
 
@@ -192,7 +191,7 @@ def get_id_list(lista):
         newlist.append(i['id'])
     return newlist
 
-if __name__ == '__main__':
+def ejecutarSA(): 
 
     start_time = time.time()
 
@@ -205,13 +204,13 @@ if __name__ == '__main__':
     tsp.copy_strategy = "slice"
     state, e = tsp.anneal()
 
-
+    tiempo=time.time() - start_time
     print()
     print("%i es el makespan total" % e)
     print("la mejor secuencia es")
     print(state)
     print('the elapsed time:%s'% (time.time() - start_time))
-    terminado_algoritmo(state)
+    terminado_algoritmo(state,tiempo,e)
     charts(tsp.index_record,tsp.makespan_record)
 
 # '''--------plot gantt chart-------'''

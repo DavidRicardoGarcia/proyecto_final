@@ -1,6 +1,6 @@
 {"tareas":
-{"banano":{"tipo":"A","duracion":{"desembarque":1,"pesado":2,"lavado":2,"pelado":2,"molienda":2,"centrifuga":3,"UHT":2,"tanque":67},"inicio":{"desembarque":8,"pesado":9,"lavado":9,"pelado":9,"molienda":9,"centrifuga":10,"UHT":11,"tanque":13}},
-"guanabana":{"tipo":"A","duracion":{"desembarque":1,"pesado":2,"lavado":2,"pelado":2,"molienda":2,"centrifuga":3,"UHT":2,"tanque":67},"inicio":{"desembarque":8,"pesado":9,"lavado":9,"pelado":9,"molienda":9,"centrifuga":10,"UHT":11,"tanque":13},"Tinsumo":7},
-"vino":{"tipo":"B","duracion":{"tanque":24},"inicio":{"tanque":8},"Tinsumo":31},
-"agua":{"tipo":"C"},"Tinsumo":1},
+{"banano":{"tipo":"A","duracion":{"desembarque":1,"pesado":2,"lavado":2,"pelado":2,"molienda":2,"centrifuga":3,"UHT":2,"tanque":67},"inicio":{"desembarque":8,"pesado":9,"lavado":9,"pelado":9,"molienda":9,"centrifuga":10,"UHT":11,"tanque":13},"Tinsumo":7,"Tprocesamiento":3},
+"guanabana":{"tipo":"A","duracion":{"desembarque":1,"pesado":2,"lavado":2,"pelado":2,"molienda":2,"centrifuga":3,"UHT":2,"tanque":67},"inicio":{"desembarque":8,"pesado":9,"lavado":9,"pelado":9,"molienda":9,"centrifuga":10,"UHT":11,"tanque":13},"Tinsumo":7,"Tprocesamiento":3},
+"vino":{"tipo":"B","duracion":{"tanque":24},"inicio":{"tanque":8},"Tinsumo":31,"Tprocesamiento":1},
+"agua":{"tipo":"C","Tinsumo":1,"Tprocesamiento":0}},
 "latas":{"8-st":{"inicio":8,"duracion":9.09},"8-sl":{"inicio":8,"duracion":7.18},"12-st":{"inicio":8,"duracion":10.08},"12-sl":{"inicio":8,"duracion":7.92},"16-st":{"inicio":8,"duracion":10.55}}}

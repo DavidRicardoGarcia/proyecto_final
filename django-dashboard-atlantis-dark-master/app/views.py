@@ -19,6 +19,12 @@ sys.path.insert(1, '/home/david/Desktop/optimizacion_final')
 
 from elementos_modelo import mantenimiento as mto
 from elementos_modelo import clientes as clt
+import ACO
+import PSO
+import GA
+import SA
+import Funcion_objetivo as fo
+funcion=fo
 
 mant=mto.generar_mantenimiento_planificado()
 tareas=clt.generar_tareas_aleatorias()
@@ -53,7 +59,7 @@ def pages(request):
         
         ejecutar_form(load_template,data)
 
-        print(data)
+        #print(data)
         
         context['segment'] = load_template
         context['tareas']=ctareas
@@ -66,6 +72,11 @@ def pages(request):
         #registros=cargar_registros()
         context['dias']=recursos_por_Fecha()
         context['consultas']=consulta['query']
+        context['chartga']=graficas['GA']
+        context['chartsa']=graficas['SA']
+        context['chartpso']=graficas['PSO']
+        context['chartaco']=graficas['ACO']
+        #print(graficas['GA'])
         
         html_template = loader.get_template( load_template )
         return HttpResponse(html_template.render(context, request))
@@ -151,14 +162,20 @@ def ejecutar_form(a,data):
                 print('nsga')
     if(a=='Registros-totales.html'):
         if(data!= " "):
-            if(data['tipor']!= " " and data['tipof']!= " "):
-                consulta['query']={'tipo':'','hinicio':'','duracion':'','nombre':'','empleado':'','insumos':''}
+            if(data['tipof']!= " "):
+                lista=[]
                 for i in registros['lista_total']:
-                    if(i['TAREA']['fecha_inicio']== data['tipof'] and i['TIPO']==data['tipor']):
-                        consulta['query']={'tipo':i['TIPO'],'hinicio':i['HINICIO'],'duracion':i['HORAS'],'nombre':i['TAREA']['nombre'],
-                        'empleado':i['EMPLEADO']['nombre'],'insumos':i['INSUMOS']}
-            
-                print(consulta)
+                    
+                    if(i['TAREA']['fecha_inicio']== data['tipof']):
+                        if ('EMPLEADO' in i.keys()):
+                            lista.append({'tipo':i['TIPO'],'hinicio':i['HINICIO'],'duracion':i['HORAS'],'nombre':i['TAREA']['nombre'],'empleado':i['EMPLEADO']['nombre'],'insumos':i['INSUMOS']})
+                        else: 
+                            lista.append({'tipo':i['TIPO'],'hinicio':i['HINICIO'],'duracion':i['HORAS'],'nombre':i['TAREA']['nombre'],'empleado':'no tiene','insumos':i['INSUMOS']})
+                #         lista.append()
+                if (lista == []):
+                    lista.append({'tipo':'','hinicio':'','duracion':'','nombre':'','empleado':'','insumos':''})
+                consulta['query']=lista
+                print(lista)
     if(a=='opt-solver.html'):
         if(data!= " "):
             botones=['btnGA','btnSA','btnPSO','btnACO']
@@ -189,9 +206,25 @@ def selecionar_Resultado(a):
             data = json.load(json_file)
 
         #se le pasa el vector a la funcion planificador
-        
-        data[a]['resultado']
+        x=ctareas
+        vector=data[a]['resultado']
+        cargar_nueva_configuracion(vector,x)
 
+def cargar_nueva_configuracion(state,tareas):
+
+    x=ordenar_Tareas(state,tareas)
+    a=funcion.Calcular_Costo(x,True)
+
+
+def ordenar_Tareas(state,tareas):
+    h={}
+    newtareas=[]
+    for i in state:
+        for x in tareas:
+            if(i == x['id']):
+                newtareas.append(x)
+    h['pedidos']=newtareas
+    return h
             
 
 def ejecutando_algoritmo(a):
@@ -207,10 +240,27 @@ def ejecutando_algoritmo(a):
 
         data[a]['estado']='ejecutando'
 
-        #se ejecuta el algoritmo en cuestion
-
         with open(completeName,'w') as outfile:
             json.dump(data,outfile)
+
+        if(a=='GA'):
+            GA.ejecutarGA()
+        
+
+        if(a=='SA'):
+            SA.ejecutarSA()
+        
+
+        if(a=='PSO'):
+            PSO.ejecutarPSO()
+        
+
+        if(a=='ACO'):
+            ACO.ejecutarACO()
+
+        #se ejecuta el algoritmo en cuestion
+
+
 
 
 def cargar_estados():
@@ -409,13 +459,83 @@ def cargar_almacen():
 
         return data['racks']
 
+def cargar_datos():
+        
+        save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+
+        name_of_file = 'charts'
+
+        completeName = os.path.join(save_path, name_of_file+".txt") 
+
+        with open(completeName) as json_file:
+            data = json.load(json_file)
+        
+        pasoga=int(len(data['GA']['y'])/100)
+        #print(pasoga)
+        y=[]
+        x=[]
+        cont=0
+        for i in range(len(data['GA']['y'])):
+            if(cont==pasoga):
+                y.append(data['GA']['y'][i])
+                x.append(data['GA']['x'][i])
+                cont=0
+            cont+=1
+        data['GA']['y']=y
+        data['GA']['x']=x
+
+        pasoga=int(len(data['SA']['y'])/100)
+        #print(pasoga)
+        y=[]
+        x=[]
+        cont=0
+        for i in range(len(data['SA']['y'])):
+            if(cont==pasoga):
+                y.append(data['SA']['y'][i])
+                x.append(data['SA']['x'][i])
+                cont=0
+            cont+=1
+        data['SA']['y']=y
+        data['SA']['x']=x
+
+
+        pasoga=int(len(data['PSO']['y'])/100)
+        #print(pasoga)
+        y=[]
+        x=[]
+        cont=0
+        for i in range(len(data['PSO']['y'])):
+            if(cont==pasoga):
+                y.append(data['PSO']['y'][i])
+                x.append(data['PSO']['x'][i])
+                cont=0
+            cont+=1
+        data['PSO']['y']=y
+        data['PSO']['x']=x
+
+        pasoga=int(len(data['ACO']['y'])/100)
+        #print(pasoga)
+        y=[]
+        x=[]
+        cont=0
+        for i in range(len(data['ACO']['y'])):
+            if(cont==pasoga):
+                y.append(data['ACO']['y'][i])
+                x.append(data['ACO']['x'][i])
+                cont=0
+            cont+=1
+        data['ACO']['y']=y
+        data['ACO']['x']=x
+
+        return data
+
 def recursos_por_Fecha():
     inicio=datetime.strptime(registros['fecha_inicio'],'%m %d %Y')
     final=datetime.strptime(registros['fecha_final'],'%m %d %Y')
     valor=final-inicio
     lista=[]
-    for i in range(valor.days):
-        dia=inicio + timedelta(days=(i+1))
+    for i in range(valor.days+1):
+        dia=inicio + timedelta(days=(i))
         lista.append(dia.strftime("%m %d %Y"))
 
     return lista
@@ -425,3 +545,4 @@ ctareas=cargar_tareas()
 cmantenimiento=cargar_mantenimiento()
 cpersonal=cargar_personal()
 calmacen=cargar_almacen()
+graficas=cargar_datos()

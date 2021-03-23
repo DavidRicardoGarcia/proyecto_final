@@ -10,7 +10,7 @@ import os.path
 
 funcion=fo
 
-def terminado_algoritmo(res):
+def terminado_algoritmo(res,tiempo,valor):
         
 	save_path = '/home/david/Desktop/optimizacion_final/datos_json'
 
@@ -23,7 +23,8 @@ def terminado_algoritmo(res):
 
 	data['PSO']['estado']='terminado'
 	data['PSO']['resultado']=res
-
+	data['PSO']['tiempo']=tiempo
+	data['PSO']['valor']=valor
 	#se ejecuta el algoritmo en cuestion
 
 	with open(completeName,'w') as outfile:
@@ -280,7 +281,8 @@ def get_id_list(lista):
     return newlist
 
 
-if __name__ == '__main__':
+def ejecutarPSO():
+	
 	start_time = time.time()
 	x=funcion.cargar_tareas()
 
@@ -295,11 +297,14 @@ if __name__ == '__main__':
 	solver.showsParticles()
 
 	print('gbest: %s | cost: %d\n' % (solver.getGBest().getPBest(), solver.getGBest().getCostPBest()))
-
+	tiempo=time.time() - start_time
 	print('the elapsed time:%s'% (time.time() - start_time))
-
-	terminado_algoritmo(solver.getGBest().getPBest())
+	lista=[int(i) for i in solver.getGBest().getPBest()]
+	cost=solver.getGBest().getCostPBest()
+	terminado_algoritmo(lista,tiempo,cost)
 	charts(solver.index_record,solver.makespan_record)
 	
 	#print(min(solver.particles, key=attrgetter('cost_pbest_solution')).solution)
 
+
+#ejecutarPSO()

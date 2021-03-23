@@ -1,0 +1,272 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Charts {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="page-inner">
+			<h4 class="page-title">Gráficos OPT</h4>
+			<div class="page-category">Son los gráficos con el comportamiento de cada algoritmo ante una situación especifica</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">GENETIC ALGORITHMS</div>
+						</div>
+						<div class="card-body">
+							<div class="chart-container">
+								<canvas id="lineChartGA"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">SIMULATED ANNEALING</div>
+						</div>
+						<div class="card-body">
+							<div class="chart-container">
+								<canvas id="lineChartSA"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">PARTICLE SWARM OPTIMIZATION</div>
+						</div>
+						<div class="card-body">
+							<div class="chart-container">
+								<canvas id="lineChartPSO"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">ANT COLONY OPTIMIZATION</div>
+						</div>
+						<div class="card-body">
+							<div class="chart-container">
+								<canvas id="lineChartACO"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="/static/assets/js/setting-demo2.js"></script>
+	<script>
+		var lineChartGA = document.getElementById('lineChartGA').getContext('2d'),
+		lineChartSA = document.getElementById('lineChartSA').getContext('2d'),
+		lineChartPSO = document.getElementById('lineChartPSO').getContext('2d'),
+		lineChartACO = document.getElementById('lineChartACO').getContext('2d');
+
+		var myGA = new Chart(lineChartGA, {
+			type: 'line',
+			data: {
+				labels: {{chartga.x}},
+				datasets: [{
+					label: "Generaciones",
+					borderColor: "#1d7af3",
+					pointBorderColor: "#FFF",
+					pointBackgroundColor: "#1d7af3",
+					pointBorderWidth: 2,
+					pointHoverRadius: 4,
+					pointHoverBorderWidth: 1,
+					pointRadius: 4,
+					backgroundColor: 'transparent',
+					fill: true,
+					borderWidth: 2,
+					data: {{chartga.y}}
+				}]
+			},
+			options : {
+				responsive: true, 
+				maintainAspectRatio: false,
+				legend: {
+					position: 'bottom',
+					labels : {
+						padding: 10,
+						fontColor: '#1d7af3',
+					}
+				},
+				tooltips: {
+					bodySpacing: 4,
+					mode:"nearest",
+					intersect: 0,
+					position:"nearest",
+					xPadding:10,
+					yPadding:10,
+					caretPadding:10
+				},
+				layout:{
+					padding:{left:15,right:15,top:15,bottom:15}
+				}
+			}
+		});
+	
+
+		var mySA = new Chart(lineChartSA, {
+			type: 'line',
+			data: {
+				labels: {{chartsa.x}},
+				datasets: [{
+					label: "Generaciones",
+					borderColor: "#1d7af3",
+					pointBorderColor: "#FFF",
+					pointBackgroundColor: "#1d7af3",
+					pointBorderWidth: 2,
+					pointHoverRadius: 4,
+					pointHoverBorderWidth: 1,
+					pointRadius: 4,
+					backgroundColor: 'transparent',
+					fill: true,
+					borderWidth: 2,
+					data: {{chartsa.y}}
+				}]
+			},
+			options : {
+				responsive: true, 
+				maintainAspectRatio: false,
+				legend: {
+					position: 'bottom',
+					labels : {
+						padding: 10,
+						fontColor: '#1d7af3',
+					}
+				},
+				tooltips: {
+					bodySpacing: 4,
+					mode:"nearest",
+					intersect: 0,
+					position:"nearest",
+					xPadding:10,
+					yPadding:10,
+					caretPadding:10
+				},
+				layout:{
+					padding:{left:15,right:15,top:15,bottom:15}
+				}
+			}
+		});
+
+		var myPSO = new Chart(lineChartPSO, {
+			type: 'line',
+			data: {
+				labels: {{chartpso.x}},
+				datasets: [{
+					label: "Generaciones",
+					borderColor: "#1d7af3",
+					pointBorderColor: "#FFF",
+					pointBackgroundColor: "#1d7af3",
+					pointBorderWidth: 2,
+					pointHoverRadius: 4,
+					pointHoverBorderWidth: 1,
+					pointRadius: 4,
+					backgroundColor: 'transparent',
+					fill: true,
+					borderWidth: 2,
+					data: {{chartpso.y}}
+				}]
+			},
+			options : {
+				responsive: true, 
+				maintainAspectRatio: false,
+				legend: {
+					position: 'bottom',
+					labels : {
+						padding: 10,
+						fontColor: '#1d7af3',
+					}
+				},
+				tooltips: {
+					bodySpacing: 4,
+					mode:"nearest",
+					intersect: 0,
+					position:"nearest",
+					xPadding:10,
+					yPadding:10,
+					caretPadding:10
+				},
+				layout:{
+					padding:{left:15,right:15,top:15,bottom:15}
+				}
+			}
+		});
+
+
+		var myACO = new Chart(lineChartACO, {
+			type: 'line',
+			data: {
+				labels: {{chartaco.x}},
+				datasets: [{
+					label: "Generaciones",
+					borderColor: "#1d7af3",
+					pointBorderColor: "#FFF",
+					pointBackgroundColor: "#1d7af3",
+					pointBorderWidth: 2,
+					pointHoverRadius: 4,
+					pointHoverBorderWidth: 1,
+					pointRadius: 4,
+					backgroundColor: 'transparent',
+					fill: true,
+					borderWidth: 2,
+					data: {{chartaco.y}}
+				}]
+			},
+			options : {
+				responsive: true, 
+				maintainAspectRatio: false,
+				legend: {
+					position: 'bottom',
+					labels : {
+						padding: 10,
+						fontColor: '#1d7af3',
+					}
+				},
+				tooltips: {
+					bodySpacing: 4,
+					mode:"nearest",
+					intersect: 0,
+					position:"nearest",
+					xPadding:10,
+					yPadding:10,
+					caretPadding:10
+				},
+				layout:{
+					padding:{left:15,right:15,top:15,bottom:15}
+				}
+			}
+		});
+
+
+		var myLegendContainer = document.getElementById("myChartLegend");
+
+		// generate HTML legend
+		myLegendContainer.innerHTML = myHtmlLegendsChart.generateLegend();
+
+		// bind onClick event to all LI-tags of the legend
+		var legendItems = myLegendContainer.getElementsByTagName('li');
+		for (var i = 0; i < legendItems.length; i += 1) {
+			legendItems[i].addEventListener("click", legendClickCallback, false);
+		}
+
+	</script>
+
+{% endblock javascripts %}

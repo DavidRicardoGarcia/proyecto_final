@@ -47,7 +47,7 @@ class generar_tareas_aleatorias():
         cpedidos=cpedidos
         hclist={}
         hclist['pedidos']=[]
-        tipos_de_productos=['vino','agua','banano','guanabana']
+        tipos_de_productos,tinsumos=cargar_tipos_de_tareas()
         tipos_de_lata=['8-st','8-sl','12-st','12-sl','16-st']
         tipo=['con-gas','sin-gas']
         fake=Faker()
@@ -61,8 +61,10 @@ class generar_tareas_aleatorias():
             tl=random.randint(0,len(tipos_de_lata)-1)
             rec=datetime.timedelta(days=random.randint(1,Rdiaz))
             diarec=datetime.datetime.now()+rec
-            lim=datetime.timedelta(days=7)
-            dialim=diarec+lim
+            dcotinf=tinsumos[tipos_de_productos[tp]]['Tinsumo']
+            cotainf=datetime.timedelta(days=dcotinf)
+            cotasup=datetime.timedelta(days=5)
+            dialim=diarec+(cotainf+cotasup)
             cliente=orden_de_venta(i,tipos_de_productos[tp]+' '+tipos_de_lata[tl]+' '+tipo[t],
             random.randint(1,cpedidos),fake.name(),fake.name(),dialim,diarec,1000)
             hclist['pedidos'].append(cliente.get_dict())
@@ -70,5 +72,63 @@ class generar_tareas_aleatorias():
         with open(completeName,'w') as outfile:
             json.dump(hclist,outfile)
 
-#x=generar_tareas_aleatorias()
-#x.generar()
+    def generar_Dia(self,save=False ,fecha=0 ,nclientes=3,cpedidos=4):
+
+            save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+
+            name_of_file = 'data'
+
+            completeName = os.path.join(save_path, name_of_file+".txt") 
+
+
+            #dias a simular
+            fecha=fecha
+            nclientes=nclientes
+            cpedidos=cpedidos
+            hclist={}
+            hclist['pedidos']=[]
+
+            if(save):
+                with open(completeName) as json_file:
+                    data = json.load(json_file)
+                    hclist=data['pedidos']
+
+            tipos_de_productos,tinsumos=cargar_tipos_de_tareas()
+            tipos_de_lata=['8-st','8-sl','12-st','12-sl','16-st']
+            tipo=['con-gas','sin-gas']
+           
+            fake=Faker()
+            #inicializacion de clientes
+            for i in range(nclientes):
+                tp=random.randint(0,len(tipos_de_productos)-1)
+                if(tipos_de_productos[tp]=='vino'):
+                    t=1
+                else:
+                    t=random.randint(0,len(tipo)-1)
+                tl=random.randint(0,len(tipos_de_lata)-1)
+                t1=tinsumos[tipos_de_productos[tp]]['Tinsumo']
+                cotainf=datetime.timedelta(days=t1)
+                t2=tinsumos[tipos_de_productos[tp]]['Tprocesamiento']
+                cotasup=datetime.timedelta(days=t2)
+                prioridad=datetime.timedelta(days=(random.randint(0,5)))
+                dialim=fecha+(cotainf+cotasup+prioridad)
+                cliente=orden_de_venta(i,tipos_de_productos[tp]+' '+tipos_de_lata[tl]+' '+tipo[t],
+                random.randint(1,cpedidos),fake.name(),fake.name(),dialim,fecha,1000)
+                hclist['pedidos'].append(cliente.get_dict())
+                #print(cliente.get_dict)
+            with open(completeName,'w') as outfile:
+                json.dump(hclist,outfile)
+
+def cargar_tipos_de_tareas():
+        save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+        name_of_file = 'modelsettings'
+        completeName = os.path.join(save_path, name_of_file+".txt") 
+        with open(completeName) as json_file:
+            tipos = json.load(json_file)
+        a=[]
+        a=list(tipos['tareas'].keys())
+        return a,tipos['tareas']
+#x=cargar_tipos_de_tareas()
+x=generar_tareas_aleatorias()
+fecha=datetime.datetime.now()
+x.generar_Dia(fecha,nclientes=4,cpedidos=2)

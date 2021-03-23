@@ -4,14 +4,14 @@ import os.path
 from datetime import timedelta,datetime,date
 import random
 
-def Calcular_Costo(tareas):
+def Calcular_Costo(tareas=[],save=False):
 
     funcion=sc.Planificador()
     #a=random.sample(tareas['pedidos'],len(tareas['pedidos']))
     #dic={'pedidos':a}
     funcion.lista_de_tareas=tareas
     funcion.separar_por_tipos()
-    funcion.ejecutar_proceso()
+    funcion.ejecutar_proceso(save)
     costo_maquinas=0
     costo_trabajadores=0
     costo_insumos=0

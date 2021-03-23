@@ -1,1 +1,1 @@
-{"opt": {"ga": {"tp": "", "tc": "", "tm": "", "ts": "", "maxk": ""}, "sa": {"nv": 0, "maxk": 0}, "pso": {"tp": 0, "w": 0, "c1": 0, "c2": 0, "maxk": 0}, "aco": {"tp": 0, "maxk": 0}, "nsga": {"tp": 0, "tc": 0, "tm": 0, "ts": 0, "maxk": 0}}}
+{"opt": {"ga": {"tp": "0", "tc": "0", "tm": "0", "ts": "0", "maxk": "0"}, "sa": {"nv": 0, "maxk": 0}, "pso": {"tp": 0, "w": 0, "c1": 0, "c2": 0, "maxk": 0}, "aco": {"tp": 0, "maxk": 0}, "nsga": {"tp": 0, "tc": 0, "tm": 0, "ts": 0, "maxk": 0}}}
