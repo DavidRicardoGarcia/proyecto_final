@@ -91,7 +91,7 @@ class generar_tareas_aleatorias():
             if(save):
                 with open(completeName) as json_file:
                     data = json.load(json_file)
-                    hclist=data['pedidos']
+                    hclist=data
 
             tipos_de_productos,tinsumos=cargar_tipos_de_tareas()
             tipos_de_lata=['8-st','8-sl','12-st','12-sl','16-st']
@@ -131,4 +131,4 @@ def cargar_tipos_de_tareas():
 #x=cargar_tipos_de_tareas()
 x=generar_tareas_aleatorias()
 fecha=datetime.datetime.now()
-x.generar_Dia(fecha,nclientes=4,cpedidos=2)
+x.generar_Dia(False,fecha,nclientes=4,cpedidos=2)
