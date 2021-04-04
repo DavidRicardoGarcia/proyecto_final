@@ -9,10 +9,10 @@ from elementos_modelo import almacen as alm
 class planificador:
     def __init__(self):
         super().__init__()
+        self.book=agenda()
         self.lista_asignar=[]
         self.cargar_datos_iniciales()
         self.separar_por_cantidad()
-        self.book=agenda()
         self.fecha=datetime.now()
         self.rh=rh.horarios()
         self.tipos_insumos=['8-st','8-sl','12-st','12-sl','16-st','quimico 0','quimico 1','quimico 2','quimico 3','quimico 4']
@@ -41,6 +41,18 @@ class planificador:
         completeName = os.path.join(save_path, name_of_file+".txt") 
         with open(completeName) as json_file:
             self.pedidos = json.load(json_file)
+        #pedidos
+        name_of_file = 'book_pedidos'
+        completeName = os.path.join(save_path, name_of_file+".json") 
+        with open(completeName) as json_file:
+            pedidos = json.load(json_file)
+        #recursos
+        name_of_file = 'book_recursos'
+        completeName = os.path.join(save_path, name_of_file+".json") 
+        with open(completeName) as json_file:
+            recursos = json.load(json_file)
+        self.book.bookR=recursos['calendario']
+        self.book.bookP=pedidos['calendario']
     def separar_por_cantidad(self):
         for val in self.pedidos['pedidos']:
             for x in range(val['cantidad']):
@@ -108,8 +120,9 @@ class planificador:
     def buscar_pedidos_en_camino(self,bookp):
         lista_De_pedidos=[]
         for i in bookp:
-            if (i.pedidos_insumos !=[]):
-                lista_De_pedidos.append(i.getpedidos())
+            if (i['pedidosI'] !=[]):
+                for x in i['pedidosI']:
+                    lista_De_pedidos.append(x)
         return lista_De_pedidos
     def asignar_transformar(self,fecha,tarea):
         tipo=tarea['tipo'].split()
@@ -316,22 +329,10 @@ class planificador:
                     value=self.condiciones(tagendar,tipo)
                     if(value):
                         tdefinitivo=tagendar
-                        #se asigna
                         flagAB=False
-                        # insumo1=self.almacen.asignar_recurso_quimico('quimico 0',1)
-                        # insumo2=self.almacen.asignar_recurso_quimico('quimico 1',1)
-                        # self.pedir_horario_a_RH(tagendar)
-                        # insumo=[insumo1,insumo2]
-                        #se asigna transfomar
                         self.asignar_transformar(tagendar,tarea)
-                        #se asigna tanque
+
                         self.asignar_tanque(tagendar,tarea)
-                        # taux=timedelta(days=self.settings['tareas'][tipo]['Tinsumo'])
-                        # tpedido=tagendar-taux
-                        # self.asignar_pedido(tpedido,tarea)
-                        # self.asignar_ingreso(tagendar,tarea)
-                        # print('hola')
-                        #se asignara el recurso tanque
                         tenlatar=tagendar+timedelta(days=self.settings['tareas'][tipo]['Tprocesamiento'])
                         while(flagABC):
                             value=self.condiciones_enlatar(tenlatar)
@@ -573,10 +574,10 @@ class agenda:
         super().__init__()
         self.bookR=[]
         self.bookP=[]
-        diainicial=datetime.now()
-        diafinal=diainicial+timedelta(days=365)
-        self.crear_AgendaP(diainicial,diafinal)
-        self.crear_AgendaR(diainicial,diafinal)
+        #diainicial=datetime.now()
+        #diafinal=diainicial+timedelta(days=365)
+        #self.crear_AgendaP(diainicial,diafinal)
+        #self.crear_AgendaR(diainicial,diafinal)
     def crear_AgendaR(self,diao,diaf):
         dias=diaf-diao
         for i in range(dias.days):
