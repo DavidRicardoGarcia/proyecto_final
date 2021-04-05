@@ -46,19 +46,30 @@ class planificador:
         completeName = os.path.join(save_path, name_of_file+".json") 
         with open(completeName) as json_file:
             pedidos = json.load(json_file)
+        diao=datetime.strptime(pedidos['calendario'][0]['fecha'],'%m %d %Y')
+        diaf=datetime.strptime(pedidos['calendario'][-1]['fecha'],'%m %d %Y')
+        self.book.crear_AgendaP(diao,diaf)
+        self.book.cargarP(pedidos['calendario'])
         #recursos
         name_of_file = 'book_recursos'
         completeName = os.path.join(save_path, name_of_file+".json") 
         with open(completeName) as json_file:
             recursos = json.load(json_file)
-        self.book.bookR=recursos['calendario']
-        self.book.bookP=pedidos['calendario']
+        diao=datetime.strptime(recursos['calendario'][0]['fecha'],'%m %d %Y')
+        diaf=datetime.strptime(recursos['calendario'][-1]['fecha'],'%m %d %Y')
+        self.book.crear_AgendaR(diao,diaf)
+        self.book.cargarR(recursos['calendario'])
+        # self.book.bookR=recursos['calendario']
+        # self.book.bookP=pedidos['calendario']
     def separar_por_cantidad(self):
+        cont=0
         for val in self.pedidos['pedidos']:
             for x in range(val['cantidad']):
                 k=val.copy()
                 k['cantidad']=1
+                k['ident']=cont
                 self.lista_asignar.append(k)
+                cont+=1
     def separar_por_tipos(self):
 
         for val in self.pedidos['pedidos']:
@@ -120,8 +131,8 @@ class planificador:
     def buscar_pedidos_en_camino(self,bookp):
         lista_De_pedidos=[]
         for i in bookp:
-            if (i['pedidosI'] !=[]):
-                for x in i['pedidosI']:
+            if (i.pedidos_insumos !=[]):
+                for x in i.pedidos_insumos:
                     lista_De_pedidos.append(x)
         return lista_De_pedidos
     def asignar_transformar(self,fecha,tarea):
@@ -177,7 +188,7 @@ class planificador:
         tipo=tarea['tipo'].split()
         for i in self.book.bookP:
             if((fecha-i.fecha).days == 0):
-                        i.setPedido_insumo(0,tarea['nombre'],tipo[0],1000,111,fecha.strftime("%m %d %Y"),'encamino')
+                        i.setPedido_insumo(0,tarea['nombre'],tipo[0],1000,111,fecha.strftime("%m %d %Y"),'encamino',tarea['ident'])
     def asignar_ingreso(self,fecha,tarea):
         tipo=tarea['tipo'].split()
         for i in self.book.bookP:
@@ -515,7 +526,7 @@ class datos_de_suministro:
 #genera la hoja de datos del pedido que va a ingresar
 class ingreso:
 
-    def __init__(self,id,nombre,tipo,cant_und_bas,cant_und_doc,und_doc,f_c,precio,lote,fecha_caducidad,fecha_produccion,n_palet,estado):
+    def __init__(self,id,nombre,tipo,cant_und_bas,cant_und_doc,und_doc,f_c,precio,lote,fecha_caducidad,fecha_produccion,n_palet,estado,ident):
         self.id=id
         self.nombre=nombre
         self.tipo=tipo
@@ -529,11 +540,12 @@ class ingreso:
         self.tipo_palet='std'
         self.n_palet=n_palet
         self.estado=estado
+        self.ident=ident
 
     def get_dict(self):
         data={'id':self.id,'tipo': self.tipo,'cantidad und basica':self.cant_und_bas,'cantidad und doc': self.cant_und_doc,
         'unidad doc':'palet','F_C':'f_C','precio':self.precio,'lote':self.lote,'caducidad':self.caducidad,'produccion':self.produccion,
-        'n palets':self.n_palet,'estado':self.estado}
+        'n palets':self.n_palet,'estado':self.estado,'ident':self.ident}
         return data
 #guarda los pedidos y los ingresos de insumos por fecha
 class dia_registro:
@@ -553,8 +565,8 @@ class dia_registro:
     def setFecha(self,fecha):
         self.fecha=fecha
     #orden de pedido
-    def setPedido_insumo(self,id,nombre,tipo,precio,lote,fecha_caducidad,estado):
-        a=ingreso(id,nombre,tipo,1,1,1,1,precio,lote,fecha_caducidad,0,0,estado)
+    def setPedido_insumo(self,id,nombre,tipo,precio,lote,fecha_caducidad,estado,ident):
+        a=ingreso(id,nombre,tipo,1,1,1,1,precio,lote,fecha_caducidad,0,0,estado,ident)
         self.pedidos_insumos.append(a.get_dict())
 
     #ingreso del pedido que se ordenó previamente
@@ -586,6 +598,25 @@ class agenda:
         dias=diaf-diao
         for i in range(dias.days):
             self.bookP.append(dia_registro(diao+timedelta(days=i)))
+    def cargarR(self,a):
+        cont=0
+        for i in self.bookR:
+            i.recursoA=a[cont]['recursoA']
+            i.recursoB1=a[cont]['recursoB1']
+            i.recursoB2=a[cont]['recursoB2']
+            i.recursoB3=a[cont]['recursoB3']
+            i.recursoB4=a[cont]['recursoB4']
+            i.recursoC=a[cont]['recursoC']
+            cont+=1
+
+    def cargarP(self,a):
+        cont=0
+        for i in self.bookP:
+            i.pedidos_insumos=a[cont]['pedidosI']
+            i.ingresos_insumos=a[cont]['ingresosI']
+            i.salida_productos=a[cont]['salidasP']
+            cont+=1
+    
     def guardarR(self):
         save_path = '/home/david/Desktop/optimizacion_final/datos_json'
 
@@ -622,4 +653,4 @@ class agenda:
 # settings,mantenimiento,materiales,pedidos=cargar_datos_iniciales()
 # print('hola')
 prueba=planificador()
-prueba.asignacion(True)
+prueba.asignacion(False)
