@@ -8,10 +8,9 @@ import os.path
 import pandas as pd
 import numpy as np
 import copy
-import Funcion_objetivo as fo
+import booking as book
 
-
-funcion=fo
+funcion=book.planificador()
 
 def terminado_algoritmo(res,tiempo,valor):
         
@@ -286,15 +285,21 @@ def get_id_list(lista):
     for i in lista:
         newlist.append(i['id'])
     return newlist
-
+def cargar_tareas():
+        save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+        name_of_file = 'data'
+        completeName = os.path.join(save_path, name_of_file+".txt") 
+        with open(completeName) as json_file:
+            clientes = json.load(json_file)
+        return clientes
 
 
 def ejecutarACO():
 
     #start_time = tm.time()
-    _colony_size = 20
-    _steps = 100
-    x=funcion.cargar_tareas()
+    _colony_size = 10
+    _steps = 20
+    x=cargar_tareas()
 
     lista_id=get_id_list(x['pedidos'])
 
@@ -308,3 +313,5 @@ def ejecutarACO():
     terminado_algoritmo(tour,time,dist)
     charts(acs.index_record,acs.makespan_record)
     #print(_nodes)
+
+ejecutarACO()

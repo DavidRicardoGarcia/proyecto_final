@@ -4,11 +4,13 @@ import pandas as pd
 import numpy as np
 import time
 import copy
-import Funcion_objetivo as fo
+
 import json
 import os.path
 
-funcion=fo
+import booking as book
+
+funcion=book.planificador()
 
 def terminado_algoritmo(res,tiempo,valor):
         
@@ -280,17 +282,24 @@ def get_id_list(lista):
         newlist.append(i['id'])
     return newlist
 
+def cargar_tareas():
+        save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+        name_of_file = 'data'
+        completeName = os.path.join(save_path, name_of_file+".txt") 
+        with open(completeName) as json_file:
+            clientes = json.load(json_file)
+        return clientes
 
 def ejecutarPSO():
 	
 	start_time = time.time()
-	x=funcion.cargar_tareas()
+	x=cargar_tareas()
 
 	lista_id=get_id_list(x['pedidos'])
 
 	problem=modelo(x['pedidos'],lista_id)
 
-	solver=PSO(problem,iterations=1000,size_population=10,beta=1,alfa=0.9)
+	solver=PSO(problem,iterations=20,size_population=10,beta=1,alfa=0.9)
 
 	solver.run()
 
@@ -307,4 +316,4 @@ def ejecutarPSO():
 	#print(min(solver.particles, key=attrgetter('cost_pbest_solution')).solution)
 
 
-#ejecutarPSO()
+ejecutarPSO()

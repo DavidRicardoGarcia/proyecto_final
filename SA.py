@@ -10,10 +10,9 @@ import os.path
 #import sys
 # insert at 1, 0 is the script path (or '' in REPL)
 #sys.path.insert(1, '/home/david/Desktop/optimizacion_final')
-import Funcion_objetivo as fo
+import booking as book
 
-funcion=fo
-
+funcion=book.planificador()
 
 def terminado_algoritmo(res,tiempo,valor):
         
@@ -61,7 +60,7 @@ class SA():
                 # defaults
         self.Tmax = 25000.0
         self.Tmin = 2.5
-        self.steps = 10000
+        self.steps = 100
         self.updates = 100
         self.copy_strategy = 'deepcopy'
 
@@ -191,11 +190,19 @@ def get_id_list(lista):
         newlist.append(i['id'])
     return newlist
 
+def cargar_tareas():
+        save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+        name_of_file = 'data'
+        completeName = os.path.join(save_path, name_of_file+".txt") 
+        with open(completeName) as json_file:
+            clientes = json.load(json_file)
+        return clientes
+
 def ejecutarSA(): 
 
     start_time = time.time()
 
-    x=funcion.cargar_tareas()
+    x=cargar_tareas()
 
     lista_id=get_id_list(x['pedidos'])
 
@@ -212,6 +219,8 @@ def ejecutarSA():
     print('the elapsed time:%s'% (time.time() - start_time))
     terminado_algoritmo(state,tiempo,e)
     charts(tsp.index_record,tsp.makespan_record)
+
+ejecutarSA()
 
 # '''--------plot gantt chart-------'''
 # import pandas as pd

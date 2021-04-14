@@ -14,11 +14,19 @@ import time
 import copy
 import json
 import os.path
-import Funcion_objetivo as fo
+import booking as book
 
-funcion=fo
+funcion=book.planificador()
 
 ''' ================= initialization setting ======================'''
+
+def cargar_tareas():
+        save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+        name_of_file = 'data'
+        completeName = os.path.join(save_path, name_of_file+".txt") 
+        with open(completeName) as json_file:
+            clientes = json.load(json_file)
+        return clientes
 
 def get_id_list(lista):
 
@@ -48,6 +56,9 @@ def terminado_algoritmo(res,tiempo,valor):
     save_path = '/home/david/Desktop/optimizacion_final/datos_json'
 
     name_of_file = 'estado'
+    newlist=[]
+    for i in res:
+        newlist.append(int(i))
 
     completeName = os.path.join(save_path, name_of_file+".txt") 
 
@@ -55,7 +66,7 @@ def terminado_algoritmo(res,tiempo,valor):
         data = json.load(json_file)
 
     data['GA']['estado']='terminado'
-    data['GA']['resultado']=res
+    data['GA']['resultado']=newlist
     data['GA']['tiempo']=tiempo
     data['GA']['valor']=valor
 
@@ -85,7 +96,7 @@ def charts(x,y):
 
 def ejecutarGA():
 
-    x=funcion.cargar_tareas()
+    x=cargar_tareas()
 
     lista_id=get_id_list(x['pedidos'])
 
@@ -97,7 +108,7 @@ def ejecutarGA():
     mutation_rate=float(0.2)#float(input('Please input the size of Mutation Rate: ') or 0.2) # default value is 0.2
     mutation_selection_rate=float(0.2)#float(input('Please input the mutation selection rate: ') or 0.2)
     num_mutation_jobs=round(num_gene*mutation_selection_rate)
-    num_iteration=int(1000)#int(input('Please input number of iteration: ') or 2000) # default value is 2000
+    num_iteration=int(20)#int(input('Please input number of iteration: ') or 2000) # default value is 2000
         
     start_time = time.time()
 
@@ -233,50 +244,5 @@ def ejecutarGA():
     print('the elapsed time:%s'% (time.time() - start_time))
     terminado_algoritmo(sequence_best,tiempo,Tbest)
     charts(index_record,makespan_record)
-# import matplotlib.pyplot as plt
 
-# plt.plot([i for i in range(len(makespan_record))],makespan_record,'b')
-# plt.ylabel('makespan',fontsize=15)
-# plt.xlabel('generation',fontsize=15)
-# plt.show()
-
-
-# '''--------plot gantt chart-------'''
-# import pandas as pd
-# import chart_studio.plotly as py
-# import plotly.figure_factory as ff
-# import datetime
-# from  plotly.offline import plot
-
-# m_keys=[j+1 for j in range(num_mc)]
-# j_keys=[j for j in range(num_job)]
-# key_count={key:0 for key in j_keys}
-# j_count={key:0 for key in j_keys}
-# m_count={key:0 for key in m_keys}
-# j_record={}
-# for i in sequence_best:
-#     gen_t=int(pt[i][key_count[i]])
-#     gen_m=int(ms[i][key_count[i]])
-#     j_count[i]=j_count[i]+gen_t
-#     m_count[gen_m]=m_count[gen_m]+gen_t
-    
-#     if m_count[gen_m]<j_count[i]:
-#         m_count[gen_m]=j_count[i]
-#     elif m_count[gen_m]>j_count[i]:
-#         j_count[i]=m_count[gen_m]
-    
-#     start_time=str(datetime.timedelta(seconds=j_count[i]-pt[i][key_count[i]])) # convert seconds to hours, minutes and seconds
-#     end_time=str(datetime.timedelta(seconds=j_count[i]))
-        
-#     j_record[(i,gen_m)]=[start_time,end_time]
-    
-#     key_count[i]=key_count[i]+1
-        
-
-# df=[]
-# for m in m_keys:
-#     for j in j_keys:
-#         df.append(dict(Task='Machine %s'%(m), Start='2018-07-14 %s'%(str(j_record[(j,m)][0])), Finish='2018-07-14 %s'%(str(j_record[(j,m)][1])),Resource='Job %s'%(j+1)))
-    
-# fig = ff.create_gantt(df, index_col='Resource', show_colorbar=True, group_tasks=True, showgrid_x=True, title='Job shop Schedule')
-#plot(fig, filename='GA_job_shop_scheduling')
+ejecutarGA()
