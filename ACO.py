@@ -9,7 +9,8 @@ import pandas as pd
 import numpy as np
 import copy
 import booking as book
-
+import matplotlib
+import matplotlib.pyplot as plt
 funcion=book.planificador()
 
 def terminado_algoritmo(res,tiempo,valor):
@@ -51,6 +52,18 @@ def charts(x,y):
 
     with open(completeName,'w') as outfile:
         json.dump(data,outfile)
+
+def graficas_png(d,n,x,y):
+    fig, ax = plt.subplots()
+    ax.plot(x, y)
+
+    ax.set(xlabel='gen (k)', ylabel='f (d)',
+        title='cost function')
+    ax.grid()
+
+    s="ACOtest" +repr(d)+"-"+repr(n) + ".png"
+
+    fig.savefig(s)
 
 class ACO:
 
@@ -288,17 +301,17 @@ def get_id_list(lista):
 def cargar_tareas():
         save_path = '/home/david/Desktop/optimizacion_final/datos_json'
         name_of_file = 'data'
-        completeName = os.path.join(save_path, name_of_file+".txt") 
+        completeName = os.path.join(save_path, name_of_file+".json") 
         with open(completeName) as json_file:
             clientes = json.load(json_file)
         return clientes
 
 
-def ejecutarACO():
+def ejecutarACO(d,n,k):
 
     #start_time = tm.time()
-    _colony_size = 10
-    _steps = 20
+    _colony_size = 3
+    _steps = k
     x=cargar_tareas()
 
     lista_id=get_id_list(x['pedidos'])
@@ -307,11 +320,12 @@ def ejecutarACO():
     acs=ACO(mode='ACS', colony_size=_colony_size, steps=_steps, nodes=lista_id, tareas=x['pedidos'])
     time, dist, tour =acs.run()
 
-    s='el algoritmo ACS     :' + repr(dist) +" con tiempo de:" + repr(time)
+    s='el algoritmo ACS     :' + repr(dist) +" con tiempo de:" + repr(time) + " tour de: " + repr(tour)
     print(s)
     #print('the elapsed time:%s'% (tm.time() - start_time))
     terminado_algoritmo(tour,time,dist)
-    charts(acs.index_record,acs.makespan_record)
+    #charts(acs.index_record,acs.makespan_record)
+    #graficas_png(d,n,acs.index_record,acs.makespan_record)
     #print(_nodes)
 
-ejecutarACO()
+ejecutarACO(1,1,1)

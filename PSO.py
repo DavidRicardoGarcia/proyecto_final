@@ -7,7 +7,8 @@ import copy
 
 import json
 import os.path
-
+import matplotlib
+import matplotlib.pyplot as plt
 import booking as book
 
 funcion=book.planificador()
@@ -50,6 +51,18 @@ def charts(x,y):
 
     with open(completeName,'w') as outfile:
         json.dump(data,outfile)
+
+def graficas_png(d,n,x,y):
+    fig, ax = plt.subplots()
+    ax.plot(x, y)
+
+    ax.set(xlabel='gen (k)', ylabel='f (d)',
+        title='cost function')
+    ax.grid()
+
+    s="PSOtest" +repr(d)+"-"+repr(n) + ".png"
+
+    fig.savefig(s)
 
 
 class Particle:
@@ -285,12 +298,12 @@ def get_id_list(lista):
 def cargar_tareas():
         save_path = '/home/david/Desktop/optimizacion_final/datos_json'
         name_of_file = 'data'
-        completeName = os.path.join(save_path, name_of_file+".txt") 
+        completeName = os.path.join(save_path, name_of_file+".json") 
         with open(completeName) as json_file:
             clientes = json.load(json_file)
         return clientes
 
-def ejecutarPSO():
+def ejecutarPSO(d,n,k):
 	
 	start_time = time.time()
 	x=cargar_tareas()
@@ -299,7 +312,7 @@ def ejecutarPSO():
 
 	problem=modelo(x['pedidos'],lista_id)
 
-	solver=PSO(problem,iterations=20,size_population=10,beta=1,alfa=0.9)
+	solver=PSO(problem,iterations=k,size_population=3,beta=1,alfa=0.9)
 
 	solver.run()
 
@@ -311,9 +324,9 @@ def ejecutarPSO():
 	lista=[int(i) for i in solver.getGBest().getPBest()]
 	cost=solver.getGBest().getCostPBest()
 	terminado_algoritmo(lista,tiempo,cost)
-	charts(solver.index_record,solver.makespan_record)
-	
+	#charts(solver.index_record,solver.makespan_record)
+	#graficas_png(d,n,solver.index_record,solver.makespan_record)
 	#print(min(solver.particles, key=attrgetter('cost_pbest_solution')).solution)
 
 
-ejecutarPSO()
+ejecutarPSO(1,1,1)

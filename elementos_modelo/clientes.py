@@ -3,6 +3,7 @@ import random
 from faker import Faker
 import json
 import os.path
+import copy
 
 class orden_de_venta:
 
@@ -32,92 +33,61 @@ class generar_tareas_aleatorias():
     def __init__(self):
         super().__init__()
 
-    def generar(self, rdiaz=20,hcliente=0.5,cpedidos=4):
+    def generar(self,fecha,nclientes,cpedidos):
 
         save_path = '/home/david/Desktop/optimizacion_final/datos_json'
 
         name_of_file = 'data'
 
-        completeName = os.path.join(save_path, name_of_file+".txt") 
-        #dias a simular
-        Rdiaz=rdiaz
-        #probabilidad de clientes 
-        hclientes=hcliente
-        #rango para cantidad de pedidos
-        cpedidos=cpedidos
+        completeName = os.path.join(save_path, name_of_file+".json") 
+
         hclist={}
         hclist['pedidos']=[]
+        id=0
+
+        with open(completeName) as json_file:
+            data = json.load(json_file)
+            hclist=copy.deepcopy(data)
+            if(data['pedidos']!=[]):
+                id=data['pedidos'][-1]['id']+1
+
         tipos_de_productos,tinsumos=cargar_tipos_de_tareas()
         tipos_de_lata=['8-st','8-sl','12-st','12-sl','16-st']
         tipo=['con-gas','sin-gas']
+
+        
         fake=Faker()
         #inicializacion de clientes
-        for i in range(0,int(Rdiaz*hclientes)):
+        for i in range(nclientes):
             tp=random.randint(0,len(tipos_de_productos)-1)
             if(tipos_de_productos[tp]=='vino'):
                 t=1
             else:
                 t=random.randint(0,len(tipo)-1)
             tl=random.randint(0,len(tipos_de_lata)-1)
-            rec=datetime.timedelta(days=random.randint(1,Rdiaz))
-            diarec=datetime.datetime.now()+rec
-            dcotinf=tinsumos[tipos_de_productos[tp]]['Tinsumo']
-            cotainf=datetime.timedelta(days=dcotinf)
-            cotasup=datetime.timedelta(days=5)
-            dialim=diarec+(cotainf+cotasup)
-            cliente=orden_de_venta(i,tipos_de_productos[tp]+' '+tipos_de_lata[tl]+' '+tipo[t],
-            random.randint(1,cpedidos),fake.name(),fake.name(),dialim,diarec,1000)
+            t1=tinsumos[tipos_de_productos[tp]]['Tinsumo']
+            cotainf=datetime.timedelta(days=t1)
+            t2=tinsumos[tipos_de_productos[tp]]['Tprocesamiento']
+            cotasup=datetime.timedelta(days=t2)
+            prioridad=datetime.timedelta(days=(random.randint(0,5)))
+            dialim=fecha+(cotainf+cotasup+prioridad)
+            cliente=orden_de_venta(id+i,tipos_de_productos[tp]+' '+tipos_de_lata[tl]+' '+tipo[t],random.randint(1,cpedidos),fake.name(),fake.name(),dialim,fecha,1000)
             hclist['pedidos'].append(cliente.get_dict())
-            #print(cliente.get_dict)
+
         with open(completeName,'w') as outfile:
             json.dump(hclist,outfile)
+        
+    def resetear(self):
 
-    def generar_Dia(self,save=False ,fecha=0 ,nclientes=3,cpedidos=4):
+        save_path = '/home/david/Desktop/optimizacion_final/datos_json'
 
-            save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+        name_of_file = 'data'
 
-            name_of_file = 'data'
-
-            completeName = os.path.join(save_path, name_of_file+".txt") 
-
-
-            #dias a simular
-            fecha=fecha
-            nclientes=nclientes
-            cpedidos=cpedidos
-            hclist={}
-            hclist['pedidos']=[]
-
-            if(save):
-                with open(completeName) as json_file:
-                    data = json.load(json_file)
-                    hclist=data
-
-            tipos_de_productos,tinsumos=cargar_tipos_de_tareas()
-            tipos_de_lata=['8-st','8-sl','12-st','12-sl','16-st']
-            tipo=['con-gas','sin-gas']
-           
-            fake=Faker()
-            #inicializacion de clientes
-            for i in range(nclientes):
-                tp=random.randint(0,len(tipos_de_productos)-1)
-                if(tipos_de_productos[tp]=='vino'):
-                    t=1
-                else:
-                    t=random.randint(0,len(tipo)-1)
-                tl=random.randint(0,len(tipos_de_lata)-1)
-                t1=tinsumos[tipos_de_productos[tp]]['Tinsumo']
-                cotainf=datetime.timedelta(days=t1)
-                t2=tinsumos[tipos_de_productos[tp]]['Tprocesamiento']
-                cotasup=datetime.timedelta(days=t2)
-                prioridad=datetime.timedelta(days=(random.randint(0,5)))
-                dialim=fecha+(cotainf+cotasup+prioridad)
-                cliente=orden_de_venta(i,tipos_de_productos[tp]+' '+tipos_de_lata[tl]+' '+tipo[t],
-                random.randint(1,cpedidos),fake.name(),fake.name(),dialim,fecha,1000)
-                hclist['pedidos'].append(cliente.get_dict())
-                #print(cliente.get_dict)
-            with open(completeName,'w') as outfile:
-                json.dump(hclist,outfile)
+        completeName = os.path.join(save_path, name_of_file+".json") 
+        hclist={}
+        hclist['pedidos']=[]
+        with open(completeName,'w') as outfile:
+            json.dump(hclist,outfile)
 
 def cargar_tipos_de_tareas():
         save_path = '/home/david/Desktop/optimizacion_final/datos_json'
@@ -130,5 +100,8 @@ def cargar_tipos_de_tareas():
         return a,tipos['tareas']
 #x=cargar_tipos_de_tareas()
 x=generar_tareas_aleatorias()
-fecha=datetime.datetime.now()
-x.generar_Dia(False,fecha,nclientes=4,cpedidos=2)
+fecha=datetime.datetime.now()+datetime.timedelta(days=1)
+#x.generar_Dia(save=False,fecha=fecha,nclientes=4,cpedidos=2)
+#x.resetear()
+x.generar(fecha,4,2)
+#print('vida gran hpta')

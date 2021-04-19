@@ -11,6 +11,8 @@ import os.path
 # insert at 1, 0 is the script path (or '' in REPL)
 #sys.path.insert(1, '/home/david/Desktop/optimizacion_final')
 import booking as book
+import matplotlib
+import matplotlib.pyplot as plt
 
 funcion=book.planificador()
 
@@ -51,16 +53,29 @@ def charts(x,y):
     with open(completeName,'w') as outfile:
         json.dump(data,outfile)
 
+
+def graficas_png(d,n,x,y):
+    fig, ax = plt.subplots()
+    ax.plot(x, y)
+
+    ax.set(xlabel='gen (k)', ylabel='f (d)',
+        title='cost function')
+    ax.grid()
+
+    s="SAtest" +repr(d)+"-"+repr(n) + ".png"
+
+    fig.savefig(s)
+
 class SA():
 
     # pass extra data (the distance matrix) into the constructor
-    def __init__(self, state,tareas):
+    def __init__(self, state,tareas,k):
 
         self.tareas=tareas
                 # defaults
         self.Tmax = 25000.0
         self.Tmin = 2.5
-        self.steps = 100
+        self.steps = k
         self.updates = 100
         self.copy_strategy = 'deepcopy'
 
@@ -193,12 +208,12 @@ def get_id_list(lista):
 def cargar_tareas():
         save_path = '/home/david/Desktop/optimizacion_final/datos_json'
         name_of_file = 'data'
-        completeName = os.path.join(save_path, name_of_file+".txt") 
+        completeName = os.path.join(save_path, name_of_file+".json") 
         with open(completeName) as json_file:
             clientes = json.load(json_file)
         return clientes
 
-def ejecutarSA(): 
+def ejecutarSA(d,n,k): 
 
     start_time = time.time()
 
@@ -206,7 +221,7 @@ def ejecutarSA():
 
     lista_id=get_id_list(x['pedidos'])
 
-    tsp = SA(lista_id,x['pedidos'])
+    tsp = SA(lista_id,x['pedidos'],k)
     # since our state is just a list, slice is the fastest way to copy
     tsp.copy_strategy = "slice"
     state, e = tsp.anneal()
@@ -218,9 +233,9 @@ def ejecutarSA():
     print(state)
     print('the elapsed time:%s'% (time.time() - start_time))
     terminado_algoritmo(state,tiempo,e)
-    charts(tsp.index_record,tsp.makespan_record)
-
-ejecutarSA()
+    #charts(tsp.index_record,tsp.makespan_record)
+    #graficas_png(d,n,tsp.index_record,tsp.makespan_record)
+ejecutarSA(1,1,1)
 
 # '''--------plot gantt chart-------'''
 # import pandas as pd

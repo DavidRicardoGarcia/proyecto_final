@@ -6,6 +6,7 @@ from elementos_modelo import recursos_humanos as rh
 from elementos_modelo import transporte as tr
 from elementos_modelo import almacen as alm
 import Agenda as ag
+import itertools
 
 agenda_hist=ag.agenda()
 
@@ -79,8 +80,9 @@ class planificador:
         libro=ag.agenda()
         libro.crear_AgendaR(diao,diaf)
         libro.crear_AgendaP(diao,diaf)
-        #libro.cargarP(pedidos['calendario'])
-        #libro.cargarR(recursos['calendario'])
+        #si se quiere resetear el libro se comentan las lineas de abajo
+        libro.cargarP(pedidos['calendario'])
+        libro.cargarR(recursos['calendario'])
         self.book=libro
     def separar_por_cantidad(self):
         self.cont=0
@@ -215,12 +217,12 @@ class planificador:
         tipo=tarea['tipo'].split()
         for i in self.book.bookP:
             if((fecha-i.fecha).days == 0):
-                        i.setPedido_insumo(0,tarea['nombre'],tipo[0],1000,111,fecha.strftime("%m %d %Y"),'encamino',tarea['ident'])
+                        i.setPedido_insumo(tarea['id'],tarea['nombre'],tipo[0],1000,111,fecha.strftime("%m %d %Y"),'encamino',tarea['ident'])
     def asignar_ingreso(self,fecha,tarea):
         tipo=tarea['tipo'].split()
         for i in self.book.bookP:
             if((fecha-i.fecha).days == 0):
-                        i.setIngreso_insumo(0,tipo[0],1,1000)   
+                        i.setIngreso_insumo(tarea['id'],tipo[0],1,1000)   
     def revisar_los_tanques(self,fecha,tipo):
         flag=True
         diasocupacion=self.settings['tareas'][tipo]['Tprocesamiento']
@@ -436,10 +438,11 @@ class planificador:
                 tipo=tipo[0]
                 if(x['tipo'] == tipo):
                     flag=True
-                    id=x['ident']
+                    id=x['id']
+                    ident=x['ident']
                     for p in self.book.bookR:
                         if(p.recursoA[0]['TAREA'] != {} ):
-                            if(p.recursoA[0]['TAREA']['ident']==id):
+                            if(p.recursoA[0]['TAREA']['id']==id and p.recursoA[0]['TAREA']['ident']==ident):
                                 p.recursoA[0]['TAREA']=j
                                 p.recursoA[1]['TAREA']=j
                                 p.recursoA[2]['TAREA']=j
@@ -450,27 +453,27 @@ class planificador:
                                 #print(p.fecha)
 
                         if(p.recursoB1['TAREA'] != {} ):
-                            if(p.recursoB1['TAREA']['ident']==id):
+                            if(p.recursoB1['TAREA']['id']==id and p.recursoB1['TAREA']['ident']==ident):
                                 p.recursoB1['TAREA']=j
                                 #print(p.fecha)
 
                         if(p.recursoB2['TAREA'] != {} ):
-                            if(p.recursoB2['TAREA']['ident']==id):
+                            if(p.recursoB2['TAREA']['id']==id and p.recursoB2['TAREA']['ident']==ident):
                                 p.recursoB2['TAREA']=j
                                 #print(p.fecha)
                             
                         if(p.recursoB3['TAREA'] != {} ):
-                            if(p.recursoB3['TAREA']['ident']==id):
+                            if(p.recursoB3['TAREA']['id']==id and p.recursoB3['TAREA']['ident']==ident):
                                 p.recursoB3['TAREA']=j
                                 #print(p.fecha)
 
                         if(p.recursoB4['TAREA'] != {} ):
-                            if(p.recursoB4['TAREA']['ident']==id):
+                            if(p.recursoB4['TAREA']['id']==id and p.recursoB4['TAREA']['ident']==ident):
                                 p.recursoB4['TAREA']=j
                                 #print(p.fecha)
 
                         if(p.recursoC[0]['TAREA'] != {} ):
-                            if(p.recursoC[0]['TAREA']['ident']==id):
+                            if(p.recursoC[0]['TAREA']['id']==id and p.recursoC[0]['TAREA']['ident']==ident):
                                 p.recursoC[0]['TAREA']=j
                                 p.recursoC[1]['TAREA']=j
                                 p.recursoC[2]['TAREA']=j
@@ -607,7 +610,7 @@ class planificador:
             for p in self.book.bookR:
                 if(p.recursoC[0]['TAREA']!= {}):
                     if(p.recursoC[0]['TAREA']['id']==i['id']):
-                        lista.append((p.recursoC[0]['TAREA']['id'],p.fecha))
+                        lista.append((p.recursoC[0]['TAREA']['id'],p.fecha,p.recursoC[0]['TAREA']['contratista']))
         listadef=[]
         total=0
         for i in self.pedidos['pedidos']:
@@ -617,6 +620,8 @@ class planificador:
                     if(max<x[1]):
                         max=x[1]
             dif=max-datetime.strptime(i['fecha_recepcion'],'%m %d %Y')
+            if(dif.days < 0):
+                dif=timedelta(days=0)
             pe=datetime.strptime(i['fecha_limite'],'%m %d %Y')
             if(pe<max):
                 total+=10
@@ -624,34 +629,55 @@ class planificador:
             listadef.append((i['id'],dif,i['fecha_limite']))
             total+=dif.days
         return total
-# def cargar_tareas():
-#         save_path = '/home/david/Desktop/optimizacion_final/datos_json'
-#         name_of_file = 'data'
-#         completeName = os.path.join(save_path, name_of_file+".txt") 
-#         with open(completeName) as json_file:
-#             clientes = json.load(json_file)
-#         return clientes
-# def get_id_list(lista):
+    def Asignar_insumos_personal(self,listapedidos):
+            del(self.pedidos)
+            del(self.lista_asignar)
+            del(self.lista_planificados)
+            self.lista_planificados=[]
+            self.pedidos=[]
+            self.lista_asignar=[]
+            self.pedidos=listapedidos
+            self.separar_por_cantidad()
+            self.resetear()
+            self.asignacion(True)
 
-#     newlist=[]
-#     for i in lista:
-#         newlist.append(i['id'])
-#     return newlist
-# def ordenar_Tareas(state,tareas):
-#     h={}
-#     newtareas=[]
-#     for i in state:
-#         for x in tareas:
-#             if(i == x['id']):
-#                 newtareas.append(x)
-#     h['pedidos']=newtareas
-#     return h
+def cargar_tareas():
+        save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+        name_of_file = 'data'
+        completeName = os.path.join(save_path, name_of_file+".json") 
+        with open(completeName) as json_file:
+            clientes = json.load(json_file)
+        return clientes
+def get_id_list(lista):
 
-# prueba=planificador()
+    newlist=[]
+    for i in lista:
+        newlist.append(i['id'])
+    return newlist
+def ordenar_Tareas(state,tareas):
+    h={}
+    newtareas=[]
+    for i in state:
+        for x in tareas:
+            if(i == x['id']):
+                newtareas.append(x)
+    h['pedidos']=newtareas
+    return h
+def combinaciones(plan,vector,tareas):
+    lista=[]
+    for subset in itertools.permutations(vector):
+        a=ordenar_Tareas(subset,tareas['pedidos'])
+        lista.append((subset,plan.Calcular_Costo(a)))
+        #s=repr(plan.Calcular_Costo(a))+ " " + repr(subset) 
+        #print(s)
+    print(min(lista, key=lambda item:item[1]))
 
 # x=cargar_tareas()
-
 # lista_id=get_id_list(x['pedidos'])
-# lista_id=[2,0,3,1]
+# #lista_id=[1,2,0,3]
 # a=ordenar_Tareas(lista_id,x['pedidos'])
-# print(prueba.Calcular_Costo(a))
+# prueba=planificador()
+# #prueba.Asignar_insumos_personal(a)
+# combinaciones(prueba,lista_id,x)
+#print(prueba.Calcular_Costo(a))
+#print(prueba.Calcular_Costo(a))

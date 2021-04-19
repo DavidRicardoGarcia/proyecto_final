@@ -470,62 +470,66 @@ def cargar_datos():
         with open(completeName) as json_file:
             data = json.load(json_file)
         
-        pasoga=int(len(data['GA']['y'])/100)
-        #print(pasoga)
-        y=[]
-        x=[]
-        cont=0
-        for i in range(len(data['GA']['y'])):
-            if(cont==pasoga):
-                y.append(data['GA']['y'][i])
-                x.append(data['GA']['x'][i])
-                cont=0
-            cont+=1
-        data['GA']['y']=y
-        data['GA']['x']=x
+        # pasoga=int(len(data['GA']['y'])/100)
+        # pasoga=0
+        # #print(pasoga)
+        # y=[]
+        # x=[]
+        # cont=0
+        # for i in range(len(data['GA']['y'])):
+        #     if(cont==pasoga):
+        #         y.append(data['GA']['y'][i])
+        #         x.append(data['GA']['x'][i])
+        #         cont=0
+        #     #cont+=1
+        # data['GA']['y']=y
+        # data['GA']['x']=x
 
-        pasoga=int(len(data['SA']['y'])/100)
-        #print(pasoga)
-        y=[]
-        x=[]
-        cont=0
-        for i in range(len(data['SA']['y'])):
-            if(cont==pasoga):
-                y.append(data['SA']['y'][i])
-                x.append(data['SA']['x'][i])
-                cont=0
-            cont+=1
-        data['SA']['y']=y
-        data['SA']['x']=x
+        # pasoga=int(len(data['SA']['y'])/100)
+        # pasoga=0
+        # #print(pasoga)
+        # y=[]
+        # x=[]
+        # cont=0
+        # for i in range(len(data['SA']['y'])):
+        #     if(cont==pasoga):
+        #         y.append(data['SA']['y'][i])
+        #         x.append(data['SA']['x'][i])
+        #         cont=0
+        #     #cont+=1
+        # data['SA']['y']=y
+        # data['SA']['x']=x
 
 
-        pasoga=int(len(data['PSO']['y'])/100)
-        #print(pasoga)
-        y=[]
-        x=[]
-        cont=0
-        for i in range(len(data['PSO']['y'])):
-            if(cont==pasoga):
-                y.append(data['PSO']['y'][i])
-                x.append(data['PSO']['x'][i])
-                cont=0
-            cont+=1
-        data['PSO']['y']=y
-        data['PSO']['x']=x
+        # pasoga=int(len(data['PSO']['y'])/100)
+        # pasoga=0
+        # #print(pasoga)
+        # y=[]
+        # x=[]
+        # cont=0
+        # for i in range(len(data['PSO']['y'])):
+        #     if(cont==pasoga):
+        #         y.append(data['PSO']['y'][i])
+        #         x.append(data['PSO']['x'][i])
+        #         cont=0
+        #     #cont+=1
+        # data['PSO']['y']=y
+        # data['PSO']['x']=x
 
-        pasoga=int(len(data['ACO']['y'])/100)
-        #print(pasoga)
-        y=[]
-        x=[]
-        cont=0
-        for i in range(len(data['ACO']['y'])):
-            if(cont==pasoga):
-                y.append(data['ACO']['y'][i])
-                x.append(data['ACO']['x'][i])
-                cont=0
-            cont+=1
-        data['ACO']['y']=y
-        data['ACO']['x']=x
+        # pasoga=int(len(data['ACO']['y'])/100)
+        # pasoga=0
+        # #print(pasoga)
+        # y=[]
+        # x=[]
+        # cont=0
+        # for i in range(len(data['ACO']['y'])):
+        #     if(cont==pasoga):
+        #         y.append(data['ACO']['y'][i])
+        #         x.append(data['ACO']['x'][i])
+        #         cont=0
+        #     cont+=1
+        # data['ACO']['y']=y
+        # data['ACO']['x']=x
 
         return data
 

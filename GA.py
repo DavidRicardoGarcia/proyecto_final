@@ -15,7 +15,8 @@ import copy
 import json
 import os.path
 import booking as book
-
+import matplotlib
+import matplotlib.pyplot as plt
 funcion=book.planificador()
 
 ''' ================= initialization setting ======================'''
@@ -23,7 +24,7 @@ funcion=book.planificador()
 def cargar_tareas():
         save_path = '/home/david/Desktop/optimizacion_final/datos_json'
         name_of_file = 'data'
-        completeName = os.path.join(save_path, name_of_file+".txt") 
+        completeName = os.path.join(save_path, name_of_file+".json") 
         with open(completeName) as json_file:
             clientes = json.load(json_file)
         return clientes
@@ -94,7 +95,20 @@ def charts(x,y):
     with open(completeName,'w') as outfile:
         json.dump(data,outfile)
 
-def ejecutarGA():
+
+def graficas_png(d,n,x,y):
+    fig, ax = plt.subplots()
+    ax.plot(x, y)
+
+    ax.set(xlabel='gen (k)', ylabel='f (d)',
+        title='cost function')
+    ax.grid()
+
+    s="GAtest" +repr(d)+"-"+repr(n) + ".png"
+
+    fig.savefig(s)
+
+def ejecutarGA(dia,num,gen):
 
     x=cargar_tareas()
 
@@ -108,7 +122,7 @@ def ejecutarGA():
     mutation_rate=float(0.2)#float(input('Please input the size of Mutation Rate: ') or 0.2) # default value is 0.2
     mutation_selection_rate=float(0.2)#float(input('Please input the mutation selection rate: ') or 0.2)
     num_mutation_jobs=round(num_gene*mutation_selection_rate)
-    num_iteration=int(20)#int(input('Please input number of iteration: ') or 2000) # default value is 2000
+    num_iteration=int(gen)#int(input('Please input number of iteration: ') or 2000) # default value is 2000
         
     start_time = time.time()
 
@@ -243,6 +257,6 @@ def ejecutarGA():
     print("optimal value:%f"%Tbest)
     print('the elapsed time:%s'% (time.time() - start_time))
     terminado_algoritmo(sequence_best,tiempo,Tbest)
-    charts(index_record,makespan_record)
-
-ejecutarGA()
+    #charts(index_record,makespan_record)
+    #graficas_png(dia,num,index_record,makespan_record)
+ejecutarGA(1,1,1)
