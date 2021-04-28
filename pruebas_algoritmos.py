@@ -20,7 +20,7 @@ def pruebaGA(d,k):
 
     for i in range(5):
         GA.ejecutarGA(d,i,k)
-#pruebaSA(2,1000)
-#pruebaPSO(2,1000)
-#pruebaGA(2,1000)
-pruebaACO(2,100)
+pruebaSA(2,1000)
+pruebaPSO(2,200)
+pruebaGA(2,500)
+pruebaACO(2,50)

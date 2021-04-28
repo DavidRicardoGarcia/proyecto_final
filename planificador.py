@@ -496,7 +496,7 @@ class Planificador():
             a['fecha_inicio']=(self.dayzero+timedelta(days=(d-1))).strftime("%m %d %Y")
 
         if(condicion2):
-            insumo1=self.almacen.asignar_recurso_quimico('quimico 2',1)
+            insumo3=self.almacen.asignar_recurso_quimico('quimico 2',1)
             a=self.jugo[0]
             name=a['tipo'].split()
             parametros=self.settings['tareas'][name[0]]

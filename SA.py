@@ -234,8 +234,8 @@ def ejecutarSA(d,n,k):
     print('the elapsed time:%s'% (time.time() - start_time))
     terminado_algoritmo(state,tiempo,e)
     #charts(tsp.index_record,tsp.makespan_record)
-    #graficas_png(d,n,tsp.index_record,tsp.makespan_record)
-ejecutarSA(1,1,1)
+    graficas_png(d,n,tsp.index_record,tsp.makespan_record)
+#ejecutarSA(1,1,1)
 
 # '''--------plot gantt chart-------'''
 # import pandas as pd

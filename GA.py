@@ -258,5 +258,5 @@ def ejecutarGA(dia,num,gen):
     print('the elapsed time:%s'% (time.time() - start_time))
     terminado_algoritmo(sequence_best,tiempo,Tbest)
     #charts(index_record,makespan_record)
-    #graficas_png(dia,num,index_record,makespan_record)
-ejecutarGA(1,1,1)
+    graficas_png(dia,num,index_record,makespan_record)
+#ejecutarGA(1,1,1)

@@ -310,7 +310,7 @@ def cargar_tareas():
 def ejecutarACO(d,n,k):
 
     #start_time = tm.time()
-    _colony_size = 3
+    _colony_size = 5
     _steps = k
     x=cargar_tareas()
 
@@ -325,7 +325,7 @@ def ejecutarACO(d,n,k):
     #print('the elapsed time:%s'% (tm.time() - start_time))
     terminado_algoritmo(tour,time,dist)
     #charts(acs.index_record,acs.makespan_record)
-    #graficas_png(d,n,acs.index_record,acs.makespan_record)
+    graficas_png(d,n,acs.index_record,acs.makespan_record)
     #print(_nodes)
 
-ejecutarACO(1,1,1)
+#ejecutarACO(1,1,1)

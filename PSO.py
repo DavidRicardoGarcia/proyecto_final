@@ -312,7 +312,7 @@ def ejecutarPSO(d,n,k):
 
 	problem=modelo(x['pedidos'],lista_id)
 
-	solver=PSO(problem,iterations=k,size_population=3,beta=1,alfa=0.9)
+	solver=PSO(problem,iterations=k,size_population=10,beta=1,alfa=0.9)
 
 	solver.run()
 
@@ -325,8 +325,8 @@ def ejecutarPSO(d,n,k):
 	cost=solver.getGBest().getCostPBest()
 	terminado_algoritmo(lista,tiempo,cost)
 	#charts(solver.index_record,solver.makespan_record)
-	#graficas_png(d,n,solver.index_record,solver.makespan_record)
+	graficas_png(d,n,solver.index_record,solver.makespan_record)
 	#print(min(solver.particles, key=attrgetter('cost_pbest_solution')).solution)
 
 
-ejecutarPSO(1,1,1)
+#ejecutarPSO(1,1,1)
