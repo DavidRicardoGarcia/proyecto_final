@@ -10,7 +10,7 @@
 	<div class="content">
 		<div class="page-inner">
 			<div class="page-header">
-				<h4 class="page-title">Registro</h4>
+				<h4 class="page-title">Book</h4>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
@@ -49,8 +49,8 @@
 			</div>
 				<div class="card">
 						<div class="card-header">
-							<div class="card-title">Tabla de registros</div>
-							<label for="nombre">Hora y fecha de la revisión</label>
+							<div class="card-title">Asignación de recursos</div>
+							
 						</div>
 						<div class="card-body">
 							<table class="table table-bordered table-head-bg-default table-bordered-bd-default mt-4" width="978px"	height= "100px">
@@ -79,7 +79,70 @@
 								</tbody>
 							</table>
 						</div>
+				</div>
+				<div class="card">
+						<div class="card-header">
+							<div class="card-title">Pedidos</div>
+							
+						</div>
+						<div class="card-body">
+							<table class="table table-bordered table-head-bg-default table-bordered-bd-default mt-4" width="978px"	height= "100px">
+								<thead>
+									<tr>
+										<th scope="col">Id</th>
+										<th scope="col">Nombre</th>
+										<th scope="col">Tipo</th>
+										<th scope="col">Cantidad</th>
+										<th scope="col">Estado</th>
+										<th scope="col">Fecha caducidad</th>
+										<th scope="col"># palet</th>
+									</tr>
+								</thead>
+								<tbody>
+								{%for i in consultas%}
+								<tr>
+								<td>{{i.tipo}}</td>
+								<td>{{i.hinicio}}</td>
+								<td>{{i.duracion}}</td>
+								<td>{{i.nombre}}</td>
+								<td>{{i.empleado}}</td>
+								<td>{{i.insumos}}</td>
+								<td>{{i.insumos}}</td>
+								</tr>
+								{% endfor %}
+								</tbody>
+							</table>
+						</div>
 				</div> 
+				<div class="card">
+						<div class="card-header">
+							<div class="card-title">Ingresos</div>
+							
+						</div>
+						<div class="card-body">
+							<table class="table table-bordered table-head-bg-default table-bordered-bd-default mt-4" width="978px"	height= "100px">
+								<thead>
+									<tr>
+										<th scope="col">Id</th>
+										<th scope="col">Producto</th>
+										<th scope="col">Cantidad</th>
+										<th scope="col">Valor</th>
+
+									</tr>
+								</thead>
+								<tbody>
+								{%for i in consultas%}
+								<tr>
+								<td>{{i.tipo}}</td>
+								<td>{{i.hinicio}}</td>
+								<td>{{i.duracion}}</td>
+								<td>{{i.nombre}}</td>												
+								</tr>
+								{% endfor %}
+								</tbody>
+							</table>
+						</div>
+				</div>
 		</div>
 	</div>
 

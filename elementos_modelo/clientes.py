@@ -99,9 +99,9 @@ def cargar_tipos_de_tareas():
         a=list(tipos['tareas'].keys())
         return a,tipos['tareas']
 #x=cargar_tipos_de_tareas()
-x=generar_tareas_aleatorias()
-fecha=datetime.datetime.now()+datetime.timedelta(days=1)
+#x=generar_tareas_aleatorias()
+#fecha=datetime.datetime.now()+datetime.timedelta(days=1)
 #x.generar_Dia(save=False,fecha=fecha,nclientes=4,cpedidos=2)
 #x.resetear()
-x.generar(fecha,4,2)
+#x.generar(fecha,4,2)
 #print('vida gran hpta')

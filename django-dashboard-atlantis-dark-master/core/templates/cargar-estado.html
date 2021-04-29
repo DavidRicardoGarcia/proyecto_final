@@ -10,7 +10,7 @@
 	<div class="content">
 		<div class="page-inner">
 			<div class="page-header">
-				<h4 class="page-title">Estado inicial</h4>
+				<h4 class="page-title">Modificar el book</h4>
 			</div>
 
 			<div class="row">
@@ -21,447 +21,152 @@
 						</div>
 						<form method="post" action="">
 						{% csrf_token %}
+						
+							<div class="card-body">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="nombre">Fecha a consultar :</label>
+											<select class="form-control" id="tipof" name="tipof">
+												{%for d in dias%}
+													
+													<option>{{d}}</option>
+
+												{% endfor %}
+											</select>
+										</div>
+
+									
+									</div>
+
+								</div>
+							</div> 
+
 							<div class="card-body">
 								<div class="row">
 									<div class="col-md-6 col-lg-4">
 										<div class="form-group">
-											<label for="nombre">Desembarque</label>
+											<label for="nombre">Recurso A</label>
 										</div>
 									</div>
 									<div class="col-md-6 col-lg-4">
 										<div class="form-group">
 											<label for="tipo">Tipo de tarea</label>
 											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
+												{%for tarea in tareas%}
+													
+													<option>{{tarea.nombre}}</option>
+
+												{% endfor %}
 											</select>
 										</div>
 									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
+
 								</div>
 								<div class="row">
 									<div class="col-md-6 col-lg-4">
 										<div class="form-group">
-											<label for="nombre">Pesado</label>
+											<label for="nombre">Recurso B1</label>
 										</div>
 									</div>
 									<div class="col-md-6 col-lg-4">
 										<div class="form-group">
 											<label for="tipo">Tipo de tarea</label>
 											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
+												{%for tarea in tareas%}
+													
+													<option>{{tarea.nombre}}</option>
+
+												{% endfor %}
 											</select>
 										</div>
 									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
+
 								</div>
 								<div class="row">
 									<div class="col-md-6 col-lg-4">
 										<div class="form-group">
-											<label for="nombre">Lavado</label>
+											<label for="nombre">Recurso B2</label>
 										</div>
 									</div>
 									<div class="col-md-6 col-lg-4">
 										<div class="form-group">
 											<label for="tipo">Tipo de tarea</label>
 											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
+												{%for tarea in tareas%}
+													
+													<option>{{tarea.nombre}}</option>
+
+												{% endfor %}
 											</select>
 										</div>
 									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
+
 								</div>
 								<div class="row">
 									<div class="col-md-6 col-lg-4">
 										<div class="form-group">
-											<label for="nombre">Pelado</label>
+											<label for="nombre">Recurso B3</label>
 										</div>
 									</div>
 									<div class="col-md-6 col-lg-4">
 										<div class="form-group">
 											<label for="tipo">Tipo de tarea</label>
 											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
+												{%for tarea in tareas%}
+													
+													<option>{{tarea.nombre}}</option>
+
+												{% endfor %}
 											</select>
 										</div>
 									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
+
 								</div>
 								<div class="row">
 									<div class="col-md-6 col-lg-4">
 										<div class="form-group">
-											<label for="nombre">Molienda</label>
+											<label for="nombre">Recurso B4</label>
 										</div>
 									</div>
 									<div class="col-md-6 col-lg-4">
 										<div class="form-group">
 											<label for="tipo">Tipo de tarea</label>
 											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
+												{%for tarea in tareas%}
+													
+													<option>{{tarea.nombre}}</option>
+
+												{% endfor %}
 											</select>
 										</div>
 									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="nombre">Centrífuga</label>
-										</div>
-									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="nombre">UHT</label>
-										</div>
-									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="nombre">Tanque 1</label>
-										</div>
-									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="nombre">Tanque 2</label>
-										</div>
-									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="nombre">Tanque 3</label>
-										</div>
-									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="nombre">Tanque 4</label>
-										</div>
-									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="nombre">Mezclado</label>
-										</div>
-									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="nombre">Carbonatado</label>
-										</div>
-									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="nombre">Enlatado</label>
-										</div>
-									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="nombre">Embarque</label>
-										</div>
-									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6 col-lg-4">
-										<div class="form-group">
-											<label for="tipo">Tipo de tarea</label>
-											<select class="form-control" id="tipot" name="tipot">
-												<option>banano</option>
-												<option>guabanaba</option>
-												<option>vino</option>
-												<option>agua</option>
-											</select>
-										</div>
-									</div>
+
 								</div>
 
+								<div class="row">
+									<div class="col-md-6 col-lg-4">
+										<div class="form-group">
+											<label for="nombre">Recurso C</label>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-4">
+										<div class="form-group">
+											<label for="tipo">Tipo de tarea</label>
+											<select class="form-control" id="tipot" name="tipot">
+												{%for tarea in tareas%}
+													
+													<option>{{tarea.nombre}}</option>
+
+												{% endfor %}
+											</select>
+										</div>
+									</div>
+								</div>
 							</div> 
 							<div class="card-action">
-								<button type="submit" class="btn btn-success">Agregar</button>
-								<button class="btn btn-danger">Cancel</button>
+								<button type="submit" class="btn btn-primary btn-border btn-round">Modificar</button>
+								
 							</div>
 						</form>
 					</div>
