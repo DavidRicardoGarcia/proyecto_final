@@ -17,6 +17,7 @@ import os.path
 import booking as book
 import matplotlib
 import matplotlib.pyplot as plt
+
 funcion=book.planificador()
 
 ''' ================= initialization setting ======================'''
@@ -76,19 +77,20 @@ def terminado_algoritmo(res,tiempo,valor):
     with open(completeName,'w') as outfile:
         json.dump(data,outfile)
 
-def charts(x,y):
+def charts(x,y,t,d):
         
     save_path = '/home/david/Desktop/optimizacion_final/datos_json'
 
-    name_of_file = 'charts'
+    name_of_file = 'charts'+repr(d)
 
-    completeName = os.path.join(save_path, name_of_file+".txt") 
-
+    completeName = os.path.join(save_path, name_of_file+".json") 
+    data={}
     with open(completeName) as json_file:
         data = json.load(json_file)
-
+    #data={'SA':{'x':[],'y':[],'t':[]}}
     data['GA']['y']=y
     data['GA']['x']=x
+    data['GA']['t']=t
 
     #se ejecuta el algoritmo en cuestion
 
@@ -103,6 +105,7 @@ def graficas_png(d,n,x,y):
     ax.set(xlabel='gen (k)', ylabel='f (d)',
         title='cost function')
     ax.grid()
+
 
     s="GAtest" +repr(d)+"-"+repr(n) + ".png"
 
@@ -133,6 +136,7 @@ def ejecutarGA(dia,num,gen):
     population_list=[]
     makespan_record=[]
     index_record=[]
+    tiempog=[]
     # it generates a random permutation array for each one in the population
     for i in range(population_size):
         nxm_random_num=list(np.random.permutation(num_gene)) # generate a random permutation of 0 to num_job*num_mc-1
@@ -249,7 +253,7 @@ def ejecutarGA(dia,num,gen):
             
         makespan_record.append(Tbest)
         index_record.append(n)
-
+        tiempog.append(time.time()-start_time)
 
     '''----------result----------'''
     tiempo=time.time() - start_time
@@ -257,6 +261,6 @@ def ejecutarGA(dia,num,gen):
     print("optimal value:%f"%Tbest)
     print('the elapsed time:%s'% (time.time() - start_time))
     terminado_algoritmo(sequence_best,tiempo,Tbest)
-    #charts(index_record,makespan_record)
+    charts(index_record,makespan_record,tiempog,num)
     graficas_png(dia,num,index_record,makespan_record)
-#ejecutarGA(1,1,1)
+#ejecutarGA(1,1,10)

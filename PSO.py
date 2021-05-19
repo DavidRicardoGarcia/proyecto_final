@@ -9,6 +9,7 @@ import json
 import os.path
 import matplotlib
 import matplotlib.pyplot as plt
+
 import booking as book
 
 funcion=book.planificador()
@@ -33,24 +34,16 @@ def terminado_algoritmo(res,tiempo,valor):
 	with open(completeName,'w') as outfile:
 		json.dump(data,outfile)
 
-def charts(x,y):
+def guardar_data(res,tiempo,valor):
         
-    save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+	save_path = '/home/david/Desktop/optimizacion_final/datos_json'
 
-    name_of_file = 'charts'
+	name_of_file = 'estado'
 
-    completeName = os.path.join(save_path, name_of_file+".txt") 
+	completeName = os.path.join(save_path, name_of_file+".txt") 
 
-    with open(completeName) as json_file:
-        data = json.load(json_file)
-
-    data['PSO']['y']=y
-    data['PSO']['x']=x
-
-    #se ejecuta el algoritmo en cuestion
-
-    with open(completeName,'w') as outfile:
-        json.dump(data,outfile)
+	with open(completeName) as json_file:
+		data = json.load(json_file)
 
 def graficas_png(d,n,x,y):
     fig, ax = plt.subplots()
@@ -63,6 +56,26 @@ def graficas_png(d,n,x,y):
     s="PSOtest" +repr(d)+"-"+repr(n) + ".png"
 
     fig.savefig(s)
+
+def charts(x,y,t,d):
+        
+    save_path = '/home/david/Desktop/optimizacion_final/datos_json'
+
+    name_of_file = 'charts'+repr(d)
+
+    completeName = os.path.join(save_path, name_of_file+".json") 
+    data={}
+    with open(completeName) as json_file:
+        data = json.load(json_file)
+    #data={'SA':{'x':[],'y':[],'t':[]}}
+    data['PSO']['y']=y
+    data['PSO']['x']=x
+    data['PSO']['t']=t
+
+    #se ejecuta el algoritmo en cuestion
+
+    with open(completeName,'w') as outfile:
+        json.dump(data,outfile)
 
 
 class Particle:
@@ -138,6 +151,8 @@ class PSO:
 		self.alfa = alfa # the probability that all swap operators in swap sequence (pbest - x(t-1))
 		self.makespan_record=[]
 		self.index_record=[]
+		self.tiempog=[]
+		self.t0=time.time()
 
 		solutions=[]
 		# initialized with a group of random particles (solutions)
@@ -253,6 +268,7 @@ class PSO:
 					particle.setCostPBest(cost_current_solution)
 			self.makespan_record.append(self.gbest.getCostPBest())
 			self.index_record.append(t)
+			self.tiempog.append(time.time()-self.t0)
 
 class modelo:
 
@@ -324,9 +340,9 @@ def ejecutarPSO(d,n,k):
 	lista=[int(i) for i in solver.getGBest().getPBest()]
 	cost=solver.getGBest().getCostPBest()
 	terminado_algoritmo(lista,tiempo,cost)
-	#charts(solver.index_record,solver.makespan_record)
+	charts(solver.index_record,solver.makespan_record,solver.tiempog,n)
 	graficas_png(d,n,solver.index_record,solver.makespan_record)
 	#print(min(solver.particles, key=attrgetter('cost_pbest_solution')).solution)
 
 
-#ejecutarPSO(1,1,1)
+#ejecutarPSO(1,1,10)

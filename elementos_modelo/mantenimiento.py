@@ -15,14 +15,14 @@ class orden_de_mantenimiento:
         self.actividades=actividades
         self.fecha_planficada=fecha_planificada
         self.fuente_de_costos=fuente_de_costos
-        self.empresa_responsale=empresa_responsable
+        self.empresa_responsable=empresa_responsable
 
     
     def get_dict(self):
         data={'id':self.id,'tipo':self.tipo,'objeto':self.objeto,
         'encargado':self.encargado,'descripcion':self.descripcion,'actividades':self.actividades,
         'fecha planificada':self.fecha_planficada.strftime("%m %d %Y"),'fuente de costos':self.fuente_de_costos,
-        'empresa_responsable':self.empresa_responsale}
+        'empresa_responsable':self.empresa_responsable}
         return data
 
 class generar_mantenimiento_planificado():

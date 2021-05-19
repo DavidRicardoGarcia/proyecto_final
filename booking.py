@@ -7,6 +7,7 @@ from elementos_modelo import transporte as tr
 from elementos_modelo import almacen as alm
 import Agenda as ag
 import itertools
+import graficar as tablero
 from elementos_modelo import recursos_humanos as rh
 from elementos_modelo import transporte as tr
 from elementos_modelo import almacen as alm
@@ -18,10 +19,11 @@ class planificador:
     def __init__(self):
         super().__init__()
         self.book=[]
+        self.lista=[]
         self.lista_asignar=[]
         self.cargar_datos_iniciales()
         #self.separar_por_cantidad()
-        self.fecha=datetime(2021,4,23)
+        self.fecha=datetime(2021,5,12)
         self.rh=rh.horarios()
         self.tipos_insumos=['8-st','8-sl','12-st','12-sl','16-st','quimico 0','quimico 1','quimico 2','quimico 3','quimico 4']
         self.almacen=alm.almacen()
@@ -33,17 +35,17 @@ class planificador:
         save_path = '/home/david/Desktop/optimizacion_final/datos_json'
         #tiempos de cada elemento y de viajes
         name_of_file = 'modelsettings'
-        completeName = os.path.join(save_path, name_of_file+".txt") 
+        completeName = os.path.join(save_path, name_of_file+".json") 
         with open(completeName) as json_file:
             self.settings = json.load(json_file)
         #dias de mtto
         name_of_file = 'datam'
-        completeName = os.path.join(save_path, name_of_file+".txt") 
+        completeName = os.path.join(save_path, name_of_file+".json") 
         with open(completeName) as json_file:
             self.mantenimiento = json.load(json_file)
 
         name_of_file = 'data_S'
-        completeName = os.path.join(save_path, name_of_file+".txt") 
+        completeName = os.path.join(save_path, name_of_file+".json") 
         with open(completeName) as json_file:
             self.materiales = json.load(json_file)
         #las tareas
@@ -88,7 +90,14 @@ class planificador:
         libro.cargarR(recursos['calendario'])
         self.book=libro
     def separar_por_cantidad(self):
+        
+        self.lista=self.buscar_pedidos_en_camino(self.book.bookP)
+        elmax=0
         self.cont=0
+        if(self.lista):
+            elmax=max(self.lista, key=lambda x:x['ident'])
+            self.cont=elmax['ident']+1
+        
         for val in self.pedidos['pedidos']:
             for x in range(val['cantidad']):
                 k=val.copy()
@@ -167,6 +176,8 @@ class planificador:
         tipo=tarea['tipo'].split()
         for i in self.book.bookR:
             if((fecha-i.fecha).days == 0):
+                        tarea=copy.deepcopy(tarea)
+                        tarea['fecha_inicio']=fecha.strftime("%m %d %Y")
                         i.recursoA=[
         {'TIPO':'desembarque','HINICIO':self.settings['tareas'][tipo[0]]['inicio']['desembarque'],'HORAS':self.settings['tareas'][tipo[0]]['duracion']['desembarque'],'COSTO':0.5,'EMPLEADO':0,'TAREA':tarea,'DIA':fecha.strftime("%m %d %Y"),'INSUMOS':0},
         {'TIPO':'pesado','HINICIO':self.settings['tareas'][tipo[0]]['inicio']['pesado'],'HORAS':self.settings['tareas'][tipo[0]]['duracion']['desembarque'],'COSTO':0.5,'EMPLEADO':0,'TAREA':tarea,'DIA':fecha.strftime("%m %d %Y"),'INSUMOS':0},
@@ -188,23 +199,31 @@ class planificador:
         for i in self.book.bookR:
             if((fecha-i.fecha).days == 0):
                 if(i.recursoB1['ESTADO']=='disponible'):
+                    tarea=copy.deepcopy(tarea)
+                    tarea['fecha_inicio']=fecha.strftime("%m %d %Y")
                     for j in range(cantidaddias):
-                        self.book.bookR[self.cont+j].recursoB1={'TIPO':'tanque1','HINICIO':8,'HORAS':24,'COSTO':0.5,'ESTADO':'ocupado','TAREA':tarea,'DIA':0,'INSUMOS':0}
+                        self.book.bookR[self.cont+j].recursoB1={'TIPO':'tanque1','HINICIO':8,'HORAS':16,'COSTO':0.5,'ESTADO':'ocupado','TAREA':tarea,'DIA':0,'INSUMOS':0}
                     
                     break
                 elif(i.recursoB2['ESTADO']=='disponible'):
+                    tarea=copy.deepcopy(tarea)
+                    tarea['fecha_inicio']=fecha.strftime("%m %d %Y")
                     for j in range(cantidaddias):
-                        self.book.bookR[self.cont+j].recursoB2={'TIPO':'tanque2','HINICIO':8,'HORAS':24,'COSTO':0.5,'ESTADO':'ocupado','TAREA':tarea,'DIA':0,'INSUMOS':0}
+                        self.book.bookR[self.cont+j].recursoB2={'TIPO':'tanque2','HINICIO':8,'HORAS':16,'COSTO':0.5,'ESTADO':'ocupado','TAREA':tarea,'DIA':0,'INSUMOS':0}
                     
                     break
                 elif(i.recursoB3['ESTADO']=='disponible'):
+                    tarea=copy.deepcopy(tarea)
+                    tarea['fecha_inicio']=fecha.strftime("%m %d %Y")
                     for j in range(cantidaddias):
-                        self.book.bookR[self.cont+j].recursoB3={'TIPO':'tanque3','HINICIO':8,'HORAS':24,'COSTO':0.5,'ESTADO':'ocupado','TAREA':tarea,'DIA':0,'INSUMOS':0}
+                        self.book.bookR[self.cont+j].recursoB3={'TIPO':'tanque3','HINICIO':8,'HORAS':16,'COSTO':0.5,'ESTADO':'ocupado','TAREA':tarea,'DIA':0,'INSUMOS':0}
                     
                     break
                 else:
+                    tarea=copy.deepcopy(tarea)
+                    tarea['fecha_inicio']=fecha.strftime("%m %d %Y")
                     for j in range(cantidaddias):
-                        self.book.bookR[self.cont+j].recursoB4={'TIPO':'tanque4','HINICIO':8,'HORAS':24,'COSTO':0.5,'ESTADO':'ocupado','TAREA':tarea,'DIA':0,'INSUMOS':0}
+                        self.book.bookR[self.cont+j].recursoB4={'TIPO':'tanque4','HINICIO':8,'HORAS':16,'COSTO':0.5,'ESTADO':'ocupado','TAREA':tarea,'DIA':0,'INSUMOS':0}
                     
                     break
             self.cont+=1
@@ -212,6 +231,8 @@ class planificador:
         tipo=tarea['tipo'].split()
         for i in self.book.bookR:
             if((fecha-i.fecha).days == 0):
+                        tarea=copy.deepcopy(tarea)
+                        tarea['fecha_inicio']=fecha.strftime("%m %d %Y")
                         i.recursoC=[
         {'TIPO':'mezclado','HINICIO':self.settings['latas'][tipo[1]]['inicio'],'HORAS':self.settings['latas'][tipo[1]]['duracion'],'COSTO':0.5,'EMPLEADO':0,'TAREA':tarea,'DIA':fecha.strftime("%m %d %Y"),'INSUMOS':0},
         {'TIPO':'carbonatado','HINICIO':self.settings['latas'][tipo[1]]['inicio'],'HORAS':self.settings['latas'][tipo[1]]['duracion'],'COSTO':0.5,'EMPLEADO':0,'TAREA':tarea,'DIA':fecha.strftime("%m %d %Y"),'INSUMOS':0},
@@ -430,62 +451,86 @@ class planificador:
         #self.book.bookP=copy.deepcopy(self.Poriginal)
         #self.book.bookR=copy.deepcopy(self.Roriginal)
         #buscar pedidos en camino
-        lista=self.buscar_pedidos_en_camino(self.book.bookP)
-
+        
+        lista=self.lista
         #reasignar segun el orden de la lista a asignar y los pedidos en camino
         flag=False
         self.cont=0
         for x in lista:
             self.cont=0
+            lista_actividades=[]
             for j in self.lista_asignar:
                 tipo=j['tipo'].split()
                 tipo=tipo[0]
                 if(x['tipo'] == tipo):
-                    flag=True
+                    
                     id=x['id']
                     ident=x['ident']
                     for p in self.book.bookR:
                         if(p.recursoA[0]['TAREA'] != {} ):
                             if(p.recursoA[0]['TAREA']['id']==id and p.recursoA[0]['TAREA']['ident']==ident):
-                                p.recursoA[0]['TAREA']=j
-                                p.recursoA[1]['TAREA']=j
-                                p.recursoA[2]['TAREA']=j
-                                p.recursoA[3]['TAREA']=j
-                                p.recursoA[4]['TAREA']=j
-                                p.recursoA[5]['TAREA']=j
-                                p.recursoA[6]['TAREA']=j
+                                tarea=copy.deepcopy(j)
+                                tarea['fecha_inicio']=p.fecha.strftime("%m %d %Y")
+                                p.recursoA[0]['TAREA']=tarea
+                                p.recursoA[1]['TAREA']=tarea
+                                p.recursoA[2]['TAREA']=tarea
+                                p.recursoA[3]['TAREA']=tarea
+                                p.recursoA[4]['TAREA']=tarea
+                                p.recursoA[5]['TAREA']=tarea
+                                p.recursoA[6]['TAREA']=tarea
+                                lista_actividades.append(copy.deepcopy(p))
                                 #print(p.fecha)
 
                         if(p.recursoB1['TAREA'] != {} ):
                             if(p.recursoB1['TAREA']['id']==id and p.recursoB1['TAREA']['ident']==ident):
-                                p.recursoB1['TAREA']=j
+                                tarea=copy.deepcopy(j)
+                                tarea['fecha_inicio']=p.fecha.strftime("%m %d %Y")
+                                p.recursoB1['TAREA']=tarea
+                                lista_actividades.append(copy.deepcopy(p))
                                 #print(p.fecha)
 
                         if(p.recursoB2['TAREA'] != {} ):
                             if(p.recursoB2['TAREA']['id']==id and p.recursoB2['TAREA']['ident']==ident):
-                                p.recursoB2['TAREA']=j
+                                tarea=copy.deepcopy(j)
+                                tarea['fecha_inicio']=p.fecha.strftime("%m %d %Y")
+                                p.recursoB2['TAREA']=tarea
+                                lista_actividades.append(copy.deepcopy(p))
                                 #print(p.fecha)
                             
                         if(p.recursoB3['TAREA'] != {} ):
                             if(p.recursoB3['TAREA']['id']==id and p.recursoB3['TAREA']['ident']==ident):
-                                p.recursoB3['TAREA']=j
+                                tarea=copy.deepcopy(j)
+                                tarea['fecha_inicio']=p.fecha.strftime("%m %d %Y")
+                                p.recursoB3['TAREA']=tarea
+                                lista_actividades.append(copy.deepcopy(p))
                                 #print(p.fecha)
 
                         if(p.recursoB4['TAREA'] != {} ):
                             if(p.recursoB4['TAREA']['id']==id and p.recursoB4['TAREA']['ident']==ident):
-                                p.recursoB4['TAREA']=j
+                                tarea=copy.deepcopy(j)
+                                tarea['fecha_inicio']=p.fecha.strftime("%m %d %Y")
+                                p.recursoB4['TAREA']=tarea
+                                lista_actividades.append(copy.deepcopy(p))
                                 #print(p.fecha)
 
                         if(p.recursoC[0]['TAREA'] != {} ):
                             if(p.recursoC[0]['TAREA']['id']==id and p.recursoC[0]['TAREA']['ident']==ident):
-                                p.recursoC[0]['TAREA']=j
-                                p.recursoC[1]['TAREA']=j
-                                p.recursoC[2]['TAREA']=j
-                                p.recursoC[3]['TAREA']=j
+                                tarea=copy.deepcopy(j)
+                                tarea['fecha_inicio']=p.fecha.strftime("%m %d %Y")
+                                p.recursoC[0]['TAREA']=tarea
+                                p.recursoC[1]['TAREA']=tarea
+                                p.recursoC[2]['TAREA']=tarea
+                                p.recursoC[3]['TAREA']=tarea
+                                lista_actividades.append(copy.deepcopy(p))
+                                flag=True
+                                break
                                 #print(p.fecha)
                 if(flag):
                     self.lista_asignar.pop(self.cont)
                     flag=False
+                    tdefinitiva=lista_actividades[0].fecha
+                    self.lista_planificados.append((j,tdefinitiva))
+                    del(lista_actividades)
                     break        
                 self.cont+=1
         
@@ -523,10 +568,11 @@ class planificador:
                         while(flagABC):
                             value=self.condiciones_enlatar(tenlatar)
                             d=self.revisar_dia(tenlatar)
+                            m=self.revisar_mantenimiento(tenlatar)
                             if(value):
                                 flagABC=False
                                 self.asignar_enlatar(tenlatar,tarea)
-                            elif(d != 6):
+                            elif(d != 6 and m[2]):
                                 #en caso self.contrario se va a comparar la tarea que se quiere asignar con la que ya esta asignada y se va a decidir cual tiene prioridad
                                 #debido a su deadline, la tarea que sale sigue intentando ser asignadaen algun momento
                                 tarea=self.revisar_asignacion_enlatar(tarea,tenlatar)
@@ -553,10 +599,11 @@ class planificador:
                         while(flagC):
                             value=self.condiciones_enlatar(tenlatar)
                             d=self.revisar_dia(tenlatar)
+                            m=self.revisar_mantenimiento(tenlatar)
                             if(value):
                                 flagC=False
                                 self.asignar_enlatar(tenlatar,tarea)
-                            elif(d != 6):
+                            elif(d != 6 and m[2]):
                                 tarea=self.revisar_asignacion_enlatar(tarea,tenlatar)
                                 tenlatar=tenlatar+timedelta(days=1)
                                 #reservar nuevo dia de uso de tanque
@@ -584,16 +631,21 @@ class planificador:
                         tagendar=tagendar+timedelta(days=1)
             self.lista_planificados.append((tarea,tdefinitivo))
 
-        #al final despues de haber asignado los recursos a las tareas ,se les pasan los insumos, trabajadores, ordenes de pedido y ordenes de ingreso
-        for i in self.lista_planificados:
-            tfecha=i[1]
-            tipo=i[0]['tipo'].split()
-            taux=timedelta(days=self.settings['tareas'][tipo[0]]['Tinsumo'])
-            tpedido=tfecha-taux
-            self.asignar_pedido(tpedido,i[0])
-            self.asignar_ingreso(tfecha,i[0])
             #agregar los insumos y los empleados 
         if(save):
+            diao=datetime.strptime(self.r['calendario'][0]['fecha'],'%m %d %Y')
+            diaf=datetime.strptime(self.r['calendario'][-1]['fecha'],'%m %d %Y')
+            libro=ag.agenda()
+            libro.crear_AgendaP(diao,diaf)
+            self.book.bookP=libro.bookP
+            #al final despues de haber asignado los recursos a las tareas ,se les pasan los insumos, trabajadores, ordenes de pedido y ordenes de ingreso
+            for i in self.lista_planificados:
+                tfecha=i[1]
+                tipo=i[0]['tipo'].split()
+                taux=timedelta(days=self.settings['tareas'][tipo[0]]['Tinsumo'])
+                tpedido=tfecha-taux
+                self.asignar_pedido(tpedido,i[0])
+                self.asignar_ingreso(tfecha,i[0])
             self.book.guardarR()
             self.book.guardarP()
             #print('amonos')
@@ -606,15 +658,20 @@ class planificador:
         self.pedidos=[]
         self.lista_asignar=[]
         self.pedidos=listapedidos
-        self.separar_por_cantidad()
+        
         self.resetear()
+
+        self.separar_por_cantidad()
+
         self.asignacion(False)
         lista=[]
+        #print(self.pedidos['pedidos'])
         for i in self.pedidos['pedidos']:
             for p in self.book.bookR:
                 if(p.recursoC[0]['TAREA']!= {}):
                     if(p.recursoC[0]['TAREA']['id']==i['id']):
-                        lista.append((p.recursoC[0]['TAREA']['id'],p.fecha,p.recursoC[0]['TAREA']['contratista']))
+                        lista.append((p.recursoC[0]['TAREA']['id'],p.fecha,p.recursoC[0]['TAREA']['tipo']))
+        #print(lista)
         listadef=[]
         total=0
         for i in self.pedidos['pedidos']:
@@ -628,10 +685,12 @@ class planificador:
                 dif=timedelta(days=0)
             pe=datetime.strptime(i['fecha_limite'],'%m %d %Y')
             if(pe<max):
-                total+=50
+                total+=10
                 #print('se paso')
-            listadef.append((i['id'],dif,i['fecha_limite']))
+                #print(i['id'])
+            listadef.append((i['id'],dif,i['fecha_limite'],i['fecha_recepcion']))
             total+=dif.days
+        #print(listadef)
         return total
     def Asignar_insumos_personal(self,listapedidos):
             del(self.pedidos)
@@ -641,82 +700,83 @@ class planificador:
             self.pedidos=[]
             self.lista_asignar=[]
             self.pedidos=listapedidos
-            self.separar_por_cantidad()
+            
             self.resetear()
-            #self.asignacion(True)
-            self.asignacion(False)
+            self.separar_por_cantidad()
+            self.asignacion(True)
+            #self.asignacion(False)
 
-            for j in self.lista_asignar_fija:
-                tipot=j['tipo'].split()
-                tipo=tipot[0]
-                tipol=tipot[1]
-                id=j['id']
-                ident=j['ident']
-                if(tipo=='banano' or tipo=='guanabana'):
-                    insumo1=self.almacen.asignar_recurso_quimico('quimico 0',1)
-                    insumo2=self.almacen.asignar_recurso_quimico('quimico 1',1)
-                    insumo3=self.almacen.asignar_recurso_quimico('quimico 2',1)
-                if(tipo=='vino'):
-                    insumo3=self.almacen.asignar_recurso_quimico('quimico 2',1)
-                insumoa=self.almacen.asignar_recurso_quimico('quimico 3',1)
-                insumob=self.almacen.asignar_recurso_quimico('quimico 4',1)
-                lata=self.almacen.asignar_recurso_lata(tipol,8)
-                trabajadores=self.pedir_horario_a_RH()
-                for p in self.book.bookR:
-                            if(p.recursoA[0]['TAREA'] != {} ):
-                                if(p.recursoA[0]['TAREA']['id']==id and p.recursoA[0]['TAREA']['ident']==ident):
-                                    p.recursoA[0]['INSUMOS']=0
-                                    p.recursoA[1]['INSUMOS']=0
-                                    p.recursoA[2]['INSUMOS']=insumo1
-                                    p.recursoA[3]['INSUMOS']=0
-                                    p.recursoA[4]['INSUMOS']=insumo2
-                                    p.recursoA[5]['INSUMOS']=0
-                                    p.recursoA[6]['INSUMOS']=0
+            # for j in self.lista_asignar_fija:
+            #     tipot=j['tipo'].split()
+            #     tipo=tipot[0]
+            #     tipol=tipot[1]
+            #     id=j['id']
+            #     ident=j['ident']
+            #     if(tipo=='banano' or tipo=='guanabana'):
+            #         insumo1=self.almacen.asignar_recurso_quimico('quimico 0',1)
+            #         insumo2=self.almacen.asignar_recurso_quimico('quimico 1',1)
+            #         insumo3=self.almacen.asignar_recurso_quimico('quimico 2',1)
+            #     if(tipo=='vino'):
+            #         insumo3=self.almacen.asignar_recurso_quimico('quimico 2',1)
+            #     insumoa=self.almacen.asignar_recurso_quimico('quimico 3',1)
+            #     insumob=self.almacen.asignar_recurso_quimico('quimico 4',1)
+            #     lata=self.almacen.asignar_recurso_lata(tipol,8)
+            #     trabajadores=self.pedir_horario_a_RH()
+            #     for p in self.book.bookR:
+            #                 if(p.recursoA[0]['TAREA'] != {} ):
+            #                     if(p.recursoA[0]['TAREA']['id']==id and p.recursoA[0]['TAREA']['ident']==ident):
+            #                         p.recursoA[0]['INSUMOS']=0
+            #                         p.recursoA[1]['INSUMOS']=0
+            #                         p.recursoA[2]['INSUMOS']=insumo1
+            #                         p.recursoA[3]['INSUMOS']=0
+            #                         p.recursoA[4]['INSUMOS']=insumo2
+            #                         p.recursoA[5]['INSUMOS']=0
+            #                         p.recursoA[6]['INSUMOS']=0
 
-                                    p.recursoA[0]['EMPLEADO']=trabajadores['horario empleados'][0]
-                                    p.recursoA[1]['EMPLEADO']=trabajadores['horario empleados'][1]
-                                    p.recursoA[2]['EMPLEADO']=trabajadores['horario empleados'][2]
-                                    p.recursoA[3]['EMPLEADO']=trabajadores['horario empleados'][3]
-                                    p.recursoA[4]['EMPLEADO']=trabajadores['horario empleados'][4]
-                                    p.recursoA[5]['EMPLEADO']=trabajadores['horario empleados'][5]
-                                    p.recursoA[6]['EMPLEADO']=trabajadores['horario empleados'][6]
-                                    #print(p.fecha)
+            #                         p.recursoA[0]['EMPLEADO']=trabajadores['horario empleados'][0]
+            #                         p.recursoA[1]['EMPLEADO']=trabajadores['horario empleados'][1]
+            #                         p.recursoA[2]['EMPLEADO']=trabajadores['horario empleados'][2]
+            #                         p.recursoA[3]['EMPLEADO']=trabajadores['horario empleados'][3]
+            #                         p.recursoA[4]['EMPLEADO']=trabajadores['horario empleados'][4]
+            #                         p.recursoA[5]['EMPLEADO']=trabajadores['horario empleados'][5]
+            #                         p.recursoA[6]['EMPLEADO']=trabajadores['horario empleados'][6]
+            #                         #print(p.fecha)
 
-                            if(p.recursoB1['TAREA'] != {} ):
-                                if(p.recursoB1['TAREA']['id']==id and p.recursoB1['TAREA']['ident']==ident):
-                                    p.recursoB1['INSUMOS']=insumo3
-                                    #print(p.fecha)
+            #                 if(p.recursoB1['TAREA'] != {} ):
+            #                     if(p.recursoB1['TAREA']['id']==id and p.recursoB1['TAREA']['ident']==ident):
+            #                         p.recursoB1['INSUMOS']=insumo3
+            #                         #print(p.fecha)
 
-                            if(p.recursoB2['TAREA'] != {} ):
-                                if(p.recursoB2['TAREA']['id']==id and p.recursoB2['TAREA']['ident']==ident):
-                                    p.recursoB2['INSUMOS']=insumo3
-                                    #print(p.fecha)
+            #                 if(p.recursoB2['TAREA'] != {} ):
+            #                     if(p.recursoB2['TAREA']['id']==id and p.recursoB2['TAREA']['ident']==ident):
+            #                         p.recursoB2['INSUMOS']=insumo3
+            #                         #print(p.fecha)
                                 
-                            if(p.recursoB3['TAREA'] != {} ):
-                                if(p.recursoB3['TAREA']['id']==id and p.recursoB3['TAREA']['ident']==ident):
-                                    p.recursoB3['INSUMOS']=insumo3
-                                    #print(p.fecha)
+            #                 if(p.recursoB3['TAREA'] != {} ):
+            #                     if(p.recursoB3['TAREA']['id']==id and p.recursoB3['TAREA']['ident']==ident):
+            #                         p.recursoB3['INSUMOS']=insumo3
+            #                         #print(p.fecha)
 
-                            if(p.recursoB4['TAREA'] != {} ):
-                                if(p.recursoB4['TAREA']['id']==id and p.recursoB4['TAREA']['ident']==ident):
-                                    p.recursoB4['INSUMOS']=insumo3
-                                    #print(p.fecha)
+            #                 if(p.recursoB4['TAREA'] != {} ):
+            #                     if(p.recursoB4['TAREA']['id']==id and p.recursoB4['TAREA']['ident']==ident):
+            #                         p.recursoB4['INSUMOS']=insumo3
+            #                         #print(p.fecha)
 
-                            if(p.recursoC[0]['TAREA'] != {} ):
-                                if(p.recursoC[0]['TAREA']['id']==id and p.recursoC[0]['TAREA']['ident']==ident):
-                                    p.recursoC[0]['INSUMOS']=insumoa
-                                    p.recursoC[1]['INSUMOS']=insumob
-                                    p.recursoC[2]['INSUMOS']=lata
-                                    p.recursoC[3]['INSUMOS']=0
+            #                 if(p.recursoC[0]['TAREA'] != {} ):
+            #                     if(p.recursoC[0]['TAREA']['id']==id and p.recursoC[0]['TAREA']['ident']==ident):
+            #                         p.recursoC[0]['INSUMOS']=insumoa
+            #                         p.recursoC[1]['INSUMOS']=insumob
+            #                         p.recursoC[2]['INSUMOS']=lata
+            #                         p.recursoC[3]['INSUMOS']=0
 
-                                    p.recursoC[0]['EMPLEADO']=trabajadores['horario empleados'][7]
-                                    p.recursoC[1]['EMPLEADO']=trabajadores['horario empleados'][8]
-                                    p.recursoC[2]['EMPLEADO']=trabajadores['horario empleados'][9]
-                                    p.recursoC[3]['EMPLEADO']=trabajadores['horario empleados'][10]
-                                    #print(p.fecha)
-                                    fecha=p.fecha
-                m=self.almacen.revisar_Stock()
-                self.pedir_insumos(m,fecha)               
+            #                         p.recursoC[0]['EMPLEADO']=trabajadores['horario empleados'][7]
+            #                         p.recursoC[1]['EMPLEADO']=trabajadores['horario empleados'][8]
+            #                         p.recursoC[2]['EMPLEADO']=trabajadores['horario empleados'][9]
+            #                         p.recursoC[3]['EMPLEADO']=trabajadores['horario empleados'][10]
+            #                         #print(p.fecha)
+            #                         fecha=p.fecha
+            #     m=self.almacen.revisar_Stock()
+            #     self.pedir_insumos(m,fecha)               
     def pedir_horario_a_RH(self):
 
         data=self.rh.asignar_horario_ng()
@@ -738,7 +798,162 @@ class planificador:
                 cantidad=10*(1-i)
                 self.almacen.ingreso_De_insumos(self.tipos_insumos[cont],cantidad,fecha.strftime("%m %d %Y"))
             cont+=1
+    def listar_todas_las_actividades(self):
+        lista=[]
+        for i in self.pedidos['pedidos']:
+            
+            for p in self.book.bookR:
+                if(p.recursoA[0]['TAREA'] != {} ):
+                    if(p.recursoA[0]['TAREA']['id']==i['id']):
+                        lista.append((p.recursoA[0],p.fecha))
+                        lista.append((p.recursoA[1],p.fecha))
+                        lista.append((p.recursoA[2],p.fecha))
+                        lista.append((p.recursoA[3],p.fecha))
+                        lista.append((p.recursoA[4],p.fecha))
+                        lista.append((p.recursoA[5],p.fecha))
+                        lista.append((p.recursoA[6],p.fecha))
+                        #print(p.fecha)
 
+                if(p.recursoB1['TAREA'] != {} ):
+                    if(p.recursoB1['TAREA']['id']==i['id']):
+                        lista.append((p.recursoB1,p.fecha))
+                        #print(p.fecha)
+
+                if(p.recursoB2['TAREA'] != {} ):
+                    if(p.recursoB2['TAREA']['id']==i['id']):
+                        lista.append((p.recursoB2,p.fecha))
+                        #print(p.fecha)
+                    
+                if(p.recursoB3['TAREA'] != {} ):
+                    if(p.recursoB3['TAREA']['id']==i['id']):
+                        lista.append((p.recursoB3,p.fecha))
+                        #print(p.fecha)
+
+                if(p.recursoB4['TAREA'] != {} ):
+                    if(p.recursoB4['TAREA']['id']==i['id']):
+                        lista.append((p.recursoB4,p.fecha))
+                        #print(p.fecha)
+
+                if(p.recursoC[0]['TAREA'] != {} ):
+                    if(p.recursoC[0]['TAREA']['id']==i['id']):
+                        lista.append((p.recursoC[0],p.fecha))
+                        lista.append((p.recursoC[1],p.fecha))
+                        lista.append((p.recursoC[2],p.fecha))
+                        lista.append((p.recursoC[3],p.fecha))
+        return lista
+
+def separar_las_actividades(a,pedidos):
+
+    lista_de_equipos=[
+        {'TIPO':'Desembarque','Actividad':[]},{'TIPO':'Pesado','Actividad':[]},{'TIPO':'Lavado','Actividad':[]},
+        {'TIPO':'Pelado','Actividad':[]},{'TIPO':'Molienda','Actividad':[]},{'TIPO':'Centrifuga','Actividad':[]},
+        {'TIPO':'UHT','Actividad':[]},{'TIPO':'Tanque1','Actividad':[]},{'TIPO':'Tanque2','Actividad':[]},
+        {'TIPO':'Tanque3','Actividad':[]},{'TIPO':'Tanque4','Actividad':[]},{'TIPO':'Mezclado','Actividad':[]},
+        {'TIPO':'Carbonatado','Actividad':[]},{'TIPO':'Enlatado','Actividad':[]},{'TIPO':'Embarque','Actividad':[]}
+        ]
+            #recorro la lista de tareas efectuadas y se asignan a una estructura que separa las actividades por etapa
+    for tareas in a:
+
+        if(tareas[0]['TIPO']=='desembarque'):
+            lista_de_equipos[0]['Actividad'].append(tareas)
+        if(tareas[0]['TIPO']=='pesado'):
+            lista_de_equipos[1]['Actividad'].append(tareas)
+        if(tareas[0]['TIPO']=='lavado'):
+            lista_de_equipos[2]['Actividad'].append(tareas)
+        if(tareas[0]['TIPO']=='pelado'):
+            lista_de_equipos[3]['Actividad'].append(tareas)
+        if(tareas[0]['TIPO']=='molienda'):
+            lista_de_equipos[4]['Actividad'].append(tareas)
+        if(tareas[0]['TIPO']=='centrifuga'):
+            lista_de_equipos[5]['Actividad'].append(tareas)
+        if(tareas[0]['TIPO']=='UHT'):
+            lista_de_equipos[6]['Actividad'].append(tareas)
+        if(tareas[0]['TIPO']=='tanque1'):
+            lista_de_equipos[7]['Actividad'].append(tareas)
+        if(tareas[0]['TIPO']=='tanque2'):
+            lista_de_equipos[8]['Actividad'].append(tareas)
+        if(tareas[0]['TIPO']=='tanque3'):
+            lista_de_equipos[9]['Actividad'].append(tareas)
+        if(tareas[0]['TIPO']=='tanque4'):
+            lista_de_equipos[10]['Actividad'].append(tareas)
+        if(tareas[0]['TIPO']=='mezclado'):
+            lista_de_equipos[11]['Actividad'].append(tareas)
+        if(tareas[0]['TIPO']=='carbonatado'):
+            lista_de_equipos[12]['Actividad'].append(tareas)
+        if(tareas[0]['TIPO']=='enlatado'):
+            lista_de_equipos[13]['Actividad'].append(tareas)
+        if(tareas[0]['TIPO']=='embarque'):
+            lista_de_equipos[14]['Actividad'].append(tareas)
+
+    values_of_key = [a_dict[0]['TAREA']['id'] for a_dict in lista_de_equipos[7]['Actividad']]
+    list1=set(values_of_key)
+    elements=(list(list1))
+    lista1=[]
+    for i in elements:
+        lista1.append(list(filter(lambda dias: dias[0]['TAREA']['id']==i,lista_de_equipos[7]['Actividad'])))
+    listadef=[]
+    for j in lista1:
+        elemento=copy.deepcopy(j[0][0])
+        valor_max=max(j, key=lambda item:item[1])
+        valor_min=min(j, key=lambda item:item[1])
+        elemento['TAREA']['fecha_finalizacion']=valor_max[1].strftime("%m %d %Y")
+        elemento['TAREA']['fecha_inicio']=valor_min[1].strftime("%m %d %Y")
+        listadef.append((elemento,0))
+    lista_de_equipos[7]['Actividad']=listadef
+
+    values_of_key = [a_dict[0]['TAREA']['id'] for a_dict in lista_de_equipos[8]['Actividad']]
+    list1=set(values_of_key)
+    elements=(list(list1))
+    lista1=[]
+    for i in elements:
+        lista1.append(list(filter(lambda dias: dias[0]['TAREA']['id']==i,lista_de_equipos[8]['Actividad'])))
+    listadef=[]
+    for j in lista1:
+        elemento=copy.deepcopy(j[0][0])
+        valor_max=max(j, key=lambda item:item[1])
+        valor_min=min(j, key=lambda item:item[1])
+        elemento['TAREA']['fecha_finalizacion']=valor_max[1].strftime("%m %d %Y")
+        elemento['TAREA']['fecha_inicio']=valor_min[1].strftime("%m %d %Y")
+        listadef.append((elemento,0))
+    lista_de_equipos[8]['Actividad']=listadef
+
+
+    values_of_key = [a_dict[0]['TAREA']['id'] for a_dict in lista_de_equipos[9]['Actividad']]
+    list1=set(values_of_key)
+    elements=(list(list1))
+    lista1=[]
+    for i in elements:
+        lista1.append(list(filter(lambda dias: dias[0]['TAREA']['id']==i,lista_de_equipos[9]['Actividad'])))
+    listadef=[]
+    for j in lista1:
+        elemento=copy.deepcopy(j[0][0])
+        valor_max=max(j, key=lambda item:item[1])
+        valor_min=min(j, key=lambda item:item[1])
+        elemento['TAREA']['fecha_finalizacion']=valor_max[1].strftime("%m %d %Y")
+        elemento['TAREA']['fecha_inicio']=valor_min[1].strftime("%m %d %Y")
+        listadef.append((elemento,0))
+    lista_de_equipos[9]['Actividad']=listadef
+
+
+    values_of_key = [a_dict[0]['TAREA']['id'] for a_dict in lista_de_equipos[10]['Actividad']]
+    list1=set(values_of_key)
+    elements=(list(list1))
+    lista1=[]
+    for i in elements:
+        lista1.append(list(filter(lambda dias: dias[0]['TAREA']['id']==i,lista_de_equipos[10]['Actividad'])))
+    listadef=[]
+    for j in lista1:
+        elemento=copy.deepcopy(j[0][0])
+        valor_max=max(j, key=lambda item:item[1])
+        valor_min=min(j, key=lambda item:item[1])
+        elemento['TAREA']['fecha_finalizacion']=valor_max[1].strftime("%m %d %Y")
+        elemento['TAREA']['fecha_inicio']=valor_min[1].strftime("%m %d %Y")
+        listadef.append((elemento,0))
+    lista_de_equipos[10]['Actividad']=listadef
+
+    #print('hola')
+        
+    return lista_de_equipos
 def cargar_tareas():
         save_path = '/home/david/Desktop/optimizacion_final/datos_json'
         name_of_file = 'data'
@@ -770,12 +985,23 @@ def combinaciones(plan,vector,tareas):
         #print(s)
     print(min(lista, key=lambda item:item[1]))
 
+
 x=cargar_tareas()
-lista_id=get_id_list(x['pedidos'])
-lista_id=[3, 0, 4, 2, 7, 5, 1, 6]
+#lista_id=get_id_list(x['pedidos'])
+#lista_id=[2,0,1]
+#lista_id=[1, 5, 4, 2, 0, 3]
+
+lista_id=[5, 6, 7, 4, 2, 0, 1, 3]
 a=ordenar_Tareas(lista_id,x['pedidos'])
 prueba=planificador()
-prueba.Asignar_insumos_personal(a)
-# combinaciones(prueba,lista_id,x)
-# print(prueba.Calcular_Costo(a))
+#prueba.Asignar_insumos_personal(a)
+#combinaciones(prueba,lista_id,x)
+print(prueba.Calcular_Costo(a))
+# listamamalona=prueba.listar_todas_las_actividades()
+# fechamax=max(listamamalona, key=lambda item:item[1])
+# actividades_por_equipo=separar_las_actividades(listamamalona,x)
+# diagrama=tablero.gantt_diagram(prueba.fecha,fechamax[1])
+# diagrama.cargar_datos(actividades_por_equipo)
+# diagrama.graficar()
+# print("goooo")
 #print(prueba.Calcular_Costo(a))

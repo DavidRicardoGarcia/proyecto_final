@@ -29,22 +29,22 @@ class gantt_diagram:
             self.labels.append(x['TIPO'])
             if(x['Actividad']):
                 for i in x['Actividad']:
-                    fechainicio=datetime.datetime.strptime(i['TAREA']['fecha inicio'],'%m %d %Y')
+                    fechainicio=datetime.datetime.strptime(i[0]['TAREA']['fecha_inicio'],'%m %d %Y')
                     año=fechainicio.year
                     mes=fechainicio.month
                     dia=fechainicio.day
-                    self.startDate.append(chartTime(año,mes,dia,i['HINICIO']))
+                    self.startDate.append(chartTime(año,mes,dia,i[0]['HINICIO']))
                     #print((2020,10,0+i['DIA'],i['HINICIO']))
-                    diasextras=int(i['HORAS']/24)
-                    horafinal=i['HORAS']%24
-                    if(i['TAREA']['fecha finalizacion']=='---'):
-                        self.endDate.append(chartTime(año,mes,dia,i['HINICIO']+horafinal))
+                    diasextras=int(i[0]['HORAS']/24)
+                    horafinal=i[0]['HORAS']%24
+                    if(i[0]['TAREA']['fecha_finalizacion']=='---'):
+                        self.endDate.append(chartTime(año,mes,dia,i[0]['HINICIO']+horafinal))
                     else:    
-                        fechafin=datetime.datetime.strptime(i['TAREA']['fecha finalizacion'],'%m %d %Y')
+                        fechafin=datetime.datetime.strptime(i[0]['TAREA']['fecha_finalizacion'],'%m %d %Y')
                         año=fechafin.year
                         mes=fechafin.month
                         dia=fechafin.day
-                        self.endDate.append(chartTime(año,mes,dia,i['HINICIO']+horafinal))
+                        self.endDate.append(chartTime(año,mes,dia,i[0]['HINICIO']+horafinal))
                     #print((2020,10,0+i['DIA']+diasextras,i['HINICIO']+horafinal))
                     self.taskno.append(cont)
             else:

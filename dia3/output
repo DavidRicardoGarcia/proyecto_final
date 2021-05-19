@@ -1,0 +1,129 @@
+(base) david@david-Nitro-AN515-52:~/Desktop/optimizacion_final$  cd /home/david/Desktop/optimizacion_final ; /usr/bin/env /home/david/anaconda3/bin/python /home/david/.vscode/extensions/ms-python.python-2021.5.842923320/pythonFiles/lib/python/debugpy/launcher 42805 -- /home/david/Desktop/optimizacion_final/pruebas_algoritmos.py 
+
+96 es el makespan total
+la mejor secuencia es
+[1, 3, 2, 5, 6, 7, 0, 4]
+the elapsed time:29.36895179748535
+
+96 es el makespan total
+la mejor secuencia es
+[2, 5, 6, 7, 4, 1, 3, 0]
+the elapsed time:28.82959794998169
+
+96 es el makespan total
+la mejor secuencia es
+[1, 5, 7, 2, 0, 3, 6, 4]
+the elapsed time:29.616244077682495
+
+96 es el makespan total
+la mejor secuencia es
+[5, 1, 2, 7, 4, 6, 3, 0]
+the elapsed time:29.958271026611328
+
+96 es el makespan total
+la mejor secuencia es
+[1, 5, 7, 3, 2, 4, 6, 0]
+the elapsed time:30.107852458953857
+Showing particles...
+
+pbest: [2, 5, 7, 1, 6, 4, 0, 3] |       cost pbest: 96  |       current solution: [2, 5, 7, 1, 6, 4, 0, 3]      |       cost current solution: 96
+pbest: [2, 5, 7, 6, 1, 4, 3, 0] |       cost pbest: 96  |       current solution: [2, 5, 7, 1, 6, 4, 0, 3]      |       cost current solution: 96
+pbest: [2, 5, 7, 6, 0, 4, 1, 3] |       cost pbest: 96  |       current solution: [2, 5, 7, 0, 1, 4, 6, 3]      |       cost current solution: 96
+pbest: [2, 5, 7, 6, 0, 4, 1, 3] |       cost pbest: 96  |       current solution: [2, 5, 7, 0, 6, 4, 1, 3]      |       cost current solution: 96
+pbest: [5, 1, 4, 7, 2, 0, 3, 6] |       cost pbest: 96  |       current solution: [3, 5, 4, 2, 6, 1, 0, 7]      |       cost current solution: 107
+pbest: [2, 5, 7, 1, 3, 4, 0, 6] |       cost pbest: 96  |       current solution: [2, 5, 7, 1, 3, 4, 0, 6]      |       cost current solution: 96
+pbest: [1, 5, 7, 2, 3, 4, 6, 0] |       cost pbest: 96  |       current solution: [1, 5, 7, 2, 6, 4, 3, 0]      |       cost current solution: 96
+pbest: [2, 5, 7, 1, 6, 4, 0, 3] |       cost pbest: 96  |       current solution: [2, 5, 7, 1, 6, 4, 0, 3]      |       cost current solution: 96
+pbest: [5, 1, 7, 6, 4, 2, 0, 3] |       cost pbest: 96  |       current solution: [4, 6, 7, 2, 5, 1, 0, 3]      |       cost current solution: 106
+pbest: [2, 5, 7, 6, 1, 0, 3, 4] |       cost pbest: 96  |       current solution: [2, 5, 7, 6, 1, 3, 4, 0]      |       cost current solution: 96
+
+gbest: [2, 5, 7, 1, 6, 4, 0, 3] | cost: 96
+
+the elapsed time:76.52304029464722
+Showing particles...
+
+pbest: [5, 2, 0, 1, 7, 4, 6, 3] |       cost pbest: 96  |       current solution: [5, 2, 0, 1, 7, 4, 6, 3]      |       cost current solution: 96
+pbest: [5, 2, 0, 1, 7, 4, 6, 3] |       cost pbest: 96  |       current solution: [5, 2, 0, 1, 7, 4, 6, 3]      |       cost current solution: 96
+pbest: [5, 2, 0, 6, 7, 1, 4, 3] |       cost pbest: 96  |       current solution: [5, 2, 0, 6, 7, 4, 1, 3]      |       cost current solution: 96
+pbest: [1, 2, 0, 5, 7, 6, 4, 3] |       cost pbest: 96  |       current solution: [1, 2, 0, 5, 7, 4, 6, 3]      |       cost current solution: 96
+pbest: [5, 2, 7, 1, 3, 4, 0, 6] |       cost pbest: 96  |       current solution: [5, 2, 3, 1, 7, 4, 6, 0]      |       cost current solution: 97
+pbest: [1, 2, 0, 5, 7, 4, 6, 3] |       cost pbest: 96  |       current solution: [1, 2, 0, 5, 7, 4, 6, 3]      |       cost current solution: 96
+pbest: [5, 2, 4, 0, 1, 7, 6, 3] |       cost pbest: 96  |       current solution: [5, 2, 1, 0, 7, 4, 6, 3]      |       cost current solution: 96
+pbest: [5, 2, 0, 1, 7, 4, 6, 3] |       cost pbest: 96  |       current solution: [5, 2, 0, 1, 7, 4, 6, 3]      |       cost current solution: 96
+pbest: [5, 2, 0, 1, 7, 6, 4, 3] |       cost pbest: 96  |       current solution: [5, 2, 0, 1, 7, 4, 6, 3]      |       cost current solution: 96
+pbest: [5, 2, 1, 0, 7, 4, 6, 3] |       cost pbest: 96  |       current solution: [5, 2, 1, 0, 7, 4, 6, 3]      |       cost current solution: 96
+
+gbest: [5, 2, 0, 1, 7, 4, 6, 3] | cost: 96
+
+the elapsed time:77.16715168952942
+Showing particles...
+
+pbest: [2, 1, 5, 3, 7, 6, 0, 4] |       cost pbest: 96  |       current solution: [2, 1, 5, 3, 7, 6, 0, 4]      |       cost current solution: 96
+pbest: [2, 5, 7, 0, 6, 1, 3, 4] |       cost pbest: 96  |       current solution: [2, 7, 6, 0, 5, 1, 3, 4]      |       cost current solution: 106
+pbest: [5, 2, 6, 7, 1, 0, 4, 3] |       cost pbest: 96  |       current solution: [0, 2, 4, 6, 5, 1, 7, 3]      |       cost current solution: 117
+pbest: [2, 5, 7, 0, 6, 1, 3, 4] |       cost pbest: 96  |       current solution: [2, 7, 1, 3, 6, 5, 0, 4]      |       cost current solution: 106
+pbest: [5, 2, 4, 7, 1, 6, 3, 0] |       cost pbest: 96  |       current solution: [2, 7, 4, 3, 5, 6, 1, 0]      |       cost current solution: 107
+pbest: [2, 5, 7, 0, 6, 4, 1, 3] |       cost pbest: 96  |       current solution: [2, 7, 4, 0, 5, 1, 6, 3]      |       cost current solution: 106
+pbest: [2, 1, 5, 7, 6, 0, 3, 4] |       cost pbest: 96  |       current solution: [2, 1, 5, 7, 3, 0, 6, 4]      |       cost current solution: 96
+pbest: [5, 2, 7, 6, 1, 0, 4, 3] |       cost pbest: 96  |       current solution: [2, 5, 1, 6, 7, 4, 3, 0]      |       cost current solution: 96
+pbest: [2, 5, 7, 0, 6, 1, 3, 4] |       cost pbest: 96  |       current solution: [2, 7, 1, 3, 6, 5, 0, 4]      |       cost current solution: 106
+pbest: [2, 5, 7, 4, 1, 6, 3, 0] |       cost pbest: 96  |       current solution: [2, 5, 1, 4, 7, 6, 0, 3]      |       cost current solution: 96
+
+gbest: [2, 1, 5, 3, 7, 6, 0, 4] | cost: 96
+
+the elapsed time:77.6727077960968
+Showing particles...
+
+pbest: [1, 5, 3, 7, 4, 2, 6, 0] |       cost pbest: 96  |       current solution: [1, 5, 3, 7, 4, 2, 6, 0]      |       cost current solution: 96
+pbest: [1, 5, 3, 7, 4, 2, 6, 0] |       cost pbest: 96  |       current solution: [1, 5, 3, 7, 4, 2, 6, 0]      |       cost current solution: 96
+pbest: [2, 5, 4, 7, 0, 1, 6, 3] |       cost pbest: 96  |       current solution: [2, 5, 3, 7, 0, 1, 6, 4]      |       cost current solution: 97
+pbest: [1, 5, 3, 7, 4, 2, 6, 0] |       cost pbest: 96  |       current solution: [1, 5, 3, 7, 4, 2, 6, 0]      |       cost current solution: 96
+pbest: [1, 5, 3, 6, 7, 4, 2, 0] |       cost pbest: 96  |       current solution: [1, 5, 3, 2, 4, 7, 6, 0]      |       cost current solution: 96
+pbest: [5, 1, 3, 2, 4, 7, 6, 0] |       cost pbest: 96  |       current solution: [1, 5, 3, 7, 4, 2, 6, 0]      |       cost current solution: 96
+pbest: [2, 5, 7, 6, 1, 4, 3, 0] |       cost pbest: 96  |       current solution: [1, 5, 6, 3, 2, 4, 7, 0]      |       cost current solution: 106
+pbest: [1, 5, 2, 7, 4, 3, 6, 0] |       cost pbest: 96  |       current solution: [1, 5, 2, 7, 4, 3, 6, 0]      |       cost current solution: 96
+pbest: [1, 5, 3, 7, 4, 2, 6, 0] |       cost pbest: 96  |       current solution: [1, 5, 3, 7, 4, 2, 6, 0]      |       cost current solution: 96
+pbest: [1, 5, 3, 7, 4, 2, 6, 0] |       cost pbest: 96  |       current solution: [1, 5, 3, 7, 4, 2, 6, 0]      |       cost current solution: 96
+
+gbest: [1, 5, 3, 7, 4, 2, 6, 0] | cost: 96
+
+the elapsed time:77.91928029060364
+Showing particles...
+
+pbest: [5, 6, 7, 2, 0, 4, 1, 3] |       cost pbest: 96  |       current solution: [5, 6, 7, 2, 0, 4, 1, 3]      |       cost current solution: 96
+pbest: [5, 7, 1, 3, 2, 4, 0, 6] |       cost pbest: 96  |       current solution: [5, 1, 7, 6, 3, 4, 2, 0]      |       cost current solution: 96
+pbest: [5, 2, 1, 3, 7, 4, 6, 0] |       cost pbest: 96  |       current solution: [5, 3, 0, 2, 6, 4, 7, 1]      |       cost current solution: 108
+pbest: [5, 7, 6, 1, 2, 4, 0, 3] |       cost pbest: 96  |       current solution: [5, 7, 6, 0, 2, 4, 1, 3]      |       cost current solution: 97
+pbest: [5, 7, 2, 1, 3, 6, 0, 4] |       cost pbest: 96  |       current solution: [5, 2, 1, 7, 6, 4, 3, 0]      |       cost current solution: 96
+pbest: [5, 7, 6, 1, 2, 4, 0, 3] |       cost pbest: 96  |       current solution: [5, 7, 6, 1, 0, 4, 2, 3]      |       cost current solution: 97
+pbest: [5, 7, 6, 1, 2, 4, 0, 3] |       cost pbest: 96  |       current solution: [5, 6, 7, 2, 0, 4, 1, 3]      |       cost current solution: 96
+pbest: [5, 7, 6, 2, 1, 4, 0, 3] |       cost pbest: 96  |       current solution: [5, 7, 6, 2, 1, 4, 0, 3]      |       cost current solution: 96
+pbest: [1, 5, 4, 7, 3, 2, 6, 0] |       cost pbest: 96  |       current solution: [6, 1, 4, 2, 0, 7, 5, 3]      |       cost current solution: 106
+pbest: [5, 7, 4, 1, 6, 2, 0, 3] |       cost pbest: 96  |       current solution: [5, 4, 7, 6, 1, 0, 2, 3]      |       cost current solution: 97
+
+gbest: [5, 6, 7, 2, 0, 4, 1, 3] | cost: 96
+
+the elapsed time:80.5431878566742
+optimal sequence [5, 2, 0, 7, 6, 4, 1, 3]
+optimal value:96.000000
+the elapsed time:313.8088891506195
+optimal sequence [2, 5, 6, 7, 1, 4, 0, 3]
+optimal value:96.000000
+the elapsed time:319.8432672023773
+optimal sequence [1, 3, 2, 5, 7, 4, 6, 0]
+optimal value:96.000000
+the elapsed time:312.62343740463257
+optimal sequence [5, 1, 2, 4, 0, 7, 3, 6]
+optimal value:96.000000
+the elapsed time:322.40539264678955
+optimal sequence [1, 2, 0, 5, 4, 7, 6, 3]
+optimal value:96.000000
+the elapsed time:315.9987299442291
+el algoritmo ACS     :96 con tiempo de:1961.2424335479736 tour de: [5, 4, 7, 6, 2, 0, 1, 3]
+(base) david@david-Nitro-AN515-52:~/Desktop/optimizacion_final$  cd /home/david/Desktop/optimizacion_final ; /usr/bin/env /home/david/anaconda3/bin/python /home/david/.vscode/extensions/ms-python.python-2021.5.842923320/pythonFiles/lib/python/debugpy/launcher 35535 -- /home/david/Desktop/optimizacion_final/pruebas_algoritmos.py 
+el algoritmo ACS     :96 con tiempo de:631.9009895324707 tour de: [5, 4, 7, 6, 2, 1, 0, 3]
+el algoritmo ACS     :96 con tiempo de:630.3240215778351 tour de: [5, 6, 7, 4, 2, 0, 1, 3]
+el algoritmo ACS     :96 con tiempo de:652.0471107959747 tour de: [5, 6, 7, 4, 2, 0, 1, 3]
+el algoritmo ACS     :96 con tiempo de:714.305258512497 tour de: [5, 7, 6, 2, 4, 0, 1, 3]
+el algoritmo ACS     :96 con tiempo de:745.6223092079163 tour de: [5, 6, 7, 4, 2, 0, 1, 3]
+(base) david@david-Nitro-AN515-52:~/Desktop/optimizacion_final$ 

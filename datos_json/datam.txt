@@ -1,1 +1,0 @@
-{"preventivo": [{"id": 0, "tipo": "trabajos adicionales", "objeto": "banda transportadora", "encargado": "Michael Brown", "descripcion": "informacion a agregar", "actividades": "actividades", "fecha planificada": "02 15 2021", "fuente de costos": "costos proyecto Kenneth Jensen", "empresa_responsable": "punta delicia"}]}

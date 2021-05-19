@@ -11,6 +11,7 @@ import copy
 import booking as book
 import matplotlib
 import matplotlib.pyplot as plt
+
 funcion=book.planificador()
 
 def terminado_algoritmo(res,tiempo,valor):
@@ -34,24 +35,26 @@ def terminado_algoritmo(res,tiempo,valor):
     with open(completeName,'w') as outfile:
         json.dump(data,outfile)
 
-def charts(x,y):
+def charts(x,y,t,d):
         
     save_path = '/home/david/Desktop/optimizacion_final/datos_json'
 
-    name_of_file = 'charts'
+    name_of_file = 'charts'+repr(d)
 
-    completeName = os.path.join(save_path, name_of_file+".txt") 
-
+    completeName = os.path.join(save_path, name_of_file+".json") 
+    data={}
     with open(completeName) as json_file:
         data = json.load(json_file)
-
+    #data={'SA':{'x':[],'y':[],'t':[]}}
     data['ACO']['y']=y
     data['ACO']['x']=x
+    data['ACO']['t']=t
 
     #se ejecuta el algoritmo en cuestion
 
     with open(completeName,'w') as outfile:
         json.dump(data,outfile)
+
 
 def graficas_png(d,n,x,y):
     fig, ax = plt.subplots()
@@ -67,7 +70,7 @@ def graficas_png(d,n,x,y):
 
 class ACO:
 
-    def __init__(self, mode='ACS', colony_size=10, elitist_weight=1.0, min_scaling_factor=0.001, alpha=1.0, beta=3.0,
+    def __init__(self, mode='ACS', colony_size=10, elitist_weight=1.0, min_scaling_factor=0.001, alpha=1.0, beta=3,
                  rho=0.1, pheromone_deposit_weight=1.0, initial_pheromone=1.0, steps=100, nodes=None, labels=None,tareas=None):
 
         self.tareas=tareas
@@ -258,6 +261,8 @@ class ACO:
     def _acs(self):
         self.makespan_record=[]
         self.index_record=[]
+        self.tiempog=[]
+        self.t0=tm.time()
         for step in range(self.steps):
             for ant in self.ants:
                 # calcula un tour para esa hormiga
@@ -274,6 +279,7 @@ class ACO:
             
             self.makespan_record.append(self.global_best_distance)
             self.index_record.append(step)
+            self.tiempog.append(tm.time()-self.t0)
 
     def run(self):
         start = tm.time()
@@ -310,7 +316,7 @@ def cargar_tareas():
 def ejecutarACO(d,n,k):
 
     #start_time = tm.time()
-    _colony_size = 5
+    _colony_size = 10
     _steps = k
     x=cargar_tareas()
 
@@ -324,8 +330,8 @@ def ejecutarACO(d,n,k):
     print(s)
     #print('the elapsed time:%s'% (tm.time() - start_time))
     terminado_algoritmo(tour,time,dist)
-    #charts(acs.index_record,acs.makespan_record)
+    charts(acs.index_record,acs.makespan_record,acs.tiempog,n)
     graficas_png(d,n,acs.index_record,acs.makespan_record)
     #print(_nodes)
 
-#ejecutarACO(1,1,1)
+#ejecutarACO(1,1,15)

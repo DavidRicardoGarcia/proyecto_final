@@ -14,6 +14,7 @@ import booking as book
 import matplotlib
 import matplotlib.pyplot as plt
 
+
 funcion=book.planificador()
 
 def terminado_algoritmo(res,tiempo,valor):
@@ -34,19 +35,20 @@ def terminado_algoritmo(res,tiempo,valor):
     with open(completeName,'w') as outfile:
         json.dump(data,outfile)
 
-def charts(x,y):
+def charts(x,y,t,d):
         
     save_path = '/home/david/Desktop/optimizacion_final/datos_json'
 
-    name_of_file = 'charts'
+    name_of_file = 'charts'+repr(d)
 
-    completeName = os.path.join(save_path, name_of_file+".txt") 
-
+    completeName = os.path.join(save_path, name_of_file+".json") 
+    data={}
     with open(completeName) as json_file:
         data = json.load(json_file)
-
+    #data={'SA':{'x':[],'y':[],'t':[]}}
     data['SA']['y']=y
     data['SA']['x']=x
+    data['SA']['t']=t
 
     #se ejecuta el algoritmo en cuestion
 
@@ -61,7 +63,6 @@ def graficas_png(d,n,x,y):
     ax.set(xlabel='gen (k)', ylabel='f (d)',
         title='cost function')
     ax.grid()
-
     s="SAtest" +repr(d)+"-"+repr(n) + ".png"
 
     fig.savefig(s)
@@ -84,6 +85,7 @@ class SA():
         self.best_state = state
         self.best_energy = self.calcular()
         self.start = None
+        self.t0=time.time()
 
     def move(self):
         """Swaps two cities in the route."""
@@ -125,6 +127,7 @@ class SA():
         
         self.makespan_record=[]
         self.index_record=[]
+        self.tiempo=[]
 
         Tfactor = -math.log(self.Tmax / self.Tmin)
 
@@ -170,6 +173,7 @@ class SA():
                     trials, accepts, improves = 0, 0, 0
             self.makespan_record.append(self.best_energy)
             self.index_record.append(step)
+            self.tiempo.append(time.time()-self.t0)
 
         self.state = self.copy_state(self.best_state)
 
@@ -233,9 +237,9 @@ def ejecutarSA(d,n,k):
     print(state)
     print('the elapsed time:%s'% (time.time() - start_time))
     terminado_algoritmo(state,tiempo,e)
-    #charts(tsp.index_record,tsp.makespan_record)
+    charts(tsp.index_record,tsp.makespan_record,tsp.tiempo,n)
     graficas_png(d,n,tsp.index_record,tsp.makespan_record)
-#ejecutarSA(1,1,1)
+#ejecutarSA(1,1,100)
 
 # '''--------plot gantt chart-------'''
 # import pandas as pd

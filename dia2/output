@@ -1,0 +1,274 @@
+(base) david@david-Nitro-AN515-52:~/Desktop/optimizacion_final$  cd /home/david/Desktop/optimizacion_final ; /usr/bin/env /home/david/anaconda3/bin/python /home/david/.vscode/extensions/ms-python.python-2021.5.842923320/pythonFiles/lib/python/debugpy/launcher 34225 -- /home/david/Desktop/optimizacion_final/pruebas_algoritmos.py 
+
+142 es el makespan total
+la mejor secuencia es
+[4, 2, 1, 3, 5, 0]
+the elapsed time:26.97503113746643
+
+142 es el makespan total
+la mejor secuencia es
+[1, 3, 2, 0, 4, 5]
+the elapsed time:29.17204451560974
+
+142 es el makespan total
+la mejor secuencia es
+[4, 1, 2, 3, 0, 5]
+the elapsed time:27.82707142829895
+
+142 es el makespan total
+la mejor secuencia es
+[1, 2, 4, 5, 3, 0]
+the elapsed time:28.117335081100464
+
+142 es el makespan total
+la mejor secuencia es
+[4, 5, 2, 1, 0, 3]
+the elapsed time:29.79439926147461
+Showing particles...
+
+pbest: [4, 5, 2, 0, 1, 3]       |       cost pbest: 142 |       current solution: [4, 5, 2, 0, 1, 3]    |       cost current solution: 142
+pbest: [2, 4, 1, 0, 5, 3]       |       cost pbest: 142 |       current solution: [1, 4, 5, 0, 2, 3]    |       cost current solution: 143
+pbest: [1, 4, 2, 0, 3, 5]       |       cost pbest: 142 |       current solution: [5, 4, 2, 0, 3, 1]    |       cost current solution: 144
+pbest: [2, 4, 0, 1, 3, 5]       |       cost pbest: 142 |       current solution: [1, 0, 3, 2, 4, 5]    |       cost current solution: 143
+pbest: [1, 3, 4, 2, 5, 0]       |       cost pbest: 142 |       current solution: [3, 5, 0, 2, 4, 1]    |       cost current solution: 145
+pbest: [2, 0, 1, 4, 3, 5]       |       cost pbest: 142 |       current solution: [2, 4, 1, 3, 0, 5]    |       cost current solution: 142
+pbest: [4, 1, 2, 5, 3, 0]       |       cost pbest: 142 |       current solution: [4, 0, 2, 5, 3, 1]    |       cost current solution: 144
+pbest: [1, 4, 2, 0, 3, 5]       |       cost pbest: 142 |       current solution: [5, 1, 2, 0, 3, 4]    |       cost current solution: 143
+pbest: [4, 1, 2, 0, 3, 5]       |       cost pbest: 142 |       current solution: [4, 1, 2, 0, 5, 3]    |       cost current solution: 142
+pbest: [1, 4, 2, 0, 3, 5]       |       cost pbest: 142 |       current solution: [3, 5, 2, 0, 1, 4]    |       cost current solution: 144
+
+gbest: [4, 5, 2, 0, 1, 3] | cost: 142
+
+the elapsed time:23.124900102615356
+Showing particles...
+
+pbest: [2, 1, 0, 3, 4, 5]       |       cost pbest: 142 |       current solution: [2, 1, 0, 3, 4, 5]    |       cost current solution: 142
+pbest: [2, 1, 3, 4, 0, 5]       |       cost pbest: 142 |       current solution: [2, 1, 0, 3, 4, 5]    |       cost current solution: 142
+pbest: [4, 1, 3, 2, 5, 0]       |       cost pbest: 142 |       current solution: [2, 1, 5, 4, 3, 0]    |       cost current solution: 143
+pbest: [4, 5, 1, 2, 3, 0]       |       cost pbest: 142 |       current solution: [3, 5, 0, 2, 4, 1]    |       cost current solution: 145
+pbest: [2, 4, 0, 1, 3, 5]       |       cost pbest: 142 |       current solution: [2, 3, 0, 4, 1, 5]    |       cost current solution: 143
+pbest: [2, 1, 3, 4, 0, 5]       |       cost pbest: 142 |       current solution: [2, 1, 3, 0, 4, 5]    |       cost current solution: 142
+pbest: [1, 2, 3, 4, 0, 5]       |       cost pbest: 142 |       current solution: [1, 2, 4, 3, 0, 5]    |       cost current solution: 142
+pbest: [2, 1, 0, 3, 4, 5]       |       cost pbest: 142 |       current solution: [2, 1, 0, 3, 4, 5]    |       cost current solution: 142
+pbest: [2, 1, 3, 4, 0, 5]       |       cost pbest: 142 |       current solution: [2, 1, 0, 4, 3, 5]    |       cost current solution: 142
+pbest: [4, 2, 5, 1, 3, 0]       |       cost pbest: 142 |       current solution: [3, 4, 0, 2, 5, 1]    |       cost current solution: 144
+
+gbest: [2, 1, 0, 3, 4, 5] | cost: 142
+
+the elapsed time:23.684046983718872
+Showing particles...
+
+pbest: [4, 1, 2, 5, 0, 3]       |       cost pbest: 142 |       current solution: [4, 1, 2, 5, 0, 3]    |       cost current solution: 142
+pbest: [1, 4, 2, 5, 0, 3]       |       cost pbest: 142 |       current solution: [1, 4, 2, 5, 0, 3]    |       cost current solution: 142
+pbest: [4, 1, 2, 5, 0, 3]       |       cost pbest: 142 |       current solution: [4, 1, 2, 5, 0, 3]    |       cost current solution: 142
+pbest: [4, 1, 2, 5, 0, 3]       |       cost pbest: 142 |       current solution: [4, 1, 2, 5, 0, 3]    |       cost current solution: 142
+pbest: [4, 1, 5, 2, 3, 0]       |       cost pbest: 142 |       current solution: [4, 1, 5, 2, 0, 3]    |       cost current solution: 142
+pbest: [4, 1, 2, 5, 0, 3]       |       cost pbest: 142 |       current solution: [4, 1, 2, 5, 0, 3]    |       cost current solution: 142
+pbest: [2, 1, 4, 5, 3, 0]       |       cost pbest: 142 |       current solution: [4, 1, 2, 5, 0, 3]    |       cost current solution: 142
+pbest: [2, 1, 0, 4, 3, 5]       |       cost pbest: 142 |       current solution: [0, 1, 4, 5, 3, 2]    |       cost current solution: 143
+pbest: [4, 1, 2, 5, 0, 3]       |       cost pbest: 142 |       current solution: [4, 1, 2, 5, 0, 3]    |       cost current solution: 142
+pbest: [4, 1, 5, 2, 0, 3]       |       cost pbest: 142 |       current solution: [4, 1, 5, 2, 0, 3]    |       cost current solution: 142
+
+gbest: [4, 1, 2, 5, 0, 3] | cost: 142
+
+the elapsed time:23.383562564849854
+Showing particles...
+
+pbest: [1, 3, 2, 0, 4, 5]       |       cost pbest: 142 |       current solution: [1, 3, 2, 0, 4, 5]    |       cost current solution: 142
+pbest: [1, 2, 4, 5, 0, 3]       |       cost pbest: 142 |       current solution: [1, 4, 5, 3, 2, 0]    |       cost current solution: 142
+pbest: [1, 3, 2, 0, 4, 5]       |       cost pbest: 142 |       current solution: [1, 3, 2, 0, 4, 5]    |       cost current solution: 142
+pbest: [1, 4, 2, 0, 3, 5]       |       cost pbest: 142 |       current solution: [1, 4, 2, 0, 3, 5]    |       cost current solution: 142
+pbest: [1, 3, 2, 0, 4, 5]       |       cost pbest: 142 |       current solution: [1, 3, 2, 0, 4, 5]    |       cost current solution: 142
+pbest: [1, 3, 2, 0, 4, 5]       |       cost pbest: 142 |       current solution: [1, 3, 2, 0, 4, 5]    |       cost current solution: 142
+pbest: [1, 3, 2, 0, 4, 5]       |       cost pbest: 142 |       current solution: [1, 3, 2, 0, 4, 5]    |       cost current solution: 142
+pbest: [1, 2, 0, 3, 4, 5]       |       cost pbest: 142 |       current solution: [1, 0, 3, 2, 4, 5]    |       cost current solution: 143
+pbest: [2, 4, 1, 5, 0, 3]       |       cost pbest: 142 |       current solution: [1, 0, 2, 4, 3, 5]    |       cost current solution: 143
+pbest: [1, 3, 2, 0, 4, 5]       |       cost pbest: 142 |       current solution: [1, 3, 2, 0, 4, 5]    |       cost current solution: 142
+
+gbest: [1, 3, 2, 0, 4, 5] | cost: 142
+
+the elapsed time:23.409269332885742
+Showing particles...
+
+pbest: [1, 2, 3, 0, 4, 5]       |       cost pbest: 142 |       current solution: [1, 2, 3, 0, 4, 5]    |       cost current solution: 142
+pbest: [1, 4, 2, 0, 3, 5]       |       cost pbest: 142 |       current solution: [1, 2, 3, 0, 4, 5]    |       cost current solution: 142
+pbest: [1, 2, 3, 0, 4, 5]       |       cost pbest: 142 |       current solution: [1, 2, 3, 0, 4, 5]    |       cost current solution: 142
+pbest: [1, 4, 3, 5, 2, 0]       |       cost pbest: 142 |       current solution: [1, 4, 3, 0, 2, 5]    |       cost current solution: 143
+pbest: [1, 2, 3, 0, 4, 5]       |       cost pbest: 142 |       current solution: [1, 2, 3, 0, 4, 5]    |       cost current solution: 142
+pbest: [1, 2, 4, 0, 3, 5]       |       cost pbest: 142 |       current solution: [1, 2, 3, 0, 4, 5]    |       cost current solution: 142
+pbest: [2, 4, 1, 5, 3, 0]       |       cost pbest: 142 |       current solution: [3, 1, 2, 5, 4, 0]    |       cost current solution: 144
+pbest: [2, 0, 4, 1, 3, 5]       |       cost pbest: 142 |       current solution: [0, 1, 4, 2, 3, 5]    |       cost current solution: 143
+pbest: [1, 2, 3, 0, 4, 5]       |       cost pbest: 142 |       current solution: [1, 2, 3, 0, 4, 5]    |       cost current solution: 142
+pbest: [2, 1, 4, 0, 3, 5]       |       cost pbest: 142 |       current solution: [2, 1, 3, 0, 4, 5]    |       cost current solution: 142
+
+gbest: [1, 2, 3, 0, 4, 5] | cost: 142
+
+the elapsed time:22.362215280532837
+optimal sequence [4, 2, 5, 1, 3, 0]
+optimal value:142.000000
+the elapsed time:154.1302785873413
+optimal sequence [4, 2, 1, 5, 3, 0]
+optimal value:142.000000
+the elapsed time:158.21296525001526
+optimal sequence [1, 2, 0, 4, 5, 3]
+optimal value:142.000000
+the elapsed time:153.64093041419983
+optimal sequence [4, 5, 2, 1, 0, 3]
+optimal value:142.000000
+the elapsed time:155.84797835350037
+optimal sequence [2, 4, 0, 5, 1, 3]
+optimal value:142.000000
+the elapsed time:161.63146805763245
+el algoritmo ACS     :142 con tiempo de:339.8342502117157 tour de: [2, 4, 0, 1, 3, 5]
+el algoritmo ACS     :142 con tiempo de:343.00007343292236 tour de: [1, 4, 2, 0, 3, 5]
+el algoritmo ACS     :142 con tiempo de:332.6335723400116 tour de: [2, 4, 0, 1, 3, 5]
+el algoritmo ACS     :142 con tiempo de:344.76080107688904 tour de: [2, 4, 0, 1, 5, 3]
+el algoritmo ACS     :142 con tiempo de:330.39227533340454 tour de: [4, 2, 0, 5, 1, 3]
+(base) david@david-Nitro-AN515-52:~/Desktop/optimizacion_final$  cd /home/david/Desktop/optimizacion_final ; /usr/bin/env /home/david/anaconda3/bin/python /home/david/.vscode/extensions/ms-python.python-2021.5.842923320/pythonFiles/lib/python/debugpy/launcher 38861 -- /home/david/Desktop/optimizacion_final/booking.py 
+143
+(base) david@david-Nitro-AN515-52:~/Desktop/optimizacion_final$  cd /home/david/Desktop/optimizacion_final ; /usr/bin/env /home/david/anaconda3/bin/python /home/david/.vscode/extensions/ms-python.python-2021.5.842923320/pythonFiles/lib/python/debugpy/launcher 44135 -- /home/david/Desktop/optimizacion_final/booking.py 
+[(4, datetime.datetime(2021, 5, 12, 0, 0), 'agua 12-st sin-gas'), (2, datetime.datetime(2021, 5, 20, 0, 0), 'guanabana 8-sl con-gas'), (0, datetime.datetime(2021, 5, 21, 0, 0), 'guanabana 8-st con-gas'), (0, datetime.datetime(2021, 5, 22, 0, 0), 'guanabana 8-st con-gas'), (5, datetime.datetime(2021, 5, 13, 0, 0), 'agua 16-st sin-gas'), (5, datetime.datetime(2021, 5, 14, 0, 0), 'agua 16-st sin-gas'), (1, datetime.datetime(2021, 6, 11, 0, 0), 'vino 16-st sin-gas'), (3, datetime.datetime(2021, 6, 12, 0, 0), 'vino 8-st sin-gas'), (3, datetime.datetime(2021, 6, 14, 0, 0), 'vino 8-st sin-gas')]
+[(4, datetime.timedelta(days=1), '05 16 2021', '05 11 2021'), (2, datetime.timedelta(days=10), '05 22 2021', '05 10 2021'), (0, datetime.timedelta(days=12), '05 25 2021', '05 10 2021'), (5, datetime.timedelta(days=3), '05 12 2021', '05 11 2021'), (1, datetime.timedelta(days=32), '06 15 2021', '05 10 2021'), (3, datetime.timedelta(days=34), '06 16 2021', '05 11 2021')]
+142
+(base) david@david-Nitro-AN515-52:~/Desktop/optimizacion_final$  cd /home/david/Desktop/optimizacion_final ; /usr/bin/env /home/david/anaconda3/bin/python /home/david/.vscode/extensions/ms-python.python-2021.5.842923320/pythonFiles/lib/python/debugpy/launcher 41405 -- /home/david/Desktop/optimizacion_final/booking.py 
+[(4, datetime.datetime(2021, 5, 12, 0, 0), 'agua 12-st sin-gas'), (2, datetime.datetime(2021, 5, 20, 0, 0), 'guanabana 8-sl con-gas'), (0, datetime.datetime(2021, 5, 21, 0, 0), 'guanabana 8-st con-gas'), (0, datetime.datetime(2021, 5, 22, 0, 0), 'guanabana 8-st con-gas'), (5, datetime.datetime(2021, 5, 13, 0, 0), 'agua 16-st sin-gas'), (1, datetime.datetime(2021, 6, 11, 0, 0), 'vino 16-st sin-gas'), (3, datetime.datetime(2021, 6, 12, 0, 0), 'vino 8-st sin-gas'), (3, datetime.datetime(2021, 6, 14, 0, 0), 'vino 8-st sin-gas')]
+[(4, datetime.timedelta(days=1), '05 16 2021', '05 11 2021'), (2, datetime.timedelta(days=10), '05 22 2021', '05 10 2021'), (0, datetime.timedelta(days=12), '05 25 2021', '05 10 2021'), (5, datetime.timedelta(days=2), '05 12 2021', '05 11 2021'), (1, datetime.timedelta(days=32), '06 15 2021', '05 10 2021'), (3, datetime.timedelta(days=34), '06 16 2021', '05 11 2021')]
+141
+(base) david@david-Nitro-AN515-52:~/Desktop/optimizacion_final$  cd /home/david/Desktop/optimizacion_final ; /usr/bin/env /home/david/anaconda3/bin/python /home/david/.vscode/extensions/ms-python.python-2021.5.842923320/pythonFiles/lib/python/debugpy/launcher 34339 -- /home/david/Desktop/optimizacion_final/booking.py 
+[(4, datetime.datetime(2021, 5, 12, 0, 0), 'agua 12-st sin-gas'), (2, datetime.datetime(2021, 5, 20, 0, 0), 'guanabana 8-sl con-gas'), (0, datetime.datetime(2021, 5, 21, 0, 0), 'guanabana 8-st con-gas'), (0, datetime.datetime(2021, 5, 22, 0, 0), 'guanabana 8-st con-gas'), (5, datetime.datetime(2021, 5, 13, 0, 0), 'agua 16-st sin-gas'), (1, datetime.datetime(2021, 6, 11, 0, 0), 'vino 16-st sin-gas'), (3, datetime.datetime(2021, 6, 12, 0, 0), 'vino 8-st sin-gas'), (3, datetime.datetime(2021, 6, 14, 0, 0), 'vino 8-st sin-gas')]
+se paso
+5
+[(4, datetime.timedelta(days=1), '05 16 2021', '05 11 2021'), (2, datetime.timedelta(days=10), '05 22 2021', '05 10 2021'), (0, datetime.timedelta(days=12), '05 25 2021', '05 10 2021'), (5, datetime.timedelta(days=2), '05 12 2021', '05 11 2021'), (1, datetime.timedelta(days=32), '06 15 2021', '05 10 2021'), (3, datetime.timedelta(days=34), '06 16 2021', '05 11 2021')]
+141
+(base) david@david-Nitro-AN515-52:~/Desktop/optimizacion_final$  cd /home/david/Desktop/optimizacion_final ; /usr/bin/env /home/david/anaconda3/bin/python /home/david/.vscode/extensions/ms-python.python-2021.5.842923320/pythonFiles/lib/python/debugpy/launcher 32813 -- /home/david/Desktop/optimizacion_final/booking.py 
+(base) david@david-Nitro-AN515-52:~/Desktop/optimizacion_final$  cd /home/david/Desktop/optimizacion_final ; /usr/bin/env /home/david/anaconda3/bin/python /home/david/.vscode/extensions/ms-python.python-2021.5.842923320/pythonFiles/lib/python/debugpy/launcher 37349 -- /home/david/Desktop/optimizacion_final/booking.py 
+((1, 2, 0, 3, 5, 4), 91)
+(base) david@david-Nitro-AN515-52:~/Desktop/optimizacion_final$  cd /home/david/Desktop/optimizacion_final ; /usr/bin/env /home/david/anaconda3/bin/python /home/david/.vscode/extensions/ms-python.python-2021.5.842923320/pythonFiles/lib/python/debugpy/launcher 43757 -- /home/david/Desktop/optimizacion_final/booking.py 
+91
+(base) david@david-Nitro-AN515-52:~/Desktop/optimizacion_final$  cd /home/david/Desktop/optimizacion_final ; /usr/bin/env /home/david/anaconda3/bin/python /home/david/.vscode/extensions/ms-python.python-2021.5.842923320/pythonFiles/lib/python/debugpy/launcher 42449 -- /home/david/Desktop/optimizacion_final/pruebas_algoritmos.py 
+
+91 es el makespan total
+la mejor secuencia es
+[1, 2, 3, 0, 5, 4]
+the elapsed time:26.513370752334595
+
+91 es el makespan total
+la mejor secuencia es
+[1, 2, 0, 5, 4, 3]
+the elapsed time:27.282291173934937
+
+91 es el makespan total
+la mejor secuencia es
+[5, 1, 4, 2, 0, 3]
+the elapsed time:26.832107067108154
+
+91 es el makespan total
+la mejor secuencia es
+[5, 2, 1, 3, 0, 4]
+the elapsed time:28.881163597106934
+
+91 es el makespan total
+la mejor secuencia es
+[5, 1, 2, 3, 4, 0]
+the elapsed time:29.13961935043335
+Showing particles...
+
+pbest: [1, 2, 3, 5, 4, 0]       |       cost pbest: 91  |       current solution: [1, 2, 3, 5, 4, 0]    |       cost current solution: 91
+pbest: [1, 5, 3, 4, 2, 0]       |       cost pbest: 91  |       current solution: [1, 4, 3, 2, 5, 0]    |       cost current solution: 141
+pbest: [2, 1, 5, 3, 4, 0]       |       cost pbest: 91  |       current solution: [1, 2, 3, 5, 4, 0]    |       cost current solution: 91
+pbest: [1, 2, 3, 5, 4, 0]       |       cost pbest: 91  |       current solution: [1, 2, 3, 5, 4, 0]    |       cost current solution: 91
+pbest: [1, 2, 5, 3, 4, 0]       |       cost pbest: 91  |       current solution: [1, 2, 3, 5, 4, 0]    |       cost current solution: 91
+pbest: [1, 2, 5, 0, 4, 3]       |       cost pbest: 91  |       current solution: [1, 2, 3, 5, 4, 0]    |       cost current solution: 91
+pbest: [1, 3, 2, 5, 0, 4]       |       cost pbest: 91  |       current solution: [1, 3, 2, 5, 4, 0]    |       cost current solution: 91
+pbest: [1, 5, 4, 2, 3, 0]       |       cost pbest: 91  |       current solution: [1, 5, 3, 2, 4, 0]    |       cost current solution: 91
+pbest: [2, 5, 4, 1, 3, 0]       |       cost pbest: 91  |       current solution: [5, 2, 3, 1, 4, 0]    |       cost current solution: 92
+pbest: [5, 4, 0, 2, 1, 3]       |       cost pbest: 92  |       current solution: [5, 4, 0, 2, 1, 3]    |       cost current solution: 92
+
+gbest: [1, 2, 3, 5, 4, 0] | cost: 91
+
+the elapsed time:22.522992849349976
+Showing particles...
+
+pbest: [2, 1, 5, 0, 3, 4]       |       cost pbest: 91  |       current solution: [2, 1, 5, 0, 3, 4]    |       cost current solution: 91
+pbest: [2, 5, 1, 4, 3, 0]       |       cost pbest: 91  |       current solution: [2, 5, 1, 4, 3, 0]    |       cost current solution: 91
+pbest: [2, 1, 5, 0, 3, 4]       |       cost pbest: 91  |       current solution: [2, 1, 5, 0, 3, 4]    |       cost current solution: 91
+pbest: [2, 5, 1, 0, 4, 3]       |       cost pbest: 91  |       current solution: [2, 1, 5, 0, 3, 4]    |       cost current solution: 91
+pbest: [2, 1, 0, 5, 3, 4]       |       cost pbest: 91  |       current solution: [2, 1, 5, 0, 3, 4]    |       cost current solution: 91
+pbest: [2, 1, 3, 0, 5, 4]       |       cost pbest: 91  |       current solution: [2, 1, 3, 0, 5, 4]    |       cost current solution: 91
+pbest: [2, 1, 5, 0, 3, 4]       |       cost pbest: 91  |       current solution: [2, 1, 5, 0, 3, 4]    |       cost current solution: 91
+pbest: [2, 5, 1, 3, 0, 4]       |       cost pbest: 91  |       current solution: [2, 1, 5, 3, 0, 4]    |       cost current solution: 91
+pbest: [2, 1, 5, 0, 3, 4]       |       cost pbest: 91  |       current solution: [2, 1, 5, 0, 3, 4]    |       cost current solution: 91
+pbest: [1, 2, 5, 0, 3, 4]       |       cost pbest: 91  |       current solution: [2, 1, 5, 0, 3, 4]    |       cost current solution: 91
+
+gbest: [2, 1, 5, 0, 3, 4] | cost: 91
+
+the elapsed time:22.78126811981201
+Showing particles...
+
+pbest: [2, 1, 5, 0, 3, 4]       |       cost pbest: 91  |       current solution: [2, 1, 5, 0, 3, 4]    |       cost current solution: 91
+pbest: [5, 1, 2, 0, 4, 3]       |       cost pbest: 91  |       current solution: [2, 1, 5, 0, 3, 4]    |       cost current solution: 91
+pbest: [5, 1, 2, 3, 0, 4]       |       cost pbest: 91  |       current solution: [5, 1, 2, 0, 4, 3]    |       cost current solution: 91
+pbest: [2, 1, 0, 5, 4, 3]       |       cost pbest: 91  |       current solution: [2, 1, 5, 0, 4, 3]    |       cost current solution: 91
+pbest: [5, 1, 2, 3, 4, 0]       |       cost pbest: 91  |       current solution: [5, 1, 2, 4, 0, 3]    |       cost current solution: 91
+pbest: [5, 2, 0, 4, 1, 3]       |       cost pbest: 91  |       current solution: [5, 3, 0, 4, 1, 2]    |       cost current solution: 93
+pbest: [2, 5, 1, 0, 4, 3]       |       cost pbest: 91  |       current solution: [5, 2, 1, 0, 4, 3]    |       cost current solution: 91
+pbest: [5, 1, 2, 3, 0, 4]       |       cost pbest: 91  |       current solution: [5, 1, 2, 4, 3, 0]    |       cost current solution: 91
+pbest: [2, 5, 4, 0, 1, 3]       |       cost pbest: 91  |       current solution: [2, 4, 5, 0, 3, 1]    |       cost current solution: 142
+pbest: [5, 4, 2, 0, 1, 3]       |       cost pbest: 91  |       current solution: [2, 3, 5, 0, 4, 1]    |       cost current solution: 92
+
+gbest: [2, 1, 5, 0, 3, 4] | cost: 91
+
+the elapsed time:21.464284896850586
+Showing particles...
+
+pbest: [1, 2, 3, 5, 0, 4]       |       cost pbest: 91  |       current solution: [1, 2, 3, 5, 0, 4]    |       cost current solution: 91
+pbest: [5, 1, 2, 4, 3, 0]       |       cost pbest: 91  |       current solution: [4, 0, 3, 5, 2, 1]    |       cost current solution: 143
+pbest: [1, 2, 3, 5, 0, 4]       |       cost pbest: 91  |       current solution: [1, 2, 3, 5, 0, 4]    |       cost current solution: 91
+pbest: [2, 1, 3, 5, 0, 4]       |       cost pbest: 91  |       current solution: [2, 1, 3, 5, 0, 4]    |       cost current solution: 91
+pbest: [5, 4, 1, 2, 0, 3]       |       cost pbest: 91  |       current solution: [1, 3, 4, 5, 0, 2]    |       cost current solution: 142
+pbest: [1, 2, 3, 5, 0, 4]       |       cost pbest: 91  |       current solution: [1, 2, 3, 5, 0, 4]    |       cost current solution: 91
+pbest: [1, 2, 3, 5, 0, 4]       |       cost pbest: 91  |       current solution: [1, 2, 3, 5, 0, 4]    |       cost current solution: 91
+pbest: [5, 2, 4, 1, 0, 3]       |       cost pbest: 91  |       current solution: [5, 2, 4, 1, 0, 3]    |       cost current solution: 91
+pbest: [5, 2, 1, 3, 0, 4]       |       cost pbest: 91  |       current solution: [5, 2, 3, 1, 0, 4]    |       cost current solution: 92
+pbest: [5, 2, 1, 4, 0, 3]       |       cost pbest: 91  |       current solution: [5, 2, 4, 3, 0, 1]    |       cost current solution: 92
+
+gbest: [1, 2, 3, 5, 0, 4] | cost: 91
+
+the elapsed time:21.651691198349
+Showing particles...
+
+pbest: [2, 1, 0, 5, 4, 3]       |       cost pbest: 91  |       current solution: [2, 1, 0, 5, 4, 3]    |       cost current solution: 91
+pbest: [2, 5, 0, 4, 1, 3]       |       cost pbest: 91  |       current solution: [2, 5, 0, 1, 4, 3]    |       cost current solution: 91
+pbest: [2, 5, 0, 1, 3, 4]       |       cost pbest: 91  |       current solution: [2, 5, 0, 1, 4, 3]    |       cost current solution: 91
+pbest: [2, 1, 0, 5, 4, 3]       |       cost pbest: 91  |       current solution: [2, 1, 0, 5, 4, 3]    |       cost current solution: 91
+pbest: [1, 2, 5, 0, 4, 3]       |       cost pbest: 91  |       current solution: [2, 1, 0, 5, 4, 3]    |       cost current solution: 91
+pbest: [2, 0, 5, 1, 4, 3]       |       cost pbest: 91  |       current solution: [2, 1, 5, 0, 4, 3]    |       cost current solution: 91
+pbest: [2, 5, 0, 1, 3, 4]       |       cost pbest: 91  |       current solution: [2, 5, 0, 1, 3, 4]    |       cost current solution: 91
+pbest: [2, 5, 0, 1, 3, 4]       |       cost pbest: 91  |       current solution: [2, 1, 0, 5, 4, 3]    |       cost current solution: 91
+pbest: [2, 5, 1, 3, 4, 0]       |       cost pbest: 91  |       current solution: [2, 1, 5, 0, 4, 3]    |       cost current solution: 91
+pbest: [2, 1, 0, 5, 4, 3]       |       cost pbest: 91  |       current solution: [2, 1, 0, 5, 4, 3]    |       cost current solution: 91
+
+gbest: [2, 1, 0, 5, 4, 3] | cost: 91
+
+the elapsed time:21.76533007621765
+optimal sequence [1, 2, 0, 3, 5, 4]
+optimal value:91.000000
+the elapsed time:288.8186995983124
+optimal sequence [5, 1, 3, 2, 0, 4]
+optimal value:91.000000
+the elapsed time:297.00802278518677
+optimal sequence [0, 1, 5, 4, 2, 3]
+optimal value:92.000000
+the elapsed time:290.8597629070282
+optimal sequence [5, 1, 2, 4, 0, 3]
+optimal value:91.000000
+the elapsed time:291.50474524497986
+optimal sequence [5, 1, 4, 3, 2, 0]
+optimal value:91.000000
+the elapsed time:289.3449273109436
+el algoritmo ACS     :91 con tiempo de:342.60814452171326 tour de: [2, 5, 4, 0, 1, 3]
+el algoritmo ACS     :91 con tiempo de:337.9750621318817 tour de: [5, 4, 2, 0, 1, 3]
+el algoritmo ACS     :91 con tiempo de:347.29727029800415 tour de: [1, 5, 4, 2, 0, 3]
+el algoritmo ACS     :91 con tiempo de:346.89468240737915 tour de: [1, 5, 4, 2, 0, 3]
+el algoritmo ACS     :91 con tiempo de:345.32691287994385 tour de: [5, 4, 2, 0, 1, 3]
+(base) david@david-Nitro-AN515-52:~/Desktop/optimizacion_final$ 
