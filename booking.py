@@ -23,7 +23,7 @@ class planificador:
         self.lista_asignar=[]
         self.cargar_datos_iniciales()
         #self.separar_por_cantidad()
-        self.fecha=datetime(2021,5,12)
+        self.fecha=datetime(2021,5,14)
         self.rh=rh.horarios()
         self.tipos_insumos=['8-st','8-sl','12-st','12-sl','16-st','quimico 0','quimico 1','quimico 2','quimico 3','quimico 4']
         self.almacen=alm.almacen()
@@ -986,17 +986,17 @@ def combinaciones(plan,vector,tareas):
     print(min(lista, key=lambda item:item[1]))
 
 
-x=cargar_tareas()
+#x=cargar_tareas()
 #lista_id=get_id_list(x['pedidos'])
 #lista_id=[2,0,1]
 #lista_id=[1, 5, 4, 2, 0, 3]
-
-lista_id=[5, 6, 7, 4, 2, 0, 1, 3]
-a=ordenar_Tareas(lista_id,x['pedidos'])
-prueba=planificador()
+#lista_id=[5, 6, 7, 4, 2, 0, 1, 3]
+#lista_id=[5, 2, 8, 7, 9, 1, 4, 6, 3, 0]
+#a=ordenar_Tareas(lista_id,x['pedidos'])
+#prueba=planificador()
 #prueba.Asignar_insumos_personal(a)
 #combinaciones(prueba,lista_id,x)
-print(prueba.Calcular_Costo(a))
+#print(prueba.Calcular_Costo(a))
 # listamamalona=prueba.listar_todas_las_actividades()
 # fechamax=max(listamamalona, key=lambda item:item[1])
 # actividades_por_equipo=separar_las_actividades(listamamalona,x)

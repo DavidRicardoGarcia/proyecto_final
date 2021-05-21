@@ -1,0 +1,133 @@
+david@david-Nitro-AN515-52:~/Desktop/optimizacion_final$ source /home/david/anaconda3/bin/activate
+(base) david@david-Nitro-AN515-52:~/Desktop/optimizacion_final$ conda activate base
+(base) david@david-Nitro-AN515-52:~/Desktop/optimizacion_final$  /usr/bin/env /home/david/anaconda3/bin/python /home/david/.vscode/extensions/ms-python.python-2021.5.842923320/pythonFiles/lib/python/debugpy/launcher 43355 -- /home/david/Desktop/optimizacion_final/booking.py 
+(base) david@david-Nitro-AN515-52:~/Desktop/optimizacion_final$  cd /home/david/Desktop/optimizacion_final ; /usr/bin/env /home/david/anaconda3/bin/python /home/david/.vscode/extensions/ms-python.python-2021.5.842923320/pythonFiles/lib/python/debugpy/launcher 42763 -- /home/david/Desktop/optimizacion_final/booking.py 
+(base) david@david-Nitro-AN515-52:~/Desktop/optimizacion_final$  cd /home/david/Desktop/optimizacion_final ; /usr/bin/env /home/david/anaconda3/bin/python /home/david/.vscode/extensions/ms-python.python-2021.5.842923320/pythonFiles/lib/python/debugpy/launcher 45011 -- /home/david/Desktop/optimizacion_final/booking.py 
+171
+(base) david@david-Nitro-AN515-52:~/Desktop/optimizacion_final$  cd /home/david/Desktop/optimizacion_final ; /usr/bin/env /home/david/anaconda3/bin/python /home/david/.vscode/extensions/ms-python.python-2021.5.842923320/pythonFiles/lib/python/debugpy/launcher 42865 -- /home/david/Desktop/optimizacion_final/pruebas_algoritmos.py 
+
+137 es el makespan total
+la mejor secuencia es
+[9, 8, 2, 5, 1, 0, 4, 7, 6, 3]
+the elapsed time:43.07087850570679
+
+137 es el makespan total
+la mejor secuencia es
+[9, 5, 6, 2, 8, 0, 1, 3, 7, 4]
+the elapsed time:42.79781746864319
+
+137 es el makespan total
+la mejor secuencia es
+[5, 1, 2, 9, 0, 8, 4, 7, 6, 3]
+the elapsed time:44.753273010253906
+
+137 es el makespan total
+la mejor secuencia es
+[8, 5, 2, 7, 9, 6, 4, 1, 3, 0]
+the elapsed time:44.463587522506714
+
+137 es el makespan total
+la mejor secuencia es
+[8, 5, 1, 4, 2, 9, 7, 0, 6, 3]
+the elapsed time:44.89358973503113
+Showing particles...
+
+pbest: [5, 1, 2, 7, 8, 4, 6, 9, 3, 0]   |       cost pbest: 137 |       current solution: [5, 1, 2, 7, 8, 4, 6, 9, 3, 0]        |       cost current solution: 137
+pbest: [5, 1, 2, 7, 8, 4, 6, 9, 3, 0]   |       cost pbest: 137 |       current solution: [5, 1, 2, 7, 8, 4, 6, 9, 3, 0]        |       cost current solution: 137
+pbest: [8, 1, 2, 3, 9, 5, 0, 6, 7, 4]   |       cost pbest: 137 |       current solution: [9, 1, 2, 7, 0, 6, 8, 4, 3, 5]        |       cost current solution: 147
+pbest: [5, 1, 2, 7, 8, 4, 6, 9, 3, 0]   |       cost pbest: 137 |       current solution: [5, 1, 2, 7, 8, 4, 6, 9, 3, 0]        |       cost current solution: 137
+pbest: [5, 8, 2, 7, 1, 9, 4, 6, 3, 0]   |       cost pbest: 137 |       current solution: [5, 1, 2, 7, 8, 4, 9, 6, 3, 0]        |       cost current solution: 137
+pbest: [1, 5, 2, 8, 9, 7, 4, 3, 0, 6]   |       cost pbest: 137 |       current solution: [1, 5, 2, 4, 6, 7, 0, 8, 3, 9]        |       cost current solution: 148
+pbest: [5, 1, 9, 7, 2, 6, 8, 4, 3, 0]   |       cost pbest: 137 |       current solution: [5, 1, 8, 7, 4, 6, 2, 9, 3, 0]        |       cost current solution: 137
+pbest: [5, 1, 2, 7, 8, 4, 6, 9, 3, 0]   |       cost pbest: 137 |       current solution: [5, 1, 2, 7, 8, 4, 6, 9, 3, 0]        |       cost current solution: 137
+pbest: [5, 9, 2, 7, 6, 1, 4, 8, 0, 3]   |       cost pbest: 137 |       current solution: [5, 6, 2, 7, 8, 4, 9, 1, 0, 3]        |       cost current solution: 137
+pbest: [5, 9, 7, 1, 8, 4, 6, 3, 2, 0]   |       cost pbest: 137 |       current solution: [5, 2, 3, 1, 8, 4, 6, 7, 9, 0]        |       cost current solution: 160
+
+gbest: [5, 1, 2, 7, 8, 4, 6, 9, 3, 0] | cost: 137
+
+the elapsed time:115.97203302383423
+Showing particles...
+
+pbest: [2, 8, 9, 1, 5, 6, 7, 3, 4, 0]   |       cost pbest: 137 |       current solution: [2, 8, 9, 1, 5, 6, 7, 3, 4, 0]        |       cost current solution: 137
+pbest: [5, 8, 9, 1, 7, 2, 6, 3, 4, 0]   |       cost pbest: 137 |       current solution: [6, 8, 9, 1, 7, 2, 5, 3, 4, 0]        |       cost current solution: 147
+pbest: [5, 1, 9, 2, 0, 8, 3, 7, 6, 4]   |       cost pbest: 137 |       current solution: [4, 2, 9, 5, 1, 8, 3, 7, 6, 0]        |       cost current solution: 147
+pbest: [5, 1, 4, 7, 2, 6, 8, 9, 0, 3]   |       cost pbest: 137 |       current solution: [2, 8, 0, 7, 5, 6, 1, 4, 9, 3]        |       cost current solution: 148
+pbest: [5, 8, 9, 1, 7, 6, 2, 3, 4, 0]   |       cost pbest: 137 |       current solution: [2, 8, 9, 1, 5, 6, 7, 3, 4, 0]        |       cost current solution: 137
+pbest: [5, 8, 4, 1, 7, 6, 2, 3, 9, 0]   |       cost pbest: 137 |       current solution: [5, 8, 9, 1, 2, 6, 7, 3, 4, 0]        |       cost current solution: 137
+pbest: [5, 8, 2, 1, 4, 9, 0, 7, 3, 6]   |       cost pbest: 137 |       current solution: [2, 8, 7, 1, 3, 6, 5, 0, 4, 9]        |       cost current solution: 148
+pbest: [5, 8, 1, 9, 2, 3, 7, 6, 4, 0]   |       cost pbest: 137 |       current solution: [5, 8, 1, 9, 2, 6, 7, 3, 4, 0]        |       cost current solution: 137
+pbest: [2, 8, 9, 1, 5, 6, 7, 3, 4, 0]   |       cost pbest: 137 |       current solution: [2, 8, 9, 1, 5, 6, 7, 3, 4, 0]        |       cost current solution: 137
+pbest: [5, 8, 2, 9, 7, 1, 0, 3, 4, 6]   |       cost pbest: 137 |       current solution: [1, 8, 5, 6, 0, 2, 7, 3, 4, 9]        |       cost current solution: 139
+
+gbest: [2, 8, 9, 1, 5, 6, 7, 3, 4, 0] | cost: 137
+
+the elapsed time:115.74171733856201
+Showing particles...
+
+pbest: [5, 2, 8, 7, 9, 1, 4, 6, 3, 0]   |       cost pbest: 137 |       current solution: [5, 2, 8, 7, 9, 1, 4, 6, 3, 0]        |       cost current solution: 137
+pbest: [5, 2, 8, 7, 9, 1, 4, 6, 3, 0]   |       cost pbest: 137 |       current solution: [5, 2, 8, 7, 9, 1, 4, 6, 3, 0]        |       cost current solution: 137
+pbest: [9, 5, 7, 2, 8, 4, 1, 6, 0, 3]   |       cost pbest: 137 |       current solution: [2, 7, 8, 9, 5, 1, 4, 6, 0, 3]        |       cost current solution: 147
+pbest: [5, 1, 8, 9, 7, 3, 2, 6, 0, 4]   |       cost pbest: 137 |       current solution: [5, 2, 8, 7, 9, 4, 1, 6, 0, 3]        |       cost current solution: 137
+pbest: [8, 2, 5, 7, 4, 1, 6, 9, 0, 3]   |       cost pbest: 137 |       current solution: [8, 2, 5, 7, 9, 1, 6, 4, 3, 0]        |       cost current solution: 137
+pbest: [5, 2, 8, 7, 9, 1, 4, 6, 3, 0]   |       cost pbest: 137 |       current solution: [5, 2, 8, 7, 9, 1, 4, 6, 3, 0]        |       cost current solution: 137
+pbest: [5, 2, 8, 4, 1, 9, 7, 0, 3, 6]   |       cost pbest: 137 |       current solution: [5, 2, 8, 7, 1, 9, 4, 0, 3, 6]        |       cost current solution: 137
+pbest: [5, 2, 8, 7, 9, 1, 4, 6, 3, 0]   |       cost pbest: 137 |       current solution: [5, 2, 8, 7, 9, 1, 4, 6, 3, 0]        |       cost current solution: 137
+pbest: [8, 5, 2, 7, 4, 1, 9, 6, 0, 3]   |       cost pbest: 137 |       current solution: [2, 8, 5, 7, 9, 1, 4, 6, 3, 0]        |       cost current solution: 137
+pbest: [5, 2, 8, 7, 9, 1, 4, 6, 3, 0]   |       cost pbest: 137 |       current solution: [5, 2, 8, 7, 9, 1, 4, 6, 3, 0]        |       cost current solution: 137
+
+gbest: [5, 2, 8, 7, 9, 1, 4, 6, 3, 0] | cost: 137
+
+the elapsed time:116.65481448173523
+Showing particles...
+
+pbest: [1, 8, 5, 2, 7, 9, 0, 3, 6, 4]   |       cost pbest: 137 |       current solution: [1, 8, 5, 2, 7, 9, 0, 3, 6, 4]        |       cost current solution: 137
+pbest: [5, 8, 9, 2, 7, 1, 0, 3, 6, 4]   |       cost pbest: 137 |       current solution: [9, 8, 1, 2, 7, 5, 0, 3, 6, 4]        |       cost current solution: 147
+pbest: [1, 8, 5, 2, 7, 9, 0, 6, 3, 4]   |       cost pbest: 137 |       current solution: [1, 8, 5, 2, 7, 9, 0, 3, 6, 4]        |       cost current solution: 137
+pbest: [1, 8, 5, 9, 6, 2, 0, 3, 7, 4]   |       cost pbest: 137 |       current solution: [1, 8, 5, 2, 6, 9, 0, 3, 7, 4]        |       cost current solution: 137
+pbest: [1, 8, 5, 2, 7, 9, 0, 3, 6, 4]   |       cost pbest: 137 |       current solution: [1, 8, 5, 2, 7, 9, 0, 3, 6, 4]        |       cost current solution: 137
+pbest: [2, 8, 1, 5, 7, 9, 0, 3, 6, 4]   |       cost pbest: 137 |       current solution: [1, 8, 5, 2, 7, 9, 0, 3, 6, 4]        |       cost current solution: 137
+pbest: [1, 8, 5, 7, 2, 9, 0, 3, 4, 6]   |       cost pbest: 137 |       current solution: [1, 8, 5, 7, 2, 9, 0, 3, 4, 6]        |       cost current solution: 137
+pbest: [1, 8, 5, 2, 7, 9, 0, 3, 6, 4]   |       cost pbest: 137 |       current solution: [1, 8, 5, 2, 7, 9, 0, 3, 6, 4]        |       cost current solution: 137
+pbest: [1, 8, 5, 2, 7, 9, 0, 3, 6, 4]   |       cost pbest: 137 |       current solution: [1, 8, 5, 2, 7, 9, 0, 3, 6, 4]        |       cost current solution: 137
+pbest: [1, 8, 5, 2, 7, 9, 0, 3, 6, 4]   |       cost pbest: 137 |       current solution: [1, 8, 5, 2, 7, 9, 0, 3, 6, 4]        |       cost current solution: 137
+
+gbest: [1, 8, 5, 2, 7, 9, 0, 3, 6, 4] | cost: 137
+
+the elapsed time:117.42801570892334
+Showing particles...
+
+pbest: [2, 5, 9, 6, 1, 7, 0, 8, 3, 4]   |       cost pbest: 137 |       current solution: [2, 5, 9, 6, 1, 7, 0, 8, 3, 4]        |       cost current solution: 137
+pbest: [2, 9, 5, 8, 1, 6, 0, 7, 4, 3]   |       cost pbest: 137 |       current solution: [2, 9, 5, 7, 1, 8, 0, 6, 3, 4]        |       cost current solution: 137
+pbest: [2, 5, 9, 8, 7, 6, 0, 1, 4, 3]   |       cost pbest: 137 |       current solution: [2, 5, 9, 6, 1, 7, 0, 8, 4, 3]        |       cost current solution: 137
+pbest: [2, 8, 5, 9, 0, 6, 1, 7, 4, 3]   |       cost pbest: 137 |       current solution: [2, 7, 5, 8, 0, 6, 1, 9, 4, 3]        |       cost current solution: 148
+pbest: [2, 9, 5, 4, 1, 8, 7, 0, 6, 3]   |       cost pbest: 137 |       current solution: [2, 9, 5, 4, 1, 0, 8, 7, 3, 6]        |       cost current solution: 137
+pbest: [5, 7, 8, 2, 6, 4, 9, 1, 3, 0]   |       cost pbest: 137 |       current solution: [5, 2, 4, 0, 7, 6, 9, 8, 3, 1]        |       cost current solution: 140
+pbest: [2, 1, 5, 8, 7, 6, 9, 4, 0, 3]   |       cost pbest: 137 |       current solution: [2, 6, 9, 4, 0, 1, 8, 5, 7, 3]        |       cost current solution: 157
+pbest: [2, 9, 5, 7, 6, 1, 0, 8, 4, 3]   |       cost pbest: 137 |       current solution: [2, 9, 5, 1, 6, 7, 0, 8, 3, 4]        |       cost current solution: 137
+pbest: [2, 5, 9, 0, 4, 7, 8, 6, 1, 3]   |       cost pbest: 137 |       current solution: [2, 5, 9, 6, 3, 7, 0, 8, 4, 1]        |       cost current solution: 140
+pbest: [2, 9, 5, 6, 8, 1, 0, 7, 4, 3]   |       cost pbest: 137 |       current solution: [2, 5, 9, 6, 7, 8, 0, 1, 3, 4]        |       cost current solution: 137
+
+gbest: [2, 5, 9, 6, 1, 7, 0, 8, 3, 4] | cost: 137
+
+the elapsed time:117.0327639579773
+optimal sequence [8, 5, 6, 7, 9, 2, 1, 4, 3, 0]
+optimal value:137.000000
+the elapsed time:464.9580411911011
+optimal sequence [8, 5, 6, 7, 4, 1, 2, 9, 3, 0]
+optimal value:137.000000
+the elapsed time:474.0095498561859
+optimal sequence [9, 5, 1, 2, 8, 4, 7, 3, 0, 6]
+optimal value:137.000000
+the elapsed time:482.40717935562134
+optimal sequence [8, 5, 6, 1, 9, 3, 7, 2, 0, 4]
+optimal value:137.000000
+the elapsed time:467.2483456134796
+optimal sequence [9, 8, 5, 7, 6, 4, 2, 1, 0, 3]
+optimal value:137.000000
+the elapsed time:486.02374815940857
+el algoritmo ACS     :137 con tiempo de:974.8871457576752 tour de: [9, 5, 6, 7, 4, 2, 0, 8, 1, 3]
+el algoritmo ACS     :137 con tiempo de:1002.5975999832153 tour de: [1, 5, 6, 7, 4, 9, 2, 0, 8, 3]
+el algoritmo ACS     :137 con tiempo de:1000.8526792526245 tour de: [1, 5, 6, 7, 4, 2, 9, 0, 8, 3]
+el algoritmo ACS     :138 con tiempo de:1002.6547510623932 tour de: [2, 5, 7, 6, 4, 0, 9, 1, 8, 3]
+el algoritmo ACS     :137 con tiempo de:995.0063071250916 tour de: [1, 5, 6, 9, 7, 4, 2, 0, 8, 3]
+(base) david@david-Nitro-AN515-52:~/Desktop/optimizacion_final$ 
